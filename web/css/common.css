@@ -1,0 +1,27 @@
+﻿table{border-collapse:collapse}
+.point{color:#f66}
+table td input[type=radio]{vertical-align:middle}
+table tbody td.item{padding-left:5px;text-align:left !important}
+table tbody td.item a{color:#333}
+table .tl{padding-left:10px}
+table tr.bon td{background-color:#e5f1f9}
+table tr.yon td{background-color:#fbfae1}
+table tr td.inner_tbl{padding:0 !important;background-color:#f7f9fa;text-align:left;border-left:none;border-right:none}
+table tr td.inner_tbl td.item{padding-left:18px}
+
+.tbl_defalut .light{color:#888}
+.tbl_defalut{margin-bottom:20px;margin-bottom:0}
+.tbl_defalut table{width:100%;border:0;border-top:1px solid #dddee2;line-height:16px;table-layout:fixed}
+.tbl_defalut table th, .tbl_defalut table td{border:0;border-bottom:1px solid #dddee2;vertical-align:top}
+.tbl_defalut table th{padding:6px 0 5px;background:#f1f1f3;color:#666;vertical-align:middle}
+.tbl_defalut table td{padding:6px 15px 5px;color:#333;text-align:left;vertical-align:middle}
+.tbl_defalut table td ul{margin-bottom:-5px}
+.tbl_defalut table td ul li{margin-bottom:5px}
+.tbl_defalut table td ul li a{display:inline-block;margin-left:10px}
+
+.error {color: red;font-style: italic}
+
+.loading{width:160px;height:56px;position: absolute;top:50%;left:50%;line-height:56px;color:#fff;padding-left:60px;font-size:15px;
+	background: #000 url(/images/loader.gif) no-repeat 10px 50%;opacity: 0.7;z-index:9999;-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+.commonBackground{background-color:#52acd9;}

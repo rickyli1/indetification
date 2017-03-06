@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+	<head> 
+	    <meta charset="utf-8">
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+		<link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/common.css">
+	</head>
+	 <body>
+		<div class="container">
+		   <nav class="navbar navbar-inverse " role="navigation">
+		      <div class="container">
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav">
+		            <li class="active"><a href="#">用户管理</a></li>
+		            <li><a href="#about">题目管理</a></li>
+		            <li><a href="#contact">回答管理</a></li>
+		            <li><a href="#">分析管理</a></li>
+		            <li><a href="#about">解析管理</a></li>
+		            <li><a href="#contact">反馈管理</a></li>
+		            <li><a href="#">科目类别管理</a></li>
+		            <li><a href="#about">纠错管理</a></li>
+		            <li><a href="#contact">评论管理</a></li>
+		           <!-- <li class="active"><a href="#">Home</a></li>
+		            <li><a href="#about">About</a></li>
+		            <li><a href="#contact">Contact</a></li>
+		            <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropdown <span class="caret"></span></a>
+		              <ul class="dropdown-menu" role="menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li><a href="#">Something else here</a></li>
+		                <li class="divider"></li>
+		                <li class="dropdown-header">Nav header</li>
+		                <li><a href="#">Separated link</a></li>
+		                <li><a href="#">One more separated link</a></li>
+		              </ul>
+		            </li>-->
+		          </ul>
+		        </div><!--/.nav-collapse -->
+		      </div>
+		   </nav>
+
+		  <h3>用户管理>用户信息</h3>
+		  <div class="jumbotron">
+		     <table>
+		     	<tr>
+		     	<td>
+		     	   <table width="890px;">
+	                   <colgroup>
+						<col style="width:130px">
+						<col>
+						<col style="width:130px">
+						</colgroup>				
+					   <tr>
+					   	 <th>用户名</th> 
+					   	  <td><input type="text"  id="email"></td>
+					   	  <th>付费有无</th> 
+					   	  <td><label><input type="checkbox"> 付费</label><label><input type="checkbox"> 未付费</label></td>
+					   <tr>
+					   
+					   <tr>
+					   	 <th>性别</th> 
+					   	  <td><div style="margin-top: 10px;"><label><input type="radio"> 男</label><label><input type="radio"> 女</label></div></td>
+					   	  <th>等级</th> 
+					   	  <td><div style="margin-top: 10px;"><select><option>高</option><option>中</option><option>低</option></select></div></td>
+					   <tr>		
+					   
+					   <tr>
+					   	 <th>注册时间</th> 
+					   	  <td colspan="3"> 
+
+				               <div style="margin-top: 15px;">
+				                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+				                    <input class="form-control" size="16" type="text" value="" >
+				                    <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				                </div>
+								<input type="hidden" id="dtp_input2" value="" /><br/>
+				  				</div>
+				          </td>
+					   	  
+					   <tr>			   
+				   </table>
+		     	</td>
+		     	 <td >
+		     	 	<button type="button" class="btn btn-default" style="margin-left:61px">查询</button>
+		     	</td>
+		     	</tr>
+		     </table>
+		  </div>
+		  
+       	  <div style="float: right;">
+	       	 <button type="button" class="btn btn-default">添加</button>
+	         <button type="button" class="btn btn-default">修正</button>
+	         <button type="button" class="btn btn-default">删除</button>
+       	 </div>
+       	 
+       	 <div style="padding-top: 50px;">
+	         <table class="table table-bordered table-striped">
+	            <thead>
+	              <tr>
+	                <th>编号</th>
+	                <th>用户名</th>
+	                <th>用户邮箱</th>
+	                <th>注册时间</th>
+	              </tr>
+	            </thead>
+	            <tbody>
+	              <tr>
+	                <td>1</td>
+	                <td>Mark</td>
+	                <td>Otto@qq.com</td>
+	                <td>2014/10/11 22:21:34</td>
+	              </tr>
+	              <tr>
+	                <td>2</td>
+	                <td>Jacob</td>
+	                <td>Thornton@qq.com</td>
+	                <td>2014/10/11 22:21:34</td>
+	              </tr>
+	              <tr>
+	                <td>3</td>
+	                <td>Larry</td>
+	                <td>theBird@qq.com</td>
+	               <td>2014/10/11 22:21:34</td>
+	              </tr>
+	            </tbody>
+	         </table>
+         </div>
+         
+         <div style="margin-top: -27px;text-align: center;">
+	         <ul class="pagination">
+			  <li><a href="#">1</a></li>
+			  <li class="active"><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li class="disabled"><a href="#">4</a></li>
+			  <li><a href="#">5</a></li>
+			</ul>
+		</div>
+		
+      </div>	
+      
+      
+
+		
+		
+		      	
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	    <script src="../js/jquery-1.11.1.min.js"></script>
+	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <script src="../js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+	    <script type="text/javascript" src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	    
+	    <script type="text/javascript">
+		    $('.form_datetime').datetimepicker({
+		        //language:  'fr',
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				forceParse: 0,
+		        showMeridian: 1
+		    });
+			$('.form_date').datetimepicker({
+		        language:  'fr',
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				minView: 2,
+				forceParse: 0
+		    });
+			$('.form_time').datetimepicker({
+		        language:  'fr',
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 1,
+				minView: 0,
+				maxView: 1,
+				forceParse: 0
+		    });
+      </script>
+	  </body>
+</html>
+
