@@ -22,7 +22,10 @@
     </beans:bean>  
       
    
-      
-      
-      
+  <!-- 国际化资源文件 -->
+    <beans:bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:messages" />
+    </beans:bean>    
+        
 </beans:beans>  

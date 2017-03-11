@@ -1,8 +1,0 @@
-/applicationContext.xml
-/com
-/log4j.xml
-/mapper
-/servlet-context.xml
-/spring-mybatis.xml
-/spring-quartz.xml
-/spring-security.xml

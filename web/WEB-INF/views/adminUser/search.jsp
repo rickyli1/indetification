@@ -84,7 +84,6 @@
  	<input type="hidden" name="page" id="page" value="1"/>
  </div>		  
 		  <c:import url="/WEB-INF/views/adminUser/list.jsp" charEncoding="UTF-8"></c:import>   
-		  
        	</div> 
       
 		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
