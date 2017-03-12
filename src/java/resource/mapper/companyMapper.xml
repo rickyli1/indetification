@@ -20,7 +20,7 @@
 		<result column="updateor" property="updateor"/>
 	</resultMap>
 	
-  <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="userId" >
+  <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="companyNo" >
     INSERT INTO company( 
 	   company_name,
 	   company_type,

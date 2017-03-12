@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.identification.repository.ApplicationRepository">
+
+	<resultMap id="applicationMap" type="Application">
+		<id column="application_no" property="applicationNo"/>
+		<result column="application_date" property="applicationDate"/>
+		<result column="company_no" property="companyNo"/>
+		<result column="department" property="department"/>
+		<result column="app_file_path" property="appFilePath"/>
+		<result column="result_fild_path" property="resultFildPath"/>
+		<result column="remark" property="remark"/>
+
+		<result column="create_id" property="createId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="createor" property="createor"/>
+		
+		<result column="update_id" property="updateId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="updateor" property="updateor"/>
+	</resultMap>
+	
+  <insert id="insertApplication" parameterType="Application" useGeneratedKeys="true" keyProperty="applicationNo" >
+    INSERT INTO application( 
+	   application_date,
+	   company_no,
+       department,
+       app_file_path,
+       result_fild_path,
+       remark,       
+	  `create_date`,
+	  `create_id`,
+	  `update_id` ,
+	  `update_date`,
+	   createor,
+	   updateor) 
+    VALUES(
+    	#{applicationDate},
+    	#{companyNo},
+    	#{department},
+    	#{appFilePath},
+    	#{resultFildPath},
+    	#{remark},
+    	now(),
+    	#{createId},
+    	#{updateId},
+    	now(),
+    	#{createor},
+    	#{updateor}
+    )
+  </insert> 
+     
+</mapper>
