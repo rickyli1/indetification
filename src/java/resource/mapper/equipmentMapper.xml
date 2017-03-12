@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.identification.repository.EquipmentRepository">
+
+	<resultMap id="equipmentMap" type="EquipmentModel">
+		<result column="EQUIPMENT_NO" property="equipmentNo"/>
+		<result column="EQUIPMENT_NAME" property="equipmentName"/>
+		<result column="GROUP_NO" property="roleName"/>
+		<result column="SUB_GROUP_NO" property="questionCategoryIds"/>
+		<result column="SORT" property="questionCategoryNames"/>
+		<result column="REMARK" property="password"/>
+
+		<result column="DELETE_FLAG" property="deleteFlag"/>
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
+	</resultMap>
+
+  <sql id="searchCondSql">
+  	<where>
+  	</where>  
+  </sql>
+  
+  <select id="selectEquipmentCount" resultType="int" parameterType="EquipmentModel">
+    select 
+	  count(1)
+    from EQUIPMENT equipment
+	<include refid="searchCondSql"/>  
+  </select>
+
+  <select id="selectEquipment" resultMap="equipmentMap" parameterType="EquipmentModel">
+    SELECT 
+	   user.admin_user_id,
+	   user.admin_user_name,
+	   user.role_id,
+       user.role_name ,
+       user.question_category_id ,
+       user.question_category_name,
+	   user.password,
+	   user.create_date,
+	   user.create_id,
+	   user.update_id ,
+	   user.update_date,
+	   user.createor,
+	   user.updateor
+    FROM admin_user user
+    
+   <include refid="searchCondSql"/>  
+   	LIMIT ${startNo}, ${pageSize}
+  </select>
+  
+  <insert id="insertEquipment" parameterType="equipmentMap" useGeneratedKeys="true" keyProperty="userId" >
+    INSERT INTO admin_user( 
+	   admin_user_name,
+	  `role_id`,
+       role_name ,
+       question_category_id ,
+       question_category_name,	  
+	  `password`,
+	  `create_date`,
+	  `create_id`,
+	  `update_id` ,
+	  `update_date`,
+	   createor,
+	   updateor) 
+    VALUES(
+    	#{userName},
+    	#{roleId},
+    	#{roleName},
+    	#{questionCategoryIds},
+    	#{questionCategoryNames},
+    	#{password},
+    	now(),
+    	#{createId},
+    	#{updateId},
+    	now(),
+    	#{createor},
+    	#{updateor}
+    )
+  </insert> 
+  
+   <update id="updateEquipment" parameterType="EquipmentModel">
+    UPDATE admin_user
+    SET  
+       admin_user_name = #{userName},
+       
+      <if test="password != null and password != ''">  
+         `password` = #{password},
+      </if>  
+      role_id = #{roleId},
+      role_name=#{roleName},
+       <if test="questionCategoryIds != null and questionCategoryIds != ''">  
+      question_category_id = #{questionCategoryIds},
+      user.question_category_name=#{questionCategoryNames},
+      </if>
+      `update_id` = #{updateId},
+       updateor = #{updateor},
+       update_date = now()
+    WHERE admin_user_id = #{userId}
+  </update>
+  
+
+   
+</mapper> 
