@@ -16,6 +16,8 @@ public class AdminUserController {
 	@Autowired
 	public AdminUserService adminUserBo;
 	
+	
+	
 	@RequestMapping("/init")
 	public String init(Model model, Principal principal) {
 		model.addAttribute("totalCount", 30);
