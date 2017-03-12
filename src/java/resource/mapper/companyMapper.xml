@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.identification.repository.CompanyRepository">
+
+	<resultMap id="companyMap" type="Company">
+		<id column="company_no" property="companyNo"/>
+		<result column="company_name" property="companyName"/>
+		<result column="company_type" property="companyType"/>
+		<result column="company_code" property="companyCode"/>
+		<result column="remark" property="remark"/>
+
+		<result column="create_id" property="createId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="createor" property="createor"/>
+		
+		<result column="update_id" property="updateId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="updateor" property="updateor"/>
+	</resultMap>
+	
+  <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="userId" >
+    INSERT INTO company( 
+	   company_name,
+	   company_type,
+       company_code,
+       remark,
+	  `create_date`,
+	  `create_id`,
+	  `update_id` ,
+	  `update_date`,
+	   createor,
+	   updateor) 
+    VALUES(
+    	#{companyName},
+    	#{companyType},
+    	#{companyCode},
+    	#{remark},
+    	now(),
+    	#{createId},
+    	#{updateId},
+    	now(),
+    	#{createor},
+    	#{updateor}
+    )
+  </insert> 
+     
+</mapper>
