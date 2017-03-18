@@ -16,6 +16,7 @@
          <li><a href="#/equipment"><spring:message code="lable.equipment"/></a></li>
          <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
          <li><a href="#/company"><spring:message code="lable.company"/></a></li>
+         <li><a href="/upload/init"><spring:message code="lable.upload"/></a></li>
        </ul>
      </div><!--/.nav-collapse -->
    </div>

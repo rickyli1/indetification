@@ -26,4 +26,8 @@ public interface ConstantRepository {
 	
 	public void deleteConstant(ConstantModel constant);
 
+	public int findParentSeq();
+
+	public int findChildrenSeq();
+
 }

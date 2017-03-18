@@ -52,33 +52,30 @@
    	LIMIT ${startNo}, ${pageSize}
   </select>
   
-  <insert id="insertEquipment" parameterType="equipmentMap" useGeneratedKeys="true" keyProperty="userId" >
-    INSERT INTO admin_user( 
-	   admin_user_name,
-	  `role_id`,
-       role_name ,
-       question_category_id ,
-       question_category_name,	  
-	  `password`,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+   <insert id="insertEquipment" parameterType="EquipmentModel"  >
+    
+	INSERT INTO Equipment
+	 (
+	  `EQUIPMENT_NO`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`, 
+	  `DELETE_FLAG`, 
+	  `GROUP_NO`, 
+	  `EQUIPMENT_NAME`,
+	  `SUB_GROUP_NO`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`
+	  ) 
     VALUES(
-    	#{userName},
-    	#{roleId},
-    	#{roleName},
-    	#{questionCategoryIds},
-    	#{questionCategoryNames},
-    	#{password},
+    	#{epuipmentNO},
+    	#{createBy},
+    	#{lastModifyBy},
+    	#{deleteFlag},
+    	#{groupNo},
+    	#{equipmentName},
+    	#{subGroupNo},
     	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
+    	now()
     )
   </insert> 
   

@@ -14,10 +14,10 @@ public class PoiUploadUtil {
 		PoiUploadUtil.getExcelDate("E:\\BaiduYunDownload\\234.xls");
 	}
 	
-	
-	
-	
-	
+	/**
+	 * 
+	 * @param filename
+	 */
 	public static void getExcelDate(String filename) {
 		try {
 

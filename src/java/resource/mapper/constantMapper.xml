@@ -54,33 +54,30 @@
    	LIMIT ${startNo}, ${pageSize}
   </select>
   
-  <insert id="insertConstant" parameterType="ConstantModel" useGeneratedKeys="true" keyProperty="userId" >
-    INSERT INTO admin_user( 
-	   admin_user_name,
-	  `role_id`,
-       role_name ,
-       question_category_id ,
-       question_category_name,	  
-	  `password`,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+  <insert id="insertConstant" parameterType="ConstantModel"  >
+    
+	INSERT INTO constant
+	 (
+	  `CONSTANT_TYPE`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`, 
+	  `DELETE_FLAG`, 
+	  `CONSTANT_NO`, 
+	  `CONSTANT_NAME`,
+	  `PARENT_NO`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`
+	  ) 
     VALUES(
-    	#{userName},
-    	#{roleId},
-    	#{roleName},
-    	#{questionCategoryIds},
-    	#{questionCategoryNames},
-    	#{password},
+    	#{constantType},
+    	#{createBy},
+    	#{lastModifyBy},
+    	#{deleteFlag},
+    	#{constantNo},
+    	#{constantName},
+    	#{parentNo},
     	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
+    	now()
     )
   </insert> 
   
@@ -104,6 +101,14 @@
     WHERE admin_user_id = #{userId}
   </update>
   
-
-   
+  
+  <select id="findParentSeq" resultType="int">
+  	SELECT NEXTVAL('ParentSeq')
+  </select> 
+  
+  <select id="findChildrenSeq" resultType="int">
+ 	 SELECT NEXTVAL('ChildrenSeq')
+  </select> 
+  
+  
 </mapper> 
