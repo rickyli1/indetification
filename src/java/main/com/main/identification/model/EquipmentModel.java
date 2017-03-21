@@ -2,6 +2,8 @@ package com.main.identification.model;
 
 import java.sql.Timestamp;
 
+import com.main.identification.utils.Constant;
+
 /**
  * 
  * @author DUQIAO
@@ -15,7 +17,7 @@ public class EquipmentModel extends BaseModel {
 	private String subGroupNo;     //专业类别编号
 	private int    sort;           //排序
 	private String remark;         //备注
-	private String deleteFlag;     //删除Flag
+	private String deleteFlag = "0";     //删除Flag
 	
 	private String createBy;       //创建人
 	private String  lastModifyBy;  //最后修改人
@@ -88,5 +90,16 @@ public class EquipmentModel extends BaseModel {
 		this.lastModifyTime = lastModifyTime;
 	}
 	
-	
+	/**
+	 * 
+	 * @param constantModel
+	 */
+	public void setDefaultValue(EquipmentModel equipmentModel){
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		equipmentModel.setDeleteFlag(Constant.DELETE_FLAG_FALSE);
+		equipmentModel.setCreateBy("-1");
+		equipmentModel.setLastModifyBy("-1");
+		equipmentModel.setCreateTime(time);
+		equipmentModel.setLastModifyTime(time);
+	}
 }

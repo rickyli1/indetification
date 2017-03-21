@@ -27,5 +27,10 @@
         class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <beans:property name="basename" value="classpath:messages" />
     </beans:bean>    
+    
+      <!-- 支持上传文件 -->  
+    <beans:bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </beans:bean>  
+  
         
 </beans:beans>  

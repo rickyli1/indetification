@@ -88,4 +88,8 @@ public class BaseModel {
 	public void setUpdateor(String updateor) {
 		this.updateor = updateor;
 	}
+	
+	public void setDefaultValue(){
+		
+	}
 }
