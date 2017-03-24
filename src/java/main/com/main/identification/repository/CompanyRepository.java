@@ -11,4 +11,6 @@ public interface CompanyRepository {
 	public int insertCompany(Company company);
 
 	public int insertCompanyBatch(List<Company> list);
+	
+	public Company searchCompanyByName(String companyName);
 }
