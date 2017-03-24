@@ -44,6 +44,35 @@
     	#{createor},
     	#{updateor}
     )
+  </insert>
+  
+  <insert id="insertCompanyBatch" parameterType="java.util.List">
+    INSERT INTO company( 
+	   company_name,
+	   company_type,
+       company_code,
+       remark,
+	  `create_date`,
+	  `create_id`,
+	  `update_id` ,
+	  `update_date`,
+	   createor,
+	   updateor) 
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+    (
+    	#{item.companyName},
+    	#{item.companyType},
+    	#{item.companyCode},
+    	#{item.remark},
+    	now(),
+    	#{item.createId},
+    	#{item.updateId},
+    	now(),
+    	#{item.createor},
+    	#{item.updateor}
+    )
+    </foreach>
   </insert> 
      
 </mapper>
