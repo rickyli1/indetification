@@ -1,0 +1,64 @@
+package com.main.identification.service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.main.identification.model.Company;
+import com.main.identification.repository.CompanyRepository;
+
+@Service
+public class CompanyUploadService {
+	
+	@Autowired
+	public CompanyRepository companyRepository;
+	
+	private static String splitConstant = "、";
+
+	/**
+	 * 文件上传单位
+	 * @param 文件内容集合
+	 */
+	public void uploadCompany(List<Map<String,String>> pioFileLst){
+		// 文件中的单位名
+		Set<String> fileCompanyName = new HashSet<String>();
+		// 单位集合
+		List<Company> companyLst = new ArrayList<Company>();
+		// 取出文档中单位名称集合
+		for(Map<String,String> pioFile : pioFileLst){
+			fileCompanyName.addAll(Arrays.asList(pioFile.get("company").split(splitConstant)));
+		}
+		// 创建要插入的单位集合
+		for(String companyName : fileCompanyName){
+			if(isNewCompany(companyName)){
+				Company company = new Company();
+				company.setCompanyName(companyName);
+				company.setCompanyType("0");
+				companyLst.add(company);
+			}
+		}
+		// 插入新的单位
+		if(companyLst != null && companyLst.size() > 0){
+			companyRepository.insertCompanyBatch(companyLst);
+		}
+	}
+	
+	/**
+	 * 单位名称是否存在
+	 * @param 单位名称
+	 */
+	private Boolean isNewCompany(String companyName){
+		Boolean result = true;
+		Company company = companyRepository.searchCompanyByName(companyName);
+		if(company != null && company.getCompanyCode() != null){
+			result = false;
+		}
+		return result;
+	}
+}
