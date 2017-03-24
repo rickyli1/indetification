@@ -66,5 +66,47 @@
     	#{updateor}
     )
   </insert> 
-     
+  
+  <insert id="insertReport" parameterType="Report" useGeneratedKeys="true" keyProperty="reportNo" >
+    INSERT INTO company( 
+	   company_no,
+	   leader_no,
+       experts_no,
+       equipment_no,
+       repair_level,
+       application_no,
+       application_date,
+       result,
+       time_limit,
+       is_reform,
+       remark,
+	  `create_date`,
+	  `create_id`,
+	  `update_id` ,
+	  `update_date`,
+	   createor,
+	   updateor) 
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+    (
+    	#{item.companyNo},
+    	#{item.leaderNo},
+    	#{item.expertsNo},
+    	#{item.equipmentNo},
+    	#{item.repairLevel},
+    	#{item.applicationNo},
+    	#{item.applicationDate},
+    	#{item.result},
+    	#{item.timeLimit},
+    	#{item.isReform},
+    	#{item.remark},
+    	now(),
+    	#{item.createId},
+    	#{item.updateId},
+    	now(),
+    	#{item.createor},
+    	#{item.updateor}
+    )
+    </foreach>
+  </insert> 
 </mapper>
