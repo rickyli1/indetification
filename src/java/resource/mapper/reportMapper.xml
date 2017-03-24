@@ -67,7 +67,7 @@
     )
   </insert> 
   
-  <insert id="insertReport" parameterType="Report" useGeneratedKeys="true" keyProperty="reportNo" >
+  <insert id="insertReportBatch" parameterType="Report" useGeneratedKeys="true" keyProperty="reportNo" >
     INSERT INTO company( 
 	   company_no,
 	   leader_no,
