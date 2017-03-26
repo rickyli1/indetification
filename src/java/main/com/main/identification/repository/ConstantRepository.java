@@ -29,5 +29,7 @@ public interface ConstantRepository {
 	public int findParentSeq();
 
 	public int findChildrenSeq();
+	
+	public int batchAddConstantModel(List<ConstantModel> constantList);
 
 }
