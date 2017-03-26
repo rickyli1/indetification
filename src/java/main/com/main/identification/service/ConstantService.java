@@ -1,5 +1,7 @@
 package com.main.identification.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +38,8 @@ public class ConstantService {
 //	public int modifyAdminUser(AdminUser adminUser) {
 //		return adminUserRepository.updateAdminUser(adminUser);
 //	}
+
+	public int batchAddConstantModel(List<ConstantModel> constantList) {
+		return constantRepository.batchAddConstantModel(constantList);
+	}
 }

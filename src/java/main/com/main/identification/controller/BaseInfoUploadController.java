@@ -1,6 +1,7 @@
 package com.main.identification.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -77,21 +78,28 @@ public class BaseInfoUploadController{
         try {
             file.transferTo(targetFile);
             List ls = poiUploadService.getExcelDate(targetFile.getAbsolutePath());
+            List<ConstantModel> constantList = new ArrayList<ConstantModel>();
             if(ls != null){
             	HashMap<String, ConstantModel> parentMap = (HashMap<String, ConstantModel>) ls.get(0);
             	 for (Map.Entry<String, ConstantModel> entry : parentMap.entrySet()) {
             		 ConstantModel cm = entry.getValue();
             		 cm.setCreateBy("-1");
             		 cm.setLastModifyBy("-1");
-            		 constantsService.addConstantModel(cm);
+//            		 constantsService.addConstantModel(cm);
+            		 constantList.add(cm);
 		         }
+            	
             	 HashMap<String, ConstantModel> childrenMap = (HashMap<String, ConstantModel>) ls.get(1);
             	 for (Map.Entry<String, ConstantModel> entry : childrenMap.entrySet()) {
             		 ConstantModel cm = entry.getValue();
             		 cm.setCreateBy("-1");
             		 cm.setLastModifyBy("-1");
-            		 constantsService.addConstantModel(cm);
+//            		 constantsService.addConstantModel(cm);
+            		 constantList.add(cm);
 		         }
+            	 
+            	 constantsService.batchAddConstantModel(constantList);
+            	 
             	 HashMap<String, EquipmentModel> equipmentMap =  (HashMap<String, EquipmentModel>) ls.get(2);
             	 for (Map.Entry<String, EquipmentModel> entry : equipmentMap.entrySet()) {
             		 EquipmentModel em = entry.getValue();

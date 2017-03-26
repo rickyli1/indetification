@@ -1,8 +1,6 @@
 package com.main.identification.model;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
 
 import com.main.identification.utils.Constant;
 
