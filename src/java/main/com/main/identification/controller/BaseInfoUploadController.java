@@ -23,6 +23,7 @@ import com.main.identification.model.AdminUser;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.repository.EquipmentRepository;
+import com.main.identification.service.CompanyUploadService;
 import com.main.identification.service.ConstantService;
 import com.main.identification.service.EquipmentService;
 import com.main.identification.service.PoiUploadService;
@@ -45,6 +46,9 @@ public class BaseInfoUploadController{
 	
 	@Autowired
 	public PoiUploadService poiUploadService;
+	
+	@Autowired
+	public CompanyUploadService companyUploadService;
 
 	@RequestMapping(value = "/upload/init", method = RequestMethod.GET)
 	public String uploadInit() {
@@ -107,6 +111,10 @@ public class BaseInfoUploadController{
             		 em.setLastModifyBy("-1");
             		 equipmentService.addEquipmentModel(em);
 		         }
+            	 
+            	 //获得companymap，调用接口插入相关数据
+            	 HashMap<String, String> companyMap =  (HashMap<String, String>) ls.get(3);
+            	 companyUploadService.addCompanyModel(companyMap);
             }
         } catch (Exception e) {
         	model.addAttribute("message", "Upload failed!");

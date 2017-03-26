@@ -2,6 +2,7 @@ package com.main.identification.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.identification.model.Company;
+import com.main.identification.model.EquipmentModel;
 import com.main.identification.repository.CompanyRepository;
 
 @Service
@@ -60,5 +62,35 @@ public class CompanyUploadService {
 			result = false;
 		}
 		return result;
+	}
+
+	/**
+	 * 
+	 * @param companyMap
+	 */
+	public void addCompanyModel(HashMap<String, String> companyMap) {
+		// 文件中的单位名
+		Set<String> fileCompanyName = new HashSet<String>();
+		// 取得每行的公司名称，按照分隔符分割，去重
+		for (Map.Entry<String, String> entry : companyMap.entrySet()) {
+			fileCompanyName.addAll(Arrays.asList(entry.getValue().split(splitConstant)));
+        }
+		// 单位集合
+		List<Company> companyLst = new ArrayList<Company>();
+	
+		// 创建要插入的单位集合
+		for(String companyName : fileCompanyName){
+			if(isNewCompany(companyName)){
+				Company company = new Company();
+				company.setCompanyNo("");
+				company.setCompanyName(companyName);
+				company.setCompanyType("0");
+				companyLst.add(company);
+			}
+		}
+		// 插入新的单位
+		if(companyLst != null && companyLst.size() > 0){
+			companyRepository.insertCompanyBatch(companyLst);
+		}	
 	}
 }

@@ -14,6 +14,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.repository.ConstantRepository;
@@ -42,6 +43,7 @@ public class PoiUploadService {
 		HashMap<String, ConstantModel> parentMap = new HashMap<String, ConstantModel>();
 		HashMap<String, ConstantModel> childrenMap = new HashMap<String, ConstantModel>();
 		HashMap<String, EquipmentModel> equipmentMap = new HashMap<String, EquipmentModel>();
+		HashMap<String, String> companyMap = new HashMap<String, String>();
 		try {
 			// create a poi workbook from the excel spreadsheet file
 			POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(
@@ -116,10 +118,16 @@ public class PoiUploadService {
 								}
 								if(c==3){
 									EquipmentModel epuipModel =  new EquipmentModel(); 
+									//创建equipment 序列
+//									epuipModel.setEquipmentNo(equipmentNo);
 									epuipModel.setEquipmentName(value);
 									epuipModel.setGroupNo(parentNo);
 									epuipModel.setSubGroupNo(childrenNo);
 									equipmentMap.put(value, epuipModel);
+								}
+								//COMPANY 字段值
+								if(c==4){
+									companyMap.put(value, value);
 								}
 								
 								System.out.println("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);
@@ -130,9 +138,10 @@ public class PoiUploadService {
 				}
 				System.out.println("worksheet  END :"+ k);
 			}
-			ls.add(0, parentMap);
-			ls.add(1, childrenMap);
-			ls.add(2, equipmentMap);
+			ls.add(0, parentMap);    	//常量父类
+			ls.add(1, childrenMap);     //常量子类
+			ls.add(2, equipmentMap);    //设备
+			ls.add(3, companyMap);      //公司
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

@@ -11,7 +11,7 @@ import com.main.identification.utils.Constant;
  * 设备实体类
  */
 public class EquipmentModel extends BaseModel {
-	private int    equipmentNo;    //设备NO
+	private String    equipmentNo;    //设备NO
 	private String equipmentName;  //设备NAME
 	private String groupNo;        //专业编号
 	private String subGroupNo;     //专业类别编号
@@ -23,10 +23,11 @@ public class EquipmentModel extends BaseModel {
 	private String  lastModifyBy;  //最后修改人
 	private Timestamp createTime;  //创建时间
 	private Timestamp lastModifyTime; //最后修改时间
-	public int getEquipmentNo() {
+	
+	public String getEquipmentNo() {
 		return equipmentNo;
 	}
-	public void setEquipmentNo(int equipmentNo) {
+	public void setEquipmentNo(String equipmentNo) {
 		this.equipmentNo = equipmentNo;
 	}
 	public String getEquipmentName() {
