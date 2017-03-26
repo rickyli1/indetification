@@ -12,7 +12,7 @@
            </ul>		            
          </li>-->
          <li><a href="#/base"><spring:message code="lable.base"/></a></li>
-         <li><a href="#/application"><spring:message code="lable.application"/></a></li>
+         <li><a href="/application/init"><spring:message code="lable.application"/></a></li>
          <li><a href="#/equipment"><spring:message code="lable.equipment"/></a></li>
          <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
          <li><a href="#/company"><spring:message code="lable.company"/></a></li>

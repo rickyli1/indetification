@@ -53,4 +53,79 @@
     )
   </insert> 
      
+
+	<resultMap id="applicationResultMap" type="ApplicationResult">
+		<id column="application_no" property="applicationNo"/>
+		<result column="application_Date" property="applicationDate"/>
+		<result column="report_No" property="reportNo"/>
+		<result column="company_No" property="companyNo"/>
+		<result column="company_Name" property="companyName"/>
+
+		<result column="leader_No" property="leaderNo"/>
+		<result column="leader_Name" property="leaderName"/>
+
+		<result column="experts_No" property="expertsNo"/>
+		<result column="experts_Name" property="expertsName"/>
+
+		<result column="equipment_No" property="equipmentNo"/>
+		<result column="equipment_Name" property="equipmentName"/>
+
+		<result column="repair_Level" property="repairLevel"/>
+		<result column="result" property="result"/>
+		<result column="time_Limit" property="timeLimit"/>
+		<result column="is_Reform" property="isReform"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	
+  <sql id="searchCondSql">
+  	<where>
+  		<if test="companyName != null and companyName != '' ">
+  			and company.company_Name = #{companyName}
+  		</if>
+  		<if test="equipmentName != null and equipmentName != '' ">
+  			and equipment.equipment_Name = #{equipmentName}
+  		</if>
+  		<if test="expertsNo != null and expertsNo != '' ">
+  			and report.leader_No = #{expertsNo} or report.EXPERTS_NO like #{expertsNo}
+  		</if>
+  		<if test="applicationDate != null and applicationDate != '' ">
+  			and report.application_Date = #{applicationDate}
+  		</if>
+  	</where>
+  </sql>	
+
+  <select id="selectApplicationResultCount" resultType="int" parameterType="ApplicationResult">
+    select count(1)
+	  from report report
+	 inner join application apply
+	    on apply.APPLICATION_NO = report.APPLICATION_NO
+	 inner join company
+	    on company.COMPANY_NO = report.COMPANY_NO
+	 inner join equipment
+	    on equipment.EQUIPMENT_NO = report.EQUIPMENT_NO
+	<include refid="searchCondSql"/>  
+  </select>
+
+  <select id="selectApplicationResultList" resultMap="applicationResultMap" parameterType="ApplicationResult">
+	select report.APPLICATION_NO
+	     , report.APPLICATION_DATE
+	     , report.COMPANY_NO
+	     , report.LEADER_NO
+	     , report.EXPERTS_NO
+		 , report.COMPANY_NO
+		 , company.COMPANY_NAME
+	     , report.EQUIPMENT_NO
+	     , equipment.EQUIPMENT_NAME
+	  from report report
+	 inner join application apply
+	    on apply.APPLICATION_NO = report.APPLICATION_NO
+	 inner join company
+	    on company.COMPANY_NO = report.COMPANY_NO
+	 inner join equipment
+	    on equipment.EQUIPMENT_NO = report.EQUIPMENT_NO
+    
+   <include refid="searchCondSql"/>  
+   	LIMIT ${startNo}, ${pageSize}
+  </select>
+     
 </mapper>
