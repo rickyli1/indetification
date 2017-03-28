@@ -1,5 +1,6 @@
 package com.main.identification.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class BaseModel {
@@ -10,12 +11,12 @@ public class BaseModel {
 	
 	// DB
 	private int createId;
-	private Date createDate;
+	private Timestamp createTime;
 	private int updateId;
-	private Date updateDate;
-	private String createor;
-	private String updateor;
-	
+	private Timestamp lastModifyTime;
+	private String createBy;
+	private String lastModifyBy;
+	private String deleteFlag;
 
 	public int getPage() {
 		return page;
@@ -49,12 +50,12 @@ public class BaseModel {
 		this.createId = createId;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 
 	public int getUpdateId() {
@@ -65,30 +66,38 @@ public class BaseModel {
 		this.updateId = updateId;
 	}
 
-	public Date getUpdateDate() {
-		return updateDate;
+	public Timestamp getLastModifyTime() {
+		return lastModifyTime;
 	}
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setLastModifyTime(Timestamp lastModifyTime) {
+		this.lastModifyTime = lastModifyTime;
 	}
 
-	public String getCreateor() {
-		return createor;
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	public void setCreateor(String createor) {
-		this.createor = createor;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public String getUpdateor() {
-		return updateor;
+	public String getLastModifyBy() {
+		return lastModifyBy;
 	}
 
-	public void setUpdateor(String updateor) {
-		this.updateor = updateor;
+	public void setLastModifyBy(String lastModifyBy) {
+		this.lastModifyBy = lastModifyBy;
 	}
-	
+
+	public String getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
 	public void setDefaultValue(){
 		
 	}

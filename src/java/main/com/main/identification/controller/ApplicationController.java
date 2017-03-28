@@ -1,13 +1,12 @@
 package com.main.identification.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.main.identification.model.ApplicationResult;
 import com.main.identification.service.ApplicationService;
@@ -32,7 +31,7 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value ="/searchList")
-	public String getApplicationList(Model model, ApplicationResult application) {
+	public String getApplicationList(Model model,@RequestBody ApplicationResult application) {
 		model.addAttribute("totalCount", applicationBo.selectApplicationResultCount(application));
 		model.addAttribute("applicationResultList", applicationBo.searchList(application));
 		

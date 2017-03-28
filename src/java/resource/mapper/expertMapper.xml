@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.identification.repository.ExpertRepository">
+
+	<resultMap id="expertMap" type="Expert">
+		<id column="expert_no" property="expertNo"/>
+		<result column="expert_name" property="expertName"/>
+		<result column="profession" property="profession"/>
+		<result column="company_no" property="companyNo"/>
+		<result column="professional_title" property="professionalTitle"/>
+		<result column="remark" property="remark"/>
+
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="last_modify_by" property="lastModifyBy"/>
+		<result column="last_modify_time" property="lastModifyTime"/>
+		<result column="delete_flag" property="deleteFlag"/>
+	</resultMap>
+	
+  <select id="selectByPK" resultMap="expertMap" parameterType="String">
+		select 
+			   t.EXPERT_NO
+			 , t.EXPERT_NAME
+		     , t.PROFESSION
+		     , t.COMPANY_NO
+		     , t.PROFESSIONAL_TITLE
+		     , t.REMARK
+		     , t.create_by
+		     , t.create_time
+		     , t.last_modify_by
+		     , t.last_modify_time
+		from expert t
+		where t.EXPERT_NO = #{expertNo}
+		  and t.delete_flag = '0'
+  </select>
+  
+    <select id="selectExpert" resultMap="expertMap" parameterType="Expert">
+		select 
+			   t.EXPERT_NO
+			 , t.EXPERT_NAME
+		     , t.PROFESSION
+		     , t.COMPANY_NO
+		     , t.PROFESSIONAL_TITLE
+		     , t.REMARK
+		     , t.create_by
+		     , t.create_time
+		     , t.last_modify_by
+		     , t.last_modify_time
+		from expert t
+		where t.delete_flag = '0'
+  		<if test="expertNo != null and expertNo != '' ">
+  			and t.expert_no = #{expertNo}
+  		</if>
+  		<if test="expertName != null and expertName != '' ">
+  			and t.expert_name = #{expertName}
+  		</if>
+  		<if test="profession != null and profession != '' ">
+  			and t.profession = #{profession}
+  		</if>
+  		<if test="companyNo != null and companyNo != '' ">
+  			and t.company_no = #{companyNo}
+  		</if>
+  		<if test="professionalTitle != null and professionalTitle != '' ">
+  			and t.professional_title = #{professionalTitle}
+  		</if>
+  </select>
+     
+</mapper>

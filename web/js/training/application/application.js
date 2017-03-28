@@ -5,7 +5,6 @@
 			this.initCalendar();
 		},
 		
-		
 		initCalendar : function() {
 		    $('.form_datetime').datetimepicker({
 		        language:  'zh-CN',
@@ -59,7 +58,7 @@
 		// 取得隐藏域参数
 		getSearchConditions: function() {
 			var data = {					
-				"companyName" : $("#companyNameHide").val(),
+				"companyName": $("#companyNameHide").val(),
 				"equipmentName":$("#equipmentNameHide").val(),
 				"expertNameCon":$("#expertNameConHide").val()
 			};
@@ -77,7 +76,6 @@
 //				that.checkAllEvent();
 //				that.listCheckBoxEvent();
 			});
-			
 		}
 		
 	});

@@ -53,7 +53,6 @@
     )
   </insert> 
      
-
 	<resultMap id="applicationResultMap" type="ApplicationResult">
 		<id column="application_no" property="applicationNo"/>
 		<result column="application_Date" property="applicationDate"/>
@@ -116,6 +115,9 @@
 		 , company.COMPANY_NAME
 	     , report.EQUIPMENT_NO
 	     , equipment.EQUIPMENT_NAME
+	     , report.REPAIR_LEVEL
+	     , report.RESULT
+	     , report.TIME_LIMIT
 	  from report report
 	 inner join application apply
 	    on apply.APPLICATION_NO = report.APPLICATION_NO

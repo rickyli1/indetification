@@ -1,12 +1,15 @@
 package com.main.identification.model;
 
+import java.io.Serializable;
+
 /**
  * 申请结果查询界面Vo
  * @author YangQi
  *
  */
-public class ApplicationResult extends BaseModel {
-//	APPLICATION_NO	申请编号
+public class ApplicationResult extends BaseModel implements Serializable{
+	private static final long serialVersionUID = 1115379120030933920L;
+	//	APPLICATION_NO	申请编号
 	private String applicationNo;
 //	APPLICATION_DATE	申请日期
 	private String applicationDate;

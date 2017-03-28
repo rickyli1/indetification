@@ -7,9 +7,13 @@
 	              <tr>
 	                <th width="10px"><input type="checkbox" id="chkAll"></th>
 	                <th>No</th>
+	                <th>申请日期</th>
 	                <th>单位名称</th>
 	                <th>设备名称</th>
-	                <th>专家姓名</th>
+	                <th>修理等级</th>
+	                <th>申请结果</th>
+	                <th>有效期限</th>
+	                <th>专家组</th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -17,15 +21,18 @@
 		               <tr>
 		                <td><input type="checkbox" class="chk"></td>
 		                <td>1</td>
+		                <td>${apply.applicationDate}</td>
 		                <td>${apply.companyName}</td>
 		                <td>${apply.equipmentName}</td>
-		                <td>${apply.leaderNo}</td>
+		                <td>${apply.repairLevel}</td>
+		                <td>${apply.result}</td>
+		                <td>${apply.timeLimit}</td>
+		                <td>${apply.expertsName}</td>
 		              </tr>
 	            	</c:forEach>
 	            </tbody>
 	         </table>
          </div>
-         
 		
           <div class="text-center">
                 <ul id="pagination-demo" class="pagination-sm pagination">

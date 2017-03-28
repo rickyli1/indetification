@@ -30,9 +30,10 @@
 									<col>
 								</colgroup>				
 					 			<tr>
+<!--
 									<th>申请编号</th> 
 					   	  			<td><input type="text"  id="applicationNo" name="applicationNo"></td>
-<!-- 			   	  			
+ -->
 					   	  			<th>申请日期</th> 
 					   	  			<td colspan="3" nowrap="nowrap"> 
 										<div style="margin-top: 15px;">
@@ -64,24 +65,25 @@
 							            	</table>
 										</div>
 							    	</td>
- -->		
+		
 					   			</tr>
 					   
 							    <tr>
 									<th>单位名称</th> 
-										<td><input type="text"  id="companyName" name="companyName"></td>
+										<td><input type="text" id="companyName" name="companyName"></td>
 									<th>设备名称</th> 
-							   	  		<td><input type="text"  id="equipmentName" name="equipmentName"></td>
+							   	  		<td><input type="text" id="equipmentName" name="equipmentName"></td>
 							    </tr>
 							    <tr>
 							   	  	<th>专家姓名</th> 
-							   	  		<td><input type="text"  id="expertNameCon" name="expertName"></td>
+							   	  		<td><input type="text" id="expertNameCon" name="expertName"></td>
 							   	</tr>
 							</table>
 		     			</td>
 		     	
 						<td>
-		     				<button id="searchBtn" class="btn btn-default" style="margin-left:61px">Search</button>
+							<br><br><br>
+		     				<button id="searchBtn" class="btn btn-default" style="margin-left:61px">查询</button>
 		    			</td>
 					</tr>
 				</table>
