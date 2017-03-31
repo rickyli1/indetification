@@ -40,26 +40,26 @@
 								        	<table>
 								            	<tr>
 								               		<td>				                
-								               	    	<span class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+								               	    	<span class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateFrom" data-link-format="yyyy-mm-dd">
 								                    		<input class="form-control" style="min-width: 135px" size="16" type="text" value="" />
 															<span class="input-group-addon">
 																<span class="glyphicon glyphicon-calendar"></span>
 															</span>
 								                    	</span>
-												     	<input type="hidden" id="dtp_input2" value="" />
+												     	<input type="hidden" id="applicationDateFrom" value="" />
 													</td>
 													
 													<td width="30px"><span style="margin-left:-19px;font-size: 21px">~<span>
 													</td>
 													
 							                    	<td>		                								
-						                            	<span class="input-group date form_date col-md-3" style="margin-left:-21px;" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+						                            	<span class="input-group date form_date col-md-3" style="margin-left:-21px;" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateTo" data-link-format="yyyy-mm-dd">
 									                    	<input class="form-control" size="16"  style="min-width: 135px" type="text" value="" />
 															<span class="input-group-addon">
 																<span class="glyphicon glyphicon-calendar"></span>
 															</span>
 									                	</span>
-														<input type="hidden" id="dtp_input1" value="" />
+														<input type="hidden" id="applicationDateTo" value="" />
 								  					</td>
 								            	</tr>
 							            	</table>
@@ -105,12 +105,12 @@
       
 		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
 
-	    <script type="text/javascript" src="/js/training/application/application.js" charset="UTF-8"></script>	    
+	    <script type="text/javascript" src="/js/identification/application/application.js" charset="UTF-8"></script>	    
 	    <script type="text/javascript">
-	    train.application = new Tarin.application.List();
+	    identification.application = new Identification.application.List();
 
 	    function goPage() {
-	    	train.application.searchList();
+	    	identification.application.searchList();
 		}
       </script>
 

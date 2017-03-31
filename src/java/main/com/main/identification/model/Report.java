@@ -1,6 +1,7 @@
 package com.main.identification.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Report extends BaseModel implements Serializable{
 
@@ -18,6 +19,53 @@ public class Report extends BaseModel implements Serializable{
 	private String isReform; // 是否整改
 	private String remark; // 备注
 	
+	private String deleteFlag = "0";     //删除Flag
+	private String createBy;       //创建人
+	private String  lastModifyBy;  //最后修改人
+	private Timestamp createTime;  //创建时间
+	private Timestamp lastModifyTime; //最后修改时间
+	
+	
+	public String getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getLastModifyBy() {
+		return lastModifyBy;
+	}
+
+	public void setLastModifyBy(String lastModifyBy) {
+		this.lastModifyBy = lastModifyBy;
+	}
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public Timestamp getLastModifyTime() {
+		return lastModifyTime;
+	}
+
+	public void setLastModifyTime(Timestamp lastModifyTime) {
+		this.lastModifyTime = lastModifyTime;
+	}
+
 	public String getReportNo() {
 		return reportNo;
 	}

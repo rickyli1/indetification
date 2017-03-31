@@ -7,10 +7,10 @@
 	<resultMap id="equipmentMap" type="EquipmentModel">
 		<result column="EQUIPMENT_NO" property="equipmentNo"/>
 		<result column="EQUIPMENT_NAME" property="equipmentName"/>
-		<result column="GROUP_NO" property="roleName"/>
-		<result column="SUB_GROUP_NO" property="questionCategoryIds"/>
-		<result column="SORT" property="questionCategoryNames"/>
-		<result column="REMARK" property="password"/>
+		<result column="GROUP_NO" property="groupNo"/>
+		<result column="SUB_GROUP_NO" property="subGroupNo"/>
+		<result column="SORT" property="sort"/>
+		<result column="REMARK" property="remark"/>
 
 		<result column="DELETE_FLAG" property="deleteFlag"/>
 		<result column="CREATE_BY" property="createBy"/>
@@ -67,7 +67,7 @@
 	  `LAST_MODIFY_TIME`
 	  ) 
     VALUES(
-    	#{epuipmentNO},
+    	#{equipmentNo},
     	#{createBy},
     	#{lastModifyBy},
     	#{deleteFlag},
@@ -100,5 +100,45 @@
   </update>
   
 
-   
+   <insert id="batchAddEquipmentModel" parameterType="java.util.List"  >
+    
+	INSERT INTO Equipment
+	 (
+	  `EQUIPMENT_NO`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`, 
+	  `DELETE_FLAG`, 
+	  `GROUP_NO`, 
+	  `EQUIPMENT_NAME`,
+	  `SUB_GROUP_NO`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`
+	  ) 
+    VALUES
+    
+     <foreach collection="list" item="item" index="index" separator=",">
+	   (
+	   	#{item.equipmentNo},
+    	#{item.createBy},
+    	#{item.lastModifyBy},
+    	#{item.deleteFlag},
+    	#{item.groupNo},
+    	#{item.equipmentName},
+    	#{item.subGroupNo},
+    	now(),
+    	now()
+	   )
+	 </foreach>
+	</insert>
+	
+  <delete id="deleteEquipment" parameterType="EquipmentModel">
+    delete from Equipment
+    WHERE delete_flag = 0
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+      <if test="equipmentNo != null and equipmentNo != ''">  
+        and `equipment_No` != #{equipmentNo}
+      </if>  
+  </delete>
 </mapper> 

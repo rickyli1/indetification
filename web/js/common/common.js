@@ -1,7 +1,7 @@
-var train = train || {};
+var identification = identification || {};
 
 (function (){
-	train.ajax = function(url, data, dataType, fn ){
+	identification.ajax = function(url, data, dataType, fn ){
 		$.ajax({
 			type: "POST",
 			contentType: "application/json;charset=utf-8",
@@ -12,7 +12,7 @@ var train = train || {};
 				fn(res);
 			},
 			error: function(e) {
-				alert(e);
+              console.log(e);
 			},
 			
 			beforeSend: function(xhr) {

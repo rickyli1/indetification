@@ -13,6 +13,10 @@ public class ApplicationResult extends BaseModel implements Serializable{
 	private String applicationNo;
 //	APPLICATION_DATE	申请日期
 	private String applicationDate;
+//	申请日期From
+	private String applicationDateFrom;
+//	申请日期To
+	private String applicationDateTo;
 //	REPORT_NO	历史编号
 	private String reportNo;
 //	COMPANY_NO	单位编号
@@ -55,6 +59,18 @@ public class ApplicationResult extends BaseModel implements Serializable{
 	}
 	public void setApplicationDate(String applicationDate) {
 		this.applicationDate = applicationDate;
+	}
+	public String getApplicationDateFrom() {
+		return applicationDateFrom;
+	}
+	public void setApplicationDateFrom(String applicationDateFrom) {
+		this.applicationDateFrom = applicationDateFrom;
+	}
+	public String getApplicationDateTo() {
+		return applicationDateTo;
+	}
+	public void setApplicationDateTo(String applicationDateTo) {
+		this.applicationDateTo = applicationDateTo;
 	}
 	public String getReportNo() {
 		return reportNo;

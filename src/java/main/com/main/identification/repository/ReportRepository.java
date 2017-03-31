@@ -10,6 +10,9 @@ public interface ReportRepository {
 	 */
 	public int insertReport(Report report);
 	
+	public int deleteReport(Report report);
+	
 	public int insertReportBatch(List<Report> list);
 
+	
 }

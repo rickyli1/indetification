@@ -81,7 +81,42 @@
     )
   </insert> 
   
-   <update id="updateConstant" parameterType="ConstantModel">
+  
+  <insert id="batchAddConstantModel" parameterType="java.util.List"  >
+    
+	INSERT INTO constant
+	 (
+	  `CONSTANT_TYPE`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`, 
+	  `DELETE_FLAG`, 
+	  `CONSTANT_NO`, 
+	  `CONSTANT_NAME`,
+	  `PARENT_NO`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`
+	  ) 
+    VALUES
+    
+     <foreach collection="list" item="item" index="index" separator=",">
+	   (
+	   	#{item.constantType},
+    	#{item.createBy},
+    	#{item.lastModifyBy},
+    	#{item.deleteFlag},
+    	#{item.constantNo},
+    	#{item.constantName},
+    	#{item.parentNo},
+    	now(),
+    	now()
+	   )
+	 </foreach>
+    	
+    
+  </insert> 
+  
+  
+  <update id="updateConstant" parameterType="ConstantModel">
     UPDATE admin_user
     SET  
        admin_user_name = #{userName},
@@ -102,6 +137,8 @@
   </update>
   
   
+  
+  
   <select id="findParentSeq" resultType="int">
   	SELECT NEXTVAL('ParentSeq')
   </select> 
@@ -110,5 +147,35 @@
  	 SELECT NEXTVAL('ChildrenSeq')
   </select> 
   
+  <select id="findCompanySeq" resultType="int">
+  	SELECT NEXTVAL('CompanySeq')
+  </select> 
+  
+  <select id="findEquipmentSeq" resultType="int">
+ 	 SELECT NEXTVAL('EquipmentSeq')
+  </select> 
+  
+  <select id="findApplicationSeq" resultType="int">
+ 	 SELECT NEXTVAL('ApplicationSeq')
+  </select> 
+  
+  <select id="findReportSeq" resultType="int">
+ 	 SELECT NEXTVAL('ReportSeq')
+  </select> 
+  
+  <select id="findConstantMap" resultMap="constantMap" parameterType="ConstantModel">
+    SELECT CONSTANT_NAME,CONSTANT_NO ,CONSTANT_TYPE FROM constant C
+    where
+    	C.CONSTANT_TYPE = #{constantType}
+  </select>
+  
+  <delete id="deleteConstant" parameterType="ConstantModel">
+    delete from constant
+    WHERE delete_flag = 0
+        and `CONSTANT_TYPE` != 'REPAIR_LEVEL'
+      <if test="constantType != null and constantType != ''">  
+        and `CONSTANT_TYPE` = #{constantType}
+      </if>  
+  </delete>
   
 </mapper> 

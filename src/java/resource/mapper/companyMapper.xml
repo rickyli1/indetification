@@ -11,13 +11,12 @@
 		<result column="company_code" property="companyCode"/>
 		<result column="remark" property="remark"/>
 
-		<result column="create_id" property="createId"/>
-		<result column="create_date" property="createDate"/>
-		<result column="createor" property="createor"/>
+		<result column="delete_flag" property="deleteFlag"/>
 		
-		<result column="update_id" property="updateId"/>
-		<result column="update_date" property="updateDate"/>
-		<result column="updateor" property="updateor"/>
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
 	
   <select id="searchCompanyByName" resultMap="companyMap" parameterType="String">
@@ -30,8 +29,8 @@
 	   company.create_id,
 	   company.update_id,
 	   company.update_date,
-	   company.createor,
-	   company.updateor
+	   company.create_by,
+	   company.update_by
     FROM company company
     WHERE 
          company.company_name = #{companyName}    
@@ -39,57 +38,89 @@
   
   <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="companyNo" >
     INSERT INTO company( 
+       company_no,
 	   company_name,
 	   company_type,
        company_code,
        remark,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+      `DELETE_FLAG`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`) 
     VALUES(
+        #{companyNo},
     	#{companyName},
     	#{companyType},
     	#{companyCode},
     	#{remark},
+    	#{deleteFlag},
+    	#{createBy},
+    	#{lastModifyBy},
     	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
+    	now()
     )
   </insert>
   
   <insert id="insertCompanyBatch" parameterType="java.util.List">
     INSERT INTO company( 
+       company_no,
 	   company_name,
 	   company_type,
        company_code,
        remark,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+       `DELETE_FLAG`,
+	   `CREATE_BY`, 
+	  `LAST_MODIFY_BY`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`) 
     VALUES
     <foreach collection="list" item="item" index="index" separator=",">
     (
+        #{item.companyNo},
     	#{item.companyName},
     	#{item.companyType},
     	#{item.companyCode},
     	#{item.remark},
+    	#{item.deleteFlag},
+    	#{item.createBy},
+    	#{item.lastModifyBy},
     	now(),
-    	#{item.createId},
-    	#{item.updateId},
-    	now(),
-    	#{item.createor},
-    	#{item.updateor}
+    	now()
     )
     </foreach>
   </insert> 
-     
+  
+  <!-- <update id="deleteCompany" parameterType="Company">
+    UPDATE company
+    SET  
+       delete_flag = 1,
+       `update_id` = #{updateId},
+       update_by = #{updateBy},
+       update_date = now()
+    WHERE delete_flag = 0
+      <if test="companyName != null and companyName != ''">  
+        and `company_Name` = #{companyName}
+      </if>  
+      <if test="companyNo != null and companyNo != ''">  
+        and `company_No` = #{companyNo}
+      </if>
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+  </update> -->
+  
+  <delete id="deleteCompany" parameterType="Company">
+    delete from company
+    WHERE delete_flag = 0
+      <if test="companyName != null and companyName != ''">  
+        and `company_Name` = #{companyName}
+      </if>  
+      <if test="companyNo != null and companyNo != ''">  
+        and `company_No` = #{companyNo}
+      </if>
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+  </delete>
 </mapper>

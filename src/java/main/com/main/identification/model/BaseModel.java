@@ -17,6 +17,8 @@ public class BaseModel {
 	private String createBy;
 	private String lastModifyBy;
 	private String deleteFlag;
+	private String createor;
+	private String updateor;
 
 	public int getPage() {
 		return page;
@@ -100,5 +102,21 @@ public class BaseModel {
 
 	public void setDefaultValue(){
 		
+	}
+	
+	public String getCreateor() {
+		return createor;
+	}
+
+	public void setCreateor(String createor) {
+		this.createor = createor;
+	}
+
+	public String getUpdateor() {
+		return updateor;
+	}
+
+	public void setUpdateor(String updateor) {
+		this.updateor = updateor;
 	}
 }

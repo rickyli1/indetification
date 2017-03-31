@@ -24,6 +24,7 @@ public class EquipmentModel extends BaseModel {
 	private Timestamp createTime;  //创建时间
 	private Timestamp lastModifyTime; //最后修改时间
 	
+	
 	public String getEquipmentNo() {
 		return equipmentNo;
 	}

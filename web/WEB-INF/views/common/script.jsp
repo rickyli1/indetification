@@ -4,4 +4,5 @@
 	    <script type="text/javascript" src="/js/common/bootstrap/bootstrap-datetimepicker.min.js"></script>
 	    <script type="text/javascript" src="/js/common/bootstrap/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	    <script type="text/javascript" src="/js/common/jquery/jquery-class-support.js" charset="UTF-8"></script>
+	    <script type="text/javascript" src="/js/common/jquery/jquery.tmpl.min.js" charset="UTF-8"></script>
 	    <script type="text/javascript" src="/js/common/common.js" charset="UTF-8"></script>

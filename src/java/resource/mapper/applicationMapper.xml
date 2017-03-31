@@ -12,50 +12,66 @@
 		<result column="app_file_path" property="appFilePath"/>
 		<result column="result_fild_path" property="resultFildPath"/>
 		<result column="remark" property="remark"/>
+		<result column="delete_flag" property="deleteFlag"/>
 
-		<result column="create_id" property="createId"/>
-		<result column="create_date" property="createDate"/>
-		<result column="createor" property="createor"/>
-		
-		<result column="update_id" property="updateId"/>
-		<result column="update_date" property="updateDate"/>
-		<result column="updateor" property="updateor"/>
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
 	
 	
   <insert id="insertApplication" parameterType="Application" useGeneratedKeys="true" keyProperty="applicationNo" >
     INSERT INTO application( 
+       application_no,
 	   application_date,
 	   company_no,
        department,
        app_file_path,
        result_fild_path,
        remark,       
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+      `DELETE_FLAG`,
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`) 
     VALUES(
+        #{applicationNo},
     	#{applicationDate},
     	#{companyNo},
     	#{department},
     	#{appFilePath},
     	#{resultFildPath},
     	#{remark},
+    	#{deleteFlag},
+    	#{createBy},
+    	#{lastModifyBy},
     	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
+    	now()
     )
-  </insert> 
+  </insert>
+  
+   <!--  <update id="deleteApplication" parameterType="Application">
+    	UPDATE application
+    	SET  
+       		delete_flag = 1,
+       		`update_id` = #{updateId},
+       		update_by = #{updateBy},
+       		update_date = now()
+   	 	WHERE delete_flag = 0
+      	<if test="applicationNo != null and applicationNo != ''">  
+        	and `application_No` = #{applicationNo}
+      	</if>  
+      	<if test="remark != null and remark != ''">  
+        	and `remark` = #{remark}
+      	</if>  
+  	</update> -->
      
 	<resultMap id="applicationResultMap" type="ApplicationResult">
 		<id column="application_no" property="applicationNo"/>
 		<result column="application_Date" property="applicationDate"/>
+		<result column="application_Date_From" property="applicationDateFrom"/>
+		<result column="application_Date_To" property="applicationDateTo"/>
 		<result column="report_No" property="reportNo"/>
 		<result column="company_No" property="companyNo"/>
 		<result column="company_Name" property="companyName"/>
@@ -65,6 +81,7 @@
 
 		<result column="experts_No" property="expertsNo"/>
 		<result column="experts_Name" property="expertsName"/>
+		<result column="expert_Name_Con" property="expertNameCon"/>
 
 		<result column="equipment_No" property="equipmentNo"/>
 		<result column="equipment_Name" property="equipmentName"/>
@@ -87,8 +104,14 @@
   		<if test="expertsNo != null and expertsNo != '' ">
   			and report.leader_No = #{expertsNo} or report.EXPERTS_NO like #{expertsNo}
   		</if>
-  		<if test="applicationDate != null and applicationDate != '' ">
-  			and report.application_Date = #{applicationDate}
+  		<if test="applicationDateFrom != null and applicationDateFrom != '' ">
+  			and report.application_Date <![CDATA[>=]]> #{applicationDateFrom}
+  		</if>
+  		<if test="applicationDateTo != null and applicationDateTo != '' ">
+  			and report.application_Date <![CDATA[<=]]> #{applicationDateTo}
+  		</if>
+  		<if test="expertNameCon != null and expertNameCon != '' ">
+  			and ( ${expertNameCon} )
   		</if>
   	</where>
   </sql>	
@@ -129,5 +152,18 @@
    <include refid="searchCondSql"/>  
    	LIMIT ${startNo}, ${pageSize}
   </select>
-     
+
+
+   <delete id="deleteApplication" parameterType="Application">
+    	delete from application
+    	
+   	 	WHERE delete_flag = 0
+      	<if test="applicationNo != null and applicationNo != ''">  
+        	and `application_No` = #{applicationNo}
+      	</if>  
+      	<if test="remark != null and remark != ''">  
+        	and `remark` = #{remark}
+      	</if>  
+  	</delete> 
+  	
 </mapper>

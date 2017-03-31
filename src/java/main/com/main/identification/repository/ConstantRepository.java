@@ -31,5 +31,15 @@ public interface ConstantRepository {
 	public int findChildrenSeq();
 	
 	public int batchAddConstantModel(List<ConstantModel> constantList);
+	
+	public int findEquipmentSeq();
+
+	public int findCompanySeq();
+	
+	public int findReportSeq();
+
+	public int findApplicationSeq();
+
+	public List<ConstantModel> findConstantMap(ConstantModel constantModel);
 
 }

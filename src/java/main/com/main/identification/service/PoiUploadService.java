@@ -2,6 +2,8 @@ package com.main.identification.service;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,11 +16,14 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.identification.model.Application;
 import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
+import com.main.identification.model.Report;
 import com.main.identification.repository.ConstantRepository;
 import com.main.identification.utils.Constant;
+import com.main.identification.utils.TimeUtils;
 
 @Service
 public class PoiUploadService {
@@ -43,7 +48,15 @@ public class PoiUploadService {
 		HashMap<String, ConstantModel> parentMap = new HashMap<String, ConstantModel>();
 		HashMap<String, ConstantModel> childrenMap = new HashMap<String, ConstantModel>();
 		HashMap<String, EquipmentModel> equipmentMap = new HashMap<String, EquipmentModel>();
-		HashMap<String, String> companyMap = new HashMap<String, String>();
+		HashMap<String, Company> companyMap = new HashMap<String, Company>();
+		HashMap<String, Application> applicationMap = new HashMap<String, Application>();
+		HashMap<String, Report> reportMap = new HashMap<String, Report>();
+		Application application = new Application();
+		String date = TimeUtils.getStringFromTime(new Date(), TimeUtils.FORMAT_DATE);
+		String remark = date + Constant.IMPORT_REMARK;
+		application.setApplicationNo(date +  String.valueOf(constantRepository.findApplicationSeq()));
+		application.setRemark(remark);
+		applicationMap.put(date, application);
 		try {
 			// create a poi workbook from the excel spreadsheet file
 			POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(
@@ -63,6 +76,7 @@ public class PoiUploadService {
 						String parentValue ="";
 						String parentNo ="";
 						String childrenNo ="";
+						String companyNo ="";
 						for (short c = 0; c < cells; c++) {
 							HSSFCell cell = row.getCell(c);
 							if (cell != null && c>=Constant.EXCEL_START_COLUMN ) {
@@ -125,9 +139,25 @@ public class PoiUploadService {
 									epuipModel.setSubGroupNo(childrenNo);
 									equipmentMap.put(value, epuipModel);
 								}
-								//COMPANY 字段值
 								if(c==4){
-									companyMap.put(value, value);
+									
+								}
+								//COMPANY 字段值
+								if(c==5){
+									if(!StringUtils.isEmpty(value)){
+										List<String> companyNames = Arrays.asList(value.split(Constant.splitConstant));
+										for(String name:companyNames){
+											Company commapny =  new Company(); 
+											commapny.setCompanyNo(companyNo);
+											commapny.setCompanyName(name);
+											companyMap.put(name, commapny);
+											Report report =  new Report(); 
+											
+											companyMap.put(name, commapny);
+											
+										}
+									}
+									
 								}
 								
 								System.out.println("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);
@@ -142,6 +172,8 @@ public class PoiUploadService {
 			ls.add(1, childrenMap);     //常量子类
 			ls.add(2, equipmentMap);    //设备
 			ls.add(3, companyMap);      //公司
+			ls.add(4, applicationMap);  //申请
+			ls.add(5, reportMap);       //报告
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

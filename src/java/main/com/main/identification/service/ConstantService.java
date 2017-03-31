@@ -42,4 +42,8 @@ public class ConstantService {
 	public int batchAddConstantModel(List<ConstantModel> constantList) {
 		return constantRepository.batchAddConstantModel(constantList);
 	}
+
+	public void deleteConstantsByCondation(ConstantModel constant) {
+		constantRepository.deleteConstant(constant);
+	}
 }

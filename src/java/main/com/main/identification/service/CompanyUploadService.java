@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.identification.model.Company;
-import com.main.identification.model.EquipmentModel;
 import com.main.identification.repository.CompanyRepository;
+import com.main.identification.utils.Constant;
 
 @Service
 public class CompanyUploadService {
@@ -21,8 +21,10 @@ public class CompanyUploadService {
 	@Autowired
 	public CompanyRepository companyRepository;
 	
-	private static String splitConstant = "、";
 
+	public void insertCompanyBatch(List<Company> companyLst){
+		companyRepository.insertCompanyBatch(companyLst);
+	}
 	/**
 	 * 文件上传单位
 	 * @param 文件内容集合
@@ -34,7 +36,7 @@ public class CompanyUploadService {
 		List<Company> companyLst = new ArrayList<Company>();
 		// 取出文档中单位名称集合
 		for(Map<String,String> pioFile : pioFileLst){
-			fileCompanyName.addAll(Arrays.asList(pioFile.get("company").split(splitConstant)));
+			fileCompanyName.addAll(Arrays.asList(pioFile.get("company").split(Constant.splitConstant)));
 		}
 		// 创建要插入的单位集合
 		for(String companyName : fileCompanyName){
@@ -73,7 +75,7 @@ public class CompanyUploadService {
 		Set<String> fileCompanyName = new HashSet<String>();
 		// 取得每行的公司名称，按照分隔符分割，去重
 		for (Map.Entry<String, String> entry : companyMap.entrySet()) {
-			fileCompanyName.addAll(Arrays.asList(entry.getValue().split(splitConstant)));
+			fileCompanyName.addAll(Arrays.asList(entry.getValue().split(Constant.splitConstant)));
         }
 		// 单位集合
 		List<Company> companyLst = new ArrayList<Company>();
@@ -92,5 +94,11 @@ public class CompanyUploadService {
 		if(companyLst != null && companyLst.size() > 0){
 			companyRepository.insertCompanyBatch(companyLst);
 		}	
+	}
+	public void insertCompany(Company company) {
+		companyRepository.insertCompany(company);
+	}
+	public void deleteCompanyByCondation(Company company) {
+		companyRepository.deleteCompany(company);
 	}
 }

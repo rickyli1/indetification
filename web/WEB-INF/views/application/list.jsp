@@ -5,7 +5,6 @@
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th width="10px"><input type="checkbox" id="chkAll"></th>
 	                <th>No</th>
 	                <th>申请日期</th>
 	                <th>单位名称</th>
@@ -19,8 +18,7 @@
 	            <tbody>
 	            	<c:forEach var="apply" items="${applicationResultList}" varStatus="status">
 		               <tr>
-		                <td><input type="checkbox" class="chk"></td>
-		                <td>1</td>
+		                <td>${status.count}</td>
 		                <td>${apply.applicationDate}</td>
 		                <td>${apply.companyName}</td>
 		                <td>${apply.equipmentName}</td>

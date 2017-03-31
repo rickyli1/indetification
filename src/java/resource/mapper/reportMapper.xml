@@ -17,18 +17,18 @@
 		<result column="time_limit" property="timeLimit"/>
 		<result column="is_reform" property="isReform"/>
 		<result column="remark" property="remark"/>
+		<result column="delete_flag" property="delectFlag"/>
 
-		<result column="create_id" property="createId"/>
-		<result column="create_date" property="createDate"/>
-		<result column="createor" property="createor"/>
-		
-		<result column="update_id" property="updateId"/>
-		<result column="update_date" property="updateDate"/>
-		<result column="updateor" property="updateor"/>
+		<result column="DELETE_FLAG" property="deleteFlag"/>
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
 	
   <insert id="insertReport" parameterType="Report" useGeneratedKeys="true" keyProperty="reportNo" >
-    INSERT INTO company( 
+    INSERT INTO report(
+       report_no, 
 	   company_no,
 	   leader_no,
        experts_no,
@@ -40,13 +40,13 @@
        time_limit,
        is_reform,
        remark,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+      `delete_flag`,
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`) 
     VALUES(
+        #{reportNo},
     	#{companyNo},
     	#{leaderNo},
     	#{expertsNo},
@@ -58,17 +58,17 @@
     	#{timeLimit},
     	#{isReform},
     	#{remark},
+    	#{deleteFlag},
+    	#{createBy},
+    	#{lastModifyBy},
     	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
+    	now()
     )
   </insert> 
   
   <insert id="insertReportBatch" parameterType="Report" useGeneratedKeys="true" keyProperty="reportNo" >
-    INSERT INTO company( 
+    INSERT INTO report(
+       report_no,  
 	   company_no,
 	   leader_no,
        experts_no,
@@ -80,15 +80,15 @@
        time_limit,
        is_reform,
        remark,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
+       `delete_flag`,
+	   `CREATE_BY`, 
+	  `LAST_MODIFY_BY`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`) 
     VALUES
     <foreach collection="list" item="item" index="index" separator=",">
     (
+        #{item.reportNo},
     	#{item.companyNo},
     	#{item.leaderNo},
     	#{item.expertsNo},
@@ -100,13 +100,39 @@
     	#{item.timeLimit},
     	#{item.isReform},
     	#{item.remark},
+    	#{item.deleteFlag},
+    	#{item.createBy},
+    	#{item.lastModifyBy},
     	now(),
-    	#{item.createId},
-    	#{item.updateId},
-    	now(),
-    	#{item.createor},
-    	#{item.updateor}
+    	now()
     )
     </foreach>
   </insert> 
+  
+<!--    <update id="deleteReport" parameterType="Report">
+    UPDATE report
+    SET  
+       delete_flag = 1,
+       `update_id` = #{updateId},
+       `update_by` = #{updateBy},
+       update_date = now()
+    WHERE delete_flag = 0
+      <if test="reportNo != null and reportNo != ''">  
+        and `report_no` = #{reportNo}
+      </if>  
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+  </update> -->
+  
+  <delete id="deleteReport" parameterType="Report">
+    delete from report
+    WHERE delete_flag = 0
+      <if test="reportNo != null and reportNo != ''">  
+        and `report_no` = #{reportNo}
+      </if>  
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+  </delete>
 </mapper>

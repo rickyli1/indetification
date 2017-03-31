@@ -32,4 +32,9 @@ public interface ApplicationRepository {
 	 * @return
 	 */
 	public int insertApplication(Application application);
+	
+	/**
+	 * @return
+	 */
+	public int deleteApplication(Application application);
 }

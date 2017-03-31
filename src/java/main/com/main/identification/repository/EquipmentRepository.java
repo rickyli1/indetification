@@ -26,4 +26,6 @@ public interface EquipmentRepository {
 	
 	public void deleteEquipment(EquipmentModel equipment);
 
+	public int batchAddEquipmentModel(List<EquipmentModel> equipmentList);
+
 }

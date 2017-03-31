@@ -13,4 +13,6 @@ public interface CompanyRepository {
 	public int insertCompanyBatch(List<Company> list);
 	
 	public Company searchCompanyByName(String companyName);
+
+	public void deleteCompany(Company company);
 }
