@@ -86,4 +86,15 @@ public class Constant {
 	
 	
 	public static String REPORT_SEQ= "ReportSeq";
+	
+	public static String APPLICATION_SEQ= "ApplicationSeq";
+	
+	public static String EQUIPMENT_SEQ= "EquipmentSeq";
+	
+	public static String COMPANY_SEQ= "CompanySeq";
+	
+	public static String CHILDREN_SEQ= "ChildrenSeq";
+	
+	public static String PARENT_SEQ= "ParentSeq";
+	  
 }

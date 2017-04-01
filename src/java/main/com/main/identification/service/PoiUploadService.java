@@ -22,6 +22,7 @@ import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.Report;
+import com.main.identification.repository.CommonRepository;
 import com.main.identification.repository.ConstantRepository;
 import com.main.identification.utils.Constant;
 import com.main.identification.utils.TimeUtils;
@@ -31,6 +32,9 @@ public class PoiUploadService {
 	
 	@Autowired
 	public ConstantRepository constantRepository;
+	
+	@Autowired
+	private CommonService commonService;
 
 	/**
 	 * 设备基础信息导入测试接口
@@ -56,7 +60,7 @@ public class PoiUploadService {
 		Application application = new Application();
 		String date = TimeUtils.getStringFromTime(new Date(), TimeUtils.FORMAT_DATE_NO);
 		String remark = date +" " +Constant.IMPORT_REMARK;
-		String applicationNo = date+"_" +  String.valueOf(constantRepository.findApplicationSeq());
+		String applicationNo = date+"_" +  String.valueOf(commonService.createSequenceId(Constant.APPLICATION_SEQ));
 		application.setApplicationNo(applicationNo);
 		application.setRemark(remark);
 		application.setApplicationDate(date);
@@ -115,7 +119,7 @@ public class PoiUploadService {
 									if(!parentMap.containsKey(parentValue)){
 										cm = new ConstantModel();
 										cm.setConstantType(Constant.PARENT_TYPE);
-										parentNo = Constant.PARENT_FLAG + String.valueOf(constantRepository.findParentSeq());
+										parentNo = Constant.PARENT_FLAG + String.valueOf(commonService.createSequenceId(Constant.PARENT_SEQ));
 	//										parentNo = Constant.PARENT_FLAG;
 										cm.setConstantNo(parentNo);
 										cm.setConstantName(value);
@@ -130,7 +134,7 @@ public class PoiUploadService {
 									if(!parentMap.containsKey(value+groupName)){
 										ConstantModel scm = new ConstantModel();
 										scm.setConstantType(Constant.CHILDREN_TYPE);
-										childrenNo = Constant.CHILDREN_FLAG + String.valueOf(constantRepository.findChildrenSeq());
+										childrenNo = Constant.CHILDREN_FLAG +  String.valueOf(commonService.createSequenceId(Constant.CHILDREN_SEQ));
 //										childrenNo = Constant.CHILDREN_FLAG;
 										
 										scm.setConstantNo(childrenNo);
@@ -144,7 +148,7 @@ public class PoiUploadService {
 									String groupNo = parentModel.getConstantNo();
 									EquipmentModel epuipModel =  new EquipmentModel(); 
 									//创建equipment 序列
-									equipmentNo = Constant.COMPANY_FLAG + String.valueOf(constantRepository.findCompanySeq());
+									equipmentNo = Constant.COMPANY_FLAG + String.valueOf(commonService.createSequenceId(Constant.COMPANY_SEQ));
 									epuipModel.setEquipmentNo(equipmentNo);
 									epuipModel.setEquipmentName(value);
 									epuipModel.setGroupNo(groupNo);
@@ -162,7 +166,8 @@ public class PoiUploadService {
 										for(String name:companyNames){
 											if(!companyMap.containsKey(name)){
 												Company commapny =  new Company(); 
-												companyNo = Constant.COMPANY_FLAG + String.valueOf(constantRepository.findCompanySeq());
+												companyNo = Constant.EQUIPMENT_FLAG
+														+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ));
 												commapny.setCompanyNo(companyNo);
 												commapny.setCompanyName(name);
 												companyMap.put(name, commapny);
@@ -171,8 +176,9 @@ public class PoiUploadService {
 											if(!reportMap.containsKey(key)){
 												Company commapny = companyMap.get(name);
 												Report report =  new Report(); 
-												String reportNo =  Constant.REPORT_FLAG + String.valueOf(constantRepository.findReportSeq());
-												report.setApplicationDate(date);
+												String reportNo = Constant.REPORT_FLAG
+														+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ));
+																	report.setApplicationDate(date);
 												report.setRemark(remark);
 												report.setReportNo(reportNo);
 												report.setCompanyNo(commapny.getCompanyNo());
