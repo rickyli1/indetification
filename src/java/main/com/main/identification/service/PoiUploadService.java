@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -44,6 +45,7 @@ public class PoiUploadService {
 	 * @param filename
 	 */
 	public List getExcelDate(String filename) {
+		HashMap<String, String> levelMap = findConstantLevel();
 		List ls = new ArrayList();
 		HashMap<String, ConstantModel> parentMap = new HashMap<String, ConstantModel>();
 		HashMap<String, ConstantModel> childrenMap = new HashMap<String, ConstantModel>();
@@ -52,10 +54,12 @@ public class PoiUploadService {
 		HashMap<String, Application> applicationMap = new HashMap<String, Application>();
 		HashMap<String, Report> reportMap = new HashMap<String, Report>();
 		Application application = new Application();
-		String date = TimeUtils.getStringFromTime(new Date(), TimeUtils.FORMAT_DATE);
-		String remark = date + Constant.IMPORT_REMARK;
-		application.setApplicationNo(date +  String.valueOf(constantRepository.findApplicationSeq()));
+		String date = TimeUtils.getStringFromTime(new Date(), TimeUtils.FORMAT_DATE_NO);
+		String remark = date +" " +Constant.IMPORT_REMARK;
+		String applicationNo = date+"_" +  String.valueOf(constantRepository.findApplicationSeq());
+		application.setApplicationNo(applicationNo);
 		application.setRemark(remark);
+		application.setApplicationDate(date);
 		applicationMap.put(date, application);
 		try {
 			// create a poi workbook from the excel spreadsheet file
@@ -66,17 +70,20 @@ public class PoiUploadService {
 				System.out.println("THE sheet number :" + k);
 				HSSFSheet sheet = wb.getSheetAt(k);
 				int rows = sheet.getPhysicalNumberOfRows();
-
+				ConstantModel cm = new ConstantModel(); 
+				String parentValue ="";
+				String parentNo ="";
+				String childrenNo ="";
+				String companyNo ="";
+				String equipmentNo ="";
+				String equipmentName ="";
+				String levelNo ="";
 				for (int r = Constant.EXCEL_START_ROW; r < rows; r++) {
 					HSSFRow row = sheet.getRow(r);
 					if (row != null && r>=Constant.EXCEL_START_ROW) {
 						int cells = row.getPhysicalNumberOfCells();
 						System.out.println("THE row:" + row.getRowNum() + "");
-						ConstantModel cm = new ConstantModel(); 
-						String parentValue ="";
-						String parentNo ="";
-						String childrenNo ="";
-						String companyNo ="";
+					
 						for (short c = 0; c < cells; c++) {
 							HSSFCell cell = row.getCell(c);
 							if (cell != null && c>=Constant.EXCEL_START_COLUMN ) {
@@ -89,32 +96,34 @@ public class PoiUploadService {
 									break;
 
 								case HSSFCell.CELL_TYPE_NUMERIC:
-									value = "NUMERIC value="
-											+ cell.getNumericCellValue();
+									value = ""+ cell.getNumericCellValue();
 									break;
 
 								case HSSFCell.CELL_TYPE_STRING:
-									value = "STRING value="
-											+ cell.getStringCellValue();
+									value =  cell.getStringCellValue();
 									break;
 
 								default:
 								}
-								if(StringUtils.isEmpty(value)){
-									break;
-								}
-								if(c==1 ){
-									parentValue = value;
-									if(!parentMap.containsKey(value)){
+//								if(StringUtils.isEmpty(value)){
+//									break;
+//								}
+								if(c==1 && !StringUtils.isEmpty(value)){
+									if(!StringUtils.isEmpty(value)){
+										parentValue = value;
+									}
+									if(!parentMap.containsKey(parentValue)){
+										cm = new ConstantModel();
 										cm.setConstantType(Constant.PARENT_TYPE);
 										parentNo = Constant.PARENT_FLAG + String.valueOf(constantRepository.findParentSeq());
-//										parentNo = Constant.PARENT_FLAG;
+	//										parentNo = Constant.PARENT_FLAG;
 										cm.setConstantNo(parentNo);
 										cm.setConstantName(value);
 										parentMap.put(parentValue, cm);
 									}
+									
 								}
-								if(c==2){
+								if(c==2 && !StringUtils.isEmpty(value)) {
 									ConstantModel parentModel =  parentMap.get(parentValue);
 									String groupNo = parentModel.getConstantNo();
 									String groupName = parentModel.getConstantName();
@@ -130,34 +139,58 @@ public class PoiUploadService {
 										childrenMap.put(value+groupName, scm);
 									}
 								}
-								if(c==3){
+								if(c==3 && !StringUtils.isEmpty(value)){
+									ConstantModel parentModel =  parentMap.get(parentValue);
+									String groupNo = parentModel.getConstantNo();
 									EquipmentModel epuipModel =  new EquipmentModel(); 
 									//创建equipment 序列
-//									epuipModel.setEquipmentNo(equipmentNo);
+									equipmentNo = Constant.COMPANY_FLAG + String.valueOf(constantRepository.findCompanySeq());
+									epuipModel.setEquipmentNo(equipmentNo);
 									epuipModel.setEquipmentName(value);
-									epuipModel.setGroupNo(parentNo);
+									epuipModel.setGroupNo(groupNo);
 									epuipModel.setSubGroupNo(childrenNo);
 									equipmentMap.put(value, epuipModel);
+									equipmentName = value;
 								}
-								if(c==4){
-									
+								if(c==4&& !StringUtils.isEmpty(value)){
+									levelNo = levelMap.get(value);
 								}
 								//COMPANY 字段值
-								if(c==5){
+								if(c==5 && !StringUtils.isEmpty(value)){
 									if(!StringUtils.isEmpty(value)){
 										List<String> companyNames = Arrays.asList(value.split(Constant.splitConstant));
 										for(String name:companyNames){
-											Company commapny =  new Company(); 
-											commapny.setCompanyNo(companyNo);
-											commapny.setCompanyName(name);
-											companyMap.put(name, commapny);
-											Report report =  new Report(); 
-											
-											companyMap.put(name, commapny);
-											
+											if(!companyMap.containsKey(name)){
+												Company commapny =  new Company(); 
+												companyNo = Constant.COMPANY_FLAG + String.valueOf(constantRepository.findCompanySeq());
+												commapny.setCompanyNo(companyNo);
+												commapny.setCompanyName(name);
+												companyMap.put(name, commapny);
+											}
+											String key = name+equipmentName+levelNo;
+											if(!reportMap.containsKey(key)){
+												Company commapny = companyMap.get(name);
+												Report report =  new Report(); 
+												String reportNo =  Constant.REPORT_FLAG + String.valueOf(constantRepository.findReportSeq());
+												report.setApplicationDate(date);
+												report.setRemark(remark);
+												report.setReportNo(reportNo);
+												report.setCompanyNo(commapny.getCompanyNo());
+												report.setEquipmentNo(equipmentNo);
+												report.setRepairLevel(levelNo);
+												report.setResult(Constant.RESULT);
+												report.setApplicationNo(applicationNo);
+												report.setRemark(remark);
+												report.setRow(row.getRowNum());
+												reportMap.put(key, report);
+											}
 										}
 									}
 									
+								}
+								//期限 字段值
+								if(c==6 && !StringUtils.isEmpty(value)){
+									reportMap = setReportLimit(value,reportMap,row.getRowNum());
 								}
 								
 								System.out.println("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);
@@ -179,5 +212,39 @@ public class PoiUploadService {
 			e.printStackTrace();
 		}
 		return ls;
+	}
+
+	/**
+	 * 更新报告期限
+	 * @param timeLimit 期限
+	 * @param reportMap 报告列表
+	 * @return 报告列表
+	 */
+	private HashMap<String, Report> setReportLimit(String timeLimit,
+			HashMap<String, Report> reportMap, int row) {
+		for (Map.Entry<String, Report> entry : reportMap.entrySet()) {
+			Report report = entry.getValue();
+			if(report.getRow() == row){
+				report.setTimeLimit(timeLimit);
+			}
+        }
+   	
+		return reportMap;
+	}
+
+	
+	/**
+	 * 获取维修级别键值对
+	 * @return  hm
+	 */
+	private HashMap<String, String> findConstantLevel() {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		ConstantModel constantModelPara = new ConstantModel(); 
+		constantModelPara.setConstantType(Constant.REPAIR_LEVEL);
+		List<ConstantModel> list = constantRepository.findConstantMap(constantModelPara);
+		for(ConstantModel constantModel : list){
+			hm.put(constantModel.getConstantName(), constantModel.getConstantNo());
+		}
+		return hm;
 	}
 }

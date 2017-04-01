@@ -7,9 +7,6 @@ package com.main.identification.utils;
  * 
  */
 public class Constant {
-	
-	public static final String   RESULT_SUCCESS = "success";
-	
 	/**
 	 * 专业标识
 	 */

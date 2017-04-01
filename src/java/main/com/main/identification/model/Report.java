@@ -25,6 +25,15 @@ public class Report extends BaseModel implements Serializable{
 	private Timestamp createTime;  //创建时间
 	private Timestamp lastModifyTime; //最后修改时间
 	
+	private int row; // 备注
+	
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
 	
 	public String getDeleteFlag() {
 		return deleteFlag;
