@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.identification.service.ExpertService;
+
 import com.main.identification.model.Application;
 import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationResult;
 import com.main.identification.model.Report;
-import com.main.identification.model.Expert;
 import com.main.identification.repository.ApplicationRepository;
 import com.main.identification.repository.ReportRepository;
 import com.main.identification.utils.IndentificationUtils;
@@ -94,21 +95,15 @@ public class ApplicationService {
 	private List<ApplicationResult> setContent(List<ApplicationResult> resultList){
 		// 设定检修级别
 		for(ApplicationResult applicationResult: resultList){
-			if("REPAIR_LEVEL/1".equals(applicationResult.getRepairLevel())){
+			if("1".equals(applicationResult.getRepairLevel())){
 				applicationResult.setRepairLevel("检修");
-			} else if ("REPAIR_LEVEL/2".equals(applicationResult.getRepairLevel())){
+			} else if ("2".equals(applicationResult.getRepairLevel())){
 				applicationResult.setRepairLevel("小修");
-			} else if ("REPAIR_LEVEL/3".equals(applicationResult.getRepairLevel())){
+			} else if ("3".equals(applicationResult.getRepairLevel())){
 				applicationResult.setRepairLevel("中修");
-			} else if ("REPAIR_LEVEL/4".equals(applicationResult.getRepairLevel())){
+			} else if ("4".equals(applicationResult.getRepairLevel())){
 				applicationResult.setRepairLevel("大修");
 			} 
-			// 设定是否合格
-			if("1".equals(applicationResult.getResult())){
-				applicationResult.setResult("合格");
-			}else{
-				applicationResult.setResult("不合格");
-			}
 			
 			// 设定专家组姓名
 			applicationResult.setExpertsName(this.getExpertsName(applicationResult));
@@ -126,7 +121,7 @@ public class ApplicationService {
 		String expertsName = "";
 		
 		// 获取组长姓名
-		if(!applicationResult.getLeaderNo().isEmpty()){
+		if(applicationResult.getLeaderNo() != null && !applicationResult.getLeaderNo().isEmpty()){
 			expertsName = expertsName.concat(expertService.selectByExpertNo(applicationResult.getLeaderNo()).getExpertName());
 		}
 		
@@ -134,11 +129,13 @@ public class ApplicationService {
 			expertsName = expertsName.concat("(*)");
 		}
 		
-		// 获取组员姓名
-		String[] namesNo = applicationResult.getExpertsNo().split(";");
-		for(int i=0;i<namesNo.length;i++){
-			if(!namesNo[i].isEmpty()){
-				expertsName = expertsName.concat(",").concat(expertService.selectByExpertNo(namesNo[i]).getExpertName());
+		if(applicationResult.getExpertsNo() != null && !applicationResult.getExpertsNo().isEmpty()){
+			// 获取组员姓名
+			String[] namesNo = applicationResult.getExpertsNo().split(";");
+			for(int i=0;i<namesNo.length;i++){
+				if(!namesNo[i].isEmpty()){
+					expertsName = expertsName.concat(",").concat(expertService.selectByExpertNo(namesNo[i]).getExpertName());
+				}
 			}
 		}
 		

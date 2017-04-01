@@ -7,6 +7,9 @@ package com.main.identification.utils;
  * 
  */
 public class Constant {
+	
+	public static final String   RESULT_SUCCESS = "success";
+	
 	/**
 	 * 专业标识
 	 */
@@ -80,4 +83,7 @@ public class Constant {
 	 */
 	public static int EXCEL_START_ROW = 3;
 	public static int EXCEL_START_COLUMN = 1;
+	
+	
+	public static String REPORT_SEQ= "ReportSeq";
 }

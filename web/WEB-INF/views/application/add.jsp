@@ -79,6 +79,7 @@
 	  </div>
 	</div>
 </div>	
+<div id="alertDiv"></div>
 </body>
 
 <script id="detailTemplate" type="text/x-jquery-tmpl">
@@ -87,15 +88,11 @@
 	<select  class="form-control" id="equipment{{= no}}">
         {{each equipments}} <option value="{{= $value.equipmentNo}}">{{= $value.equipmentName}}</option>{{/each}}
 	</select>    
-	<td>					
-	<select  class="form-control" id="repairLevel{{= no}}>
-        {{each repairLevels}} <option value="{{= $value.constantNo}}">{{= $value.constantName}}</option>{{/each}}
-	</select>
+	<td>	
+		 {{each(i,repair) repairLevels}} <input type="radio" name="repairLevel{{= no}}" value="{{= repair.constantNo}}">{{= repair.constantName}}{{/each}}		
 	</td>
 	<td>
-	<select  class="form-control" id="expert{{= no}}>
-        {{each experts}} <option value="{{= $value.expertNo}}">{{= $value.expertName}}</option>{{/each}}
-	</select>
+ {{each(i,expert) experts}} <input type="radio" name="expert{{= no}}" value="{{= expert.expertNo}}">{{=  expert.expertName}}{{/each}}	
 	</td>
 	<td>
 	<input type="radio" name="result{{= no}}" value="1">通过

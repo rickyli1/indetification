@@ -16,8 +16,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />	
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8" />
-		<property name="username" value="****" />
-		<property name="password" value="****" />
+		<property name="username" value="root" />
+		<property name="password" value="123qaz" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="5" />
 		<property name="maxIdle" value="5" />
@@ -57,9 +57,10 @@
     <!-- 拦截器方式配置事物 -->  
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">  
         <tx:attributes>  
-            <tx:method name="add*" propagation="REQUIRED" /> 
-            <tx:method name="insert*" propagation="REQUIRED" />   
-            <tx:method name="batch*" propagation="REQUIRED" />   
+            <tx:method name="add*" propagation="REQUIRED" />  
+            <tx:method name="create*" propagation="REQUIRES_NEW" />  
+            <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="batch*" propagation="REQUIRED" />  
             <tx:method name="modify*" propagation="REQUIRED" />  
             <tx:method name="update*" propagation="REQUIRED" />  
             <tx:method name="delete*" propagation="REQUIRED" />  
@@ -69,4 +70,9 @@
             <tx:method name="*" propagation="SUPPORTS" />  
         </tx:attributes>  
     </tx:advice>  
+    
+   <aop:config>    
+    <aop:pointcut id="pc" expression="execution(public * com.main.identification.service.*.*(..))" /> <!--把事务控制在Service层-->
+    <aop:advisor pointcut-ref="pc" advice-ref="transactionAdvice" />
+  </aop:config>
 </beans>  

@@ -1,6 +1,5 @@
 package com.main.identification.model;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
