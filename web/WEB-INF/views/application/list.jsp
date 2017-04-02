@@ -18,7 +18,7 @@
 	            <tbody>
 	            	<c:forEach var="apply" items="${applicationResultList}" varStatus="status">
 		               <tr>
-		                <td>${status.count}</td>
+		                <td>${status.count+(page-1)*10}</td>
 		                <td>${apply.applicationDate}</td>
 		                <td>${apply.companyName}</td>
 		                <td>${apply.equipmentName}</td>
@@ -42,7 +42,8 @@
 <script type="text/javascript">
 	
 	$('#pagination-demo').twbsPagination({
-	    totalPages: '${totalCount}',
+	    totalPages: '${totalPage}',
+	    startPage: '${page}',
 	    visiblePages: 10,
 	    onPageClick: function (event, page) {
 	    	$("#page").val(page);

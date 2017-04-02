@@ -40,9 +40,9 @@ public class PoiUploadService {
 	 * 设备基础信息导入测试接口
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		new PoiUploadService().getExcelDate("E:\\BaiduYunDownload\\234.xls");
-	}
+//	public static void main(String[] args) {
+//		new PoiUploadService().getExcelDate("E:\\BaiduYunDownload\\234.xls");
+//	}
 
 	/**
 	 * 

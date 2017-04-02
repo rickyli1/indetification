@@ -35,13 +35,6 @@
        	</div> 
       
 		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
-	    <script type="text/javascript">
-	    identification.adminUser = new Identification.adminUser.List();
-
-	    function goPage() {
-	    	identification.adminUser.searchList();
-		}
-      </script>
 	  </body>
 </html>
 

@@ -39,13 +39,16 @@ public class ApplicationController {
 
 	@RequestMapping(value ="/searchList")
 	public String getApplicationList(Model model,@RequestBody ApplicationResult application) {
+		
+		application.setStartNo(PageUtil.getStartNo(application.getPage(), 10));
+		application.setPageSize(10);
 		// 设定专家姓名检索条件
 		this.setExpertNameCon(application);
-		
-//		application.setPageSize(2);
-//		application.setStartNo(PageUtil.getStartNo(application.getPage(), application.getPageSize()));
-		
-		model.addAttribute("totalCount", applicationBo.selectApplicationResultCount(application));
+		int totalCount = applicationBo.selectApplicationResultCount(application);
+		model.addAttribute("totalPage", PageUtil.getTotalPage(totalCount, 10));
+		model.addAttribute("pageSize", "10");
+		model.addAttribute("page", application.getPage());
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("applicationResultList", applicationBo.searchList(application));
 		
 		return "application/list";

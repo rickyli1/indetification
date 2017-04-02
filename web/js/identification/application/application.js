@@ -58,7 +58,7 @@
 		// 取得隐藏域参数
 		getSearchConditions: function() {
 			var data = {	
-				"page":$("page").val(),
+				"page":$("#page").val(),
 				"companyName": $("#companyNameHide").val(),
 				"equipmentName":$("#equipmentNameHide").val(),
 				"expertNameCon":$("#expertNameConHide").val(),

@@ -38,8 +38,6 @@ public class ApplicationService {
 	 * @return 结果集
 	 */
 	public List<ApplicationResult> searchList(ApplicationResult condition){
-		condition.setPageSize(10);
-		condition.setStartNo(0);
 		return this.setContent(applicationRepository.selectApplicationResultList(condition));
 	}
 	
