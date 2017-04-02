@@ -9,11 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.main.identification.model.ApplicationAddModel;
+import com.main.identification.model.ApplicationRequstModel;
 import com.main.identification.model.ApplicationResult;
+import com.main.identification.model.ConstantModel;
+import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.Expert;
 import com.main.identification.service.ApplicationService;
+import com.main.identification.service.CompanyService;
+import com.main.identification.service.ConstantService;
+import com.main.identification.service.EquipmentService;
 import com.main.identification.service.ExpertService;
 import com.main.identification.utils.PageUtil;
 import com.main.identification.utils.Constant;
@@ -29,8 +36,18 @@ import com.main.identification.utils.Constant;
 public class ApplicationController {
 	@Autowired
 	public ApplicationService applicationBo;
+	
 	@Autowired
 	public ExpertService expertBo;
+	
+	@Autowired
+	public EquipmentService equipmentService;
+	
+	@Autowired
+	public ConstantService constantService;
+	
+	@Autowired
+	public CompanyService companyService;
 	
 	@RequestMapping("/init")
 	public String init(Model model, Principal principal) {
@@ -89,6 +106,30 @@ public class ApplicationController {
 	public String addInit(Model model) {
 		
 		return "/application/add";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getApplicationData")
+	public ApplicationRequstModel getApplicationData(Model model) {
+		ApplicationRequstModel  result = new ApplicationRequstModel();
+		
+		//取得专家List
+		Expert expertCon = new Expert();
+		List<Expert> expertList = expertBo.selectExpert(expertCon);
+		
+		//取得设备List
+		List<EquipmentModel> equipmentList = equipmentService.findEquipmentList();
+		
+		//取得修理级别
+		ConstantModel constant = new ConstantModel();
+		constant.setConstantType(Constant.REPAIR_LEVEL);
+		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
+		
+		result.setEquipments(equipmentList);
+		result.setExperts(expertList);
+		result.setRepairLevels(repairLevelList);
+		
+		return result;
 	}
 	
 	@RequestMapping("/add")

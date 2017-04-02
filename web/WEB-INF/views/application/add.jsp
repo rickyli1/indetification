@@ -39,11 +39,10 @@
                  <label class="col-md-1 control-label" for="company">申请单位</label>
                  <div class="col-md-3">                
 					<select  class="form-control" id="company">
-					  <option>1</option>
-					  <option>2</option>
-					  <option>3</option>
-					  <option>4</option>
-					  <option>5</option>
+					 <option selected value=""></option>				
+					  <c:forEach var="company" items="${companys}" varStatus="status">
+						  <option value="${company.companyNo}">${company.companyName}</option>
+					  </c:forEach>					 
 					</select>
                  </div>
                  
@@ -86,13 +85,21 @@
 <tr id="tr{{= no}}">
 	<td>
 	<select  class="form-control" id="equipment{{= no}}">
+        <option selected value=""></option>
         {{each equipments}} <option value="{{= $value.equipmentNo}}">{{= $value.equipmentName}}</option>{{/each}}
 	</select>    
 	<td>	
-		 {{each(i,repair) repairLevels}} <input type="radio" name="repairLevel{{= no}}" value="{{= repair.constantNo}}">{{= repair.constantName}}{{/each}}		
+	<select  class="form-control" id="repairLevel{{= no}}">
+         <option selected value=""></option>
+        {{each repairLevels}} <option value="{{= $value.constantNo}}">{{= $value.constantName}}</option>{{/each}}
+	</select>  
+	
 	</td>
 	<td>
- {{each(i,expert) experts}} <input type="radio" name="expert{{= no}}" value="{{= expert.expertNo}}">{{=  expert.expertName}}{{/each}}	
+	<select  class="form-control" id="expert{{= no}}">
+         <option selected value=""></option>
+        {{each experts}} <option value="{{= $value.expertNo}}">{{= $value.expertName}}</option>{{/each}}
+	</select>  
 	</td>
 	<td>
 	<input type="radio" name="result{{= no}}" value="1">通过

@@ -47,24 +47,11 @@
 			var that = this;			
 			$("#addApplicationDetailBtn").click(function() {
 	            that.no = that.no +1;
-	            console.log(that.no);
-				var datas = {  no : that.no,
-						       repairLevels:[
-				                      {constantNo:"1",constantName:"专家1"},
-				                      {constantNo:"2",constantName:"专家11"},
-				                      {constantNo:"3",constantName:"专家111"}
-				                      ],
-		                      experts:[
-				                      {expertNo:"1",expertName:"大修"},
-				                      {expertNo:"2",expertName:"中修"},
-				                      {expertNo:"3",expertName:"小修"}
-				                   ],
-				              equipments:[
-					                      {equipmentNo:"1",equipmentName:"设备111111111111111"},
-					                      {equipmentNo:"2",equipmentName:"设备1111111111uuu11111设备111111111111111"},
-					                      {equipmentNo:"3",equipmentName:"设备lll1111111111"}
-					                   ]						                   
-				            };
+	            var data = {  no : that.no};
+	            var datas = {};
+	        	identification.ajaxNoasync("/application/getApplicationData", null, "json", function(res) {
+	        		datas = $.extend(data, res);
+				});	         	
 
 				$("#detailTemplate").tmpl(datas).appendTo( "#applicationDetailBody" );
 				
@@ -73,6 +60,7 @@
 				$(".deleteClass").each(function(index,elemet){
 					var removeNo = $(this).attr("data-no");
 					$(this).click(function() {
+						that.no = that.no -1;
 						$("#tr" + removeNo).remove();
 					});
 				});
@@ -83,6 +71,8 @@
 	        $("#saveApplicationBtn").click(function() {
 	        	var saveData = that.getSaveData();
 	        	identification.ajax("/application/add", JSON.stringify(saveData), "html", function(res) {
+    				$("#alertDiv").empty();
+    				$("#alertDiv").html(res);
 				});	        	
 	        });		
 	        
@@ -106,7 +96,7 @@
     		   var report = {};
     		   report.equipmentNo = $("#equipment" + i).val();
     		   report.repairLevel = $("#repairLevel" + i).val();
-    		   report.expert = $("#expert" + i).val();
+    		   report.expertsNo = $("#expert" + i).val();
     		   report.result = $("input[name='" + "result" + i +"']:checked").val(); 
     		   report.isReform =  $("input[name='" + "isReform" + i +"']:checked").val(); 
     		   report.timeLimit = $("#timeLimit" + i).val();

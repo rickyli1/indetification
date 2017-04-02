@@ -96,5 +96,8 @@ public class Constant {
 	public static String CHILDREN_SEQ= "ChildrenSeq";
 	
 	public static String PARENT_SEQ= "ParentSeq";
-	  
+	
+	public static final String COMPANY_FACTORY_TYPE = "0";
+	public static final String COMPANY_EXPERT_TYPE = "1";
+
 }

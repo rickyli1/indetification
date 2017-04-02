@@ -3,7 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.main.identification.repository.CompanyRepository">
-
+    <sql id="baseSearchSql">
+        select 
+          COMPANY_NO,
+          CREATE_BY,
+          LAST_MODIFY_BY,
+          CREATE_TIME,
+          LAST_MODIFY_TIME,
+          DELETE_FLAG,
+          COMPANY_NAME,
+          COMPANY_TYPE,
+          COMPANY_CODE,
+          REMARK
+         from COMPANY
+    </sql>
+    
 	<resultMap id="companyMap" type="Company">
 		<id column="company_no" property="companyNo"/>
 		<result column="company_name" property="companyName"/>
@@ -18,6 +32,12 @@
 		<result column="CREATE_TIME" property="createTime"/>
 		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
+	
+  <select id="selectCompanyList" resultMap="companyMap">
+  	<include refid="baseSearchSql"/>
+  	where DELETE_FLAG = '0'
+  	and COMPANY_TYPE = #{companyType}
+  </select>
 	
   <select id="searchCompanyByName" resultMap="companyMap" parameterType="String">
     SELECT 

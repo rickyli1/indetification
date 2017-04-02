@@ -18,10 +18,10 @@ public class ConstantService {
 	@Autowired
 	private ConstantRepository constantRepository;
 
-
-	/**
-	 * @param adminUser
-	 */
+    public List<ConstantModel>findConstantList(ConstantModel constant) {
+    	return constantRepository.selectConstantList(constant);
+    }
+	
 	public int addConstantModel(ConstantModel constant) {
 		return constantRepository.insertConstant(constant);
 	}

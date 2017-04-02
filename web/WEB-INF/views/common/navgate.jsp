@@ -12,7 +12,13 @@
            </ul>		            
          </li>-->
          <li><a href="#/base"><spring:message code="lable.base"/></a></li>
-         <li><a href="/application/init"><spring:message code="lable.application"/></a></li>
+         <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.application.search"/> <span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/application/init"><spring:message code="lable.application.search"/></a></li>
+             <li><a href="/application/addInit"><spring:message code="lable.application.add"/></a></li>
+           </ul>
+         </li>
          <li><a href="#/equipment"><spring:message code="lable.equipment"/></a></li>
          <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
          <li><a href="#/company"><spring:message code="lable.company"/></a></li>

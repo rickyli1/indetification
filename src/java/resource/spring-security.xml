@@ -24,7 +24,7 @@
   
         <!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->  
         <security:form-login login-page="/login" authentication-failure-url="/login?error"  
-            default-target-url="/adminUser/init" username-parameter="username"
+            default-target-url="/application/init" username-parameter="username"
 			password-parameter="password"/>  
 
         <security:logout invalidate-session="true" logout-success-url="/login?logout" logout-url="/j_spring_security_logout" />  

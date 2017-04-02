@@ -18,10 +18,10 @@ public class EquipmentService {
 	@Autowired
 	private EquipmentRepository equipmentRepository;
 
+	public List<EquipmentModel> findEquipmentList() {
+		return equipmentRepository.selectEquipmentList();
+	}
 
-	/**
-	 * @param adminUser
-	 */
 	public int addEquipmentModel(EquipmentModel equipment) {
 		return equipmentRepository.insertEquipment(equipment);
 	}
@@ -36,10 +36,4 @@ public class EquipmentService {
 		equipmentRepository.deleteEquipment(equip);		
 	}
 	
-//	/**
-//	 * @param adminUser
-//	 */
-//	public int modifyAdminUser(AdminUser adminUser) {
-//		return adminUserRepository.updateAdminUser(adminUser);
-//	}
 }

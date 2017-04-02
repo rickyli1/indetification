@@ -5,6 +5,7 @@ import com.main.identification.model.Company;
 
 public interface CompanyRepository {
 	
+	public List<Company> selectCompanyList(Company company);
 	/**
 	 * @return
 	 */

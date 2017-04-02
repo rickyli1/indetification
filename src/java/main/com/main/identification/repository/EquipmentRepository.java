@@ -28,4 +28,6 @@ public interface EquipmentRepository {
 
 	public int batchAddEquipmentModel(List<EquipmentModel> equipmentList);
 
+	public List<EquipmentModel> selectEquipmentList();
+
 }

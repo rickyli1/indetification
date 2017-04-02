@@ -110,7 +110,6 @@
 	    identification.application = new Identification.application.List();
 
 	    function goPage() {
-	    	console.log(111);
 	    	identification.application.searchList();
 		}
       </script>

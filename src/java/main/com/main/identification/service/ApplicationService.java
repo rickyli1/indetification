@@ -12,7 +12,9 @@ import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationResult;
 import com.main.identification.model.Report;
 import com.main.identification.repository.ApplicationRepository;
+import com.main.identification.repository.ConstantRepository;
 import com.main.identification.repository.ReportRepository;
+import com.main.identification.utils.Constant;
 import com.main.identification.utils.IndentificationUtils;
 
 /**
@@ -25,11 +27,18 @@ import com.main.identification.utils.IndentificationUtils;
 public class ApplicationService {
 	@Autowired
 	private ApplicationRepository applicationRepository;
+	
 	@Autowired
 	public ExpertService expertService;
 	
 	@Autowired
 	private ReportRepository reportRepository;
+	
+	@Autowired
+	public ConstantRepository constantRepository;	
+	
+	@Autowired
+	CommonService commonService;
 	
 	/**
 	 * 申请查询
@@ -73,16 +82,21 @@ public class ApplicationService {
 		
 		Application application = applicationAddModel.getApplication();
 		List<Report> reports = applicationAddModel.getReports();
+		application.setApplicationNo(Constant.APPLICATION_FLAG +  String.valueOf(constantRepository.findApplicationSeq()));		
 		
 		IndentificationUtils.setUserInfo(application);
-		
+		application.setApplicationDate(application.getApplicationDate().replaceAll("-", ""));
 		for(Report report : reports) {
 			IndentificationUtils.setUserInfo(report);
-
+			report.setApplicationNo(application.getApplicationNo());
+			report.setCompanyNo(application.getCompanyNo());
+			report.setReportNo(Constant.REPORT_FLAG +  String.valueOf(commonService.createSequenceId(Constant.REPORT_SEQ)));	
+			report.setApplicationDate(application.getApplicationDate());
 		}
 		
-		 applicationRepository.insertApplication(application);
-		return reportRepository.insertReportBatch(reports);
+		applicationRepository.insertApplication(application);
+		int result = reportRepository.insertReportBatch(reports);
+		return result;
 	}
 	
 	/**

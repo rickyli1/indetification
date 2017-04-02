@@ -11,7 +11,7 @@ import com.main.identification.model.ConstantModel;
  */
 public interface ConstantRepository {
 	
-	public List<ConstantModel> selectConstant(ConstantModel constant);
+	public List<ConstantModel> selectConstantList(ConstantModel constant);
 
 	/**
 	 * @return

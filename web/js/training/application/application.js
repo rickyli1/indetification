@@ -60,7 +60,8 @@
 			var data = {					
 				"companyName": $("#companyNameHide").val(),
 				"equipmentName":$("#equipmentNameHide").val(),
-				"expertNameCon":$("#expertNameConHide").val()
+				"expertNameCon":$("#expertNameConHide").val(),
+				"page":$("#page").val()
 			};
 			return data;
 	    },
