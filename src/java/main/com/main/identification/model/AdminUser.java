@@ -8,8 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.main.identification.model.BaseModel;
-
 public class AdminUser extends BaseModel implements UserDetails {
 	private static final long serialVersionUID = 5249297571246463032L;
 	private int userId;

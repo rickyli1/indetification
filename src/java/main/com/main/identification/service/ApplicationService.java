@@ -92,6 +92,12 @@ public class ApplicationService {
 			report.setCompanyNo(application.getCompanyNo());
 			report.setReportNo(Constant.REPORT_FLAG +  String.valueOf(commonService.createSequenceId(Constant.REPORT_SEQ)));	
 			report.setApplicationDate(application.getApplicationDate());
+			
+			// 暂时追加为专家组长
+			if(report.getExpertsNo() != null && !report.getExpertsNo().isEmpty()){
+				report.setLeaderNo(report.getExpertsNo());
+				report.setExpertsNo("");
+			}
 		}
 		
 		applicationRepository.insertApplication(application);

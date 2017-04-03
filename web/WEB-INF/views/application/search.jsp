@@ -6,88 +6,72 @@
 	    <meta charset="utf-8">
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
-		<link rel="stylesheet" href="/css/bootstrap/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="/css/bootstrap/docs.min.css">
-		<link href="/css/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="/css/common.css">
+        <c:import url="/WEB-INF/views/common/commonCss.jsp"></c:import>
 	</head>
 	<body>
 		<div class="container">
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
-			<h4 style="margin-top:-9px">申请信息管理>申请信息检索</h4>
-			
-			<div class="jumbotron" style="height:150px;">
-				<table style="margin-top:-30px">
-		     		<tr>
-			     		<td>
-			     	   		<table width="890px;">
-		                   		<colgroup>
-									<col style="width:130px">
-									<col>
-									<col style="width:130px">
-									<col>
-								</colgroup>				
-					 			<tr>
-<!--
-									<th>申请编号</th> 
-					   	  			<td><input type="text"  id="applicationNo" name="applicationNo"></td>
- -->
-					   	  			<th>申请日期</th> 
-					   	  			<td colspan="3" nowrap="nowrap"> 
-										<div style="margin-top: 15px;">
-								        	<table>
-								            	<tr>
-								               		<td>				                
-								               	    	<span class="input-group date form_date col-md-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateFrom" data-link-format="yyyy-mm-dd">
-								                    		<input class="form-control" style="min-width: 135px" size="16" type="text" value="" />
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-								                    	</span>
-												     	<input type="hidden" id="applicationDateFrom" value="" />
-													</td>
-													
-													<td width="30px"><span style="margin-left:-19px;font-size: 21px">~<span>
-													</td>
-													
-							                    	<td>		                								
-						                            	<span class="input-group date form_date col-md-3" style="margin-left:-21px;" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateTo" data-link-format="yyyy-mm-dd">
-									                    	<input class="form-control" size="16"  style="min-width: 135px" type="text" value="" />
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-									                	</span>
-														<input type="hidden" id="applicationDateTo" value="" />
-								  					</td>
-								            	</tr>
-							            	</table>
-										</div>
-							    	</td>
-		
-					   			</tr>
-					   
-							    <tr>
-									<th>单位名称</th> 
-										<td><input type="text" id="companyName" name="companyName"></td>
-									<th>设备名称</th> 
-							   	  		<td><input type="text" id="equipmentName" name="equipmentName"></td>
-							    </tr>
-							    <tr>
-							   	  	<th>专家姓名</th> 
-							   	  		<td><input type="text" id="expertNameCon" name="expertName"></td>
-							   	</tr>
-							</table>
-		     			</td>
-		     	
-						<td>
-							<br><br><br>
-		     				<button id="searchBtn" class="btn btn-default" style="margin-left:61px">查询</button>
-		    			</td>
-					</tr>
-				</table>
-			</div>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">申请信息检索</div>
+		  <div class="panel-body"> 
+		  
+           <fieldset>
+              <legend> </legend>
+              <div class="form-group">
+                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
+                 <div class="col-md-2" style="width:220px;">
+                    <input type="text" id="companyName" name="companyName">
+                 </div>
+                 <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
+                 <div class="col-md-3">                
+					<input type="text" id="equipmentName" name="equipmentName">
+                 </div>
+                 
+                 <label class="col-md-1 control-label" for="expertNameCon">专家姓名</label>
+                 <div class="col-md-3">                
+                   <input type="text" id="expertNameCon" name="expertName">
+                 </div>                 
+              </div>
+           </fieldset>  		  
+
+
+             <fieldset style="margin-top:10px">
+                <div class="form-group">
+                 <label class="col-md-1 control-label" for="applicationDate">申请日期</label>
+                 <div class="col-md-2">
+                    <span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateFrom" data-link-format="yyyy-mm-dd">
+                    <input class="form-control"  type="text" value="" >
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </span>
+				    <input type="hidden" id="applicationDateFrom" value="" />
+				 </div>
+				 <div class="col-md-1">   
+				    <span>~</span>
+				  </div>
+				  <div class="col-md-2"  style="margin-left:-53px">
+	       		    <span class="input-group date form_date"  data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateTo" data-link-format="yyyy-mm-dd">
+	                   	<input class="form-control" type="text" value="" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+	               	</span>
+					<input type="hidden" id="applicationDateTo" value="" />     				     
+                 </div>  
+                 
+	             <div class="col-md-5" style="float:right;margin-right:-193px;">
+	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            </div>       
+	                 
+                 </div>
+            </fieldset>  		  
+	       	<div id="applicationResultList">
+	       	<c:import url="/WEB-INF/views/application/list.jsp" charEncoding="UTF-8"></c:import>  
+	       	</div>
+      	      
+	      </div>
+      </div>
+      </div>
 			
 <!-- yangqi     -->
  <div id="searchCondition">
@@ -97,10 +81,7 @@
  	<input type="hidden" id="expertNameConHide" value=""/>
  </div>		
    
-	       	<div id="applicationResultList">
-	       	<c:import url="/WEB-INF/views/application/list.jsp" charEncoding="UTF-8"></c:import>  
-	       	</div>
-       	</div> 
+
 
       
 		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  

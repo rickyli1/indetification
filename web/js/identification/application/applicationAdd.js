@@ -92,7 +92,9 @@
     	   app.application.department = $("#department").val();
     	   
     	   //reports
-    	   for(var i = 1; i <= this.no; i++) {
+    	   $(".addTr").each(function(i,element) {
+    		   var i = $(this).attr("data-no");
+    		   console.log(i);
     		   var report = {};
     		   report.equipmentNo = $("#equipment" + i).val();
     		   report.repairLevel = $("#repairLevel" + i).val();
@@ -101,8 +103,9 @@
     		   report.isReform =  $("input[name='" + "isReform" + i +"']:checked").val(); 
     		   report.timeLimit = $("#timeLimit" + i).val();
     		   report.remark = $("#remark" + i).val();
-    		   rep.reports.push(report);
-    	   }
+    		   rep.reports.push(report);   		   
+    		   
+    	   }); 
     	   
     	  return $.extend(app, rep);
   

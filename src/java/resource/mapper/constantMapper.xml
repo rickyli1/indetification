@@ -15,9 +15,7 @@
 			ATTRIBUTE_3,
 			DELETE_FLAG,
 			CREATE_BY,
-			LAST_MODIFY_BY,
-			CREATE_TIME,
-			LAST_MODIFY_TIME
+			LAST_MODIFY_BY
 		  FROM constant 
     </sql>
     

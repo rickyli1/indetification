@@ -8,8 +8,6 @@
           COMPANY_NO,
           CREATE_BY,
           LAST_MODIFY_BY,
-          CREATE_TIME,
-          LAST_MODIFY_TIME,
           DELETE_FLAG,
           COMPANY_NAME,
           COMPANY_TYPE,

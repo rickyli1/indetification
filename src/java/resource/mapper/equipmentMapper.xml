@@ -11,9 +11,7 @@
 		  `DELETE_FLAG`, 
 		  `GROUP_NO`, 
 		  `EQUIPMENT_NAME`,
-		  `SUB_GROUP_NO`,
-		  `CREATE_TIME`,
-		  `LAST_MODIFY_TIME`
+		  `SUB_GROUP_NO`
 	    FROM Equipment
     </sql>
     

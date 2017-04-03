@@ -82,30 +82,30 @@
 </body>
 
 <script id="detailTemplate" type="text/x-jquery-tmpl">
-<tr id="tr{{= no}}">
-	<td>
+<tr id="tr{{= no}}" data-no="{{= no}}" class="addTr">
+	<td style="width:150px;">
 	<select  class="form-control" id="equipment{{= no}}">
         <option selected value=""></option>
         {{each equipments}} <option value="{{= $value.equipmentNo}}">{{= $value.equipmentName}}</option>{{/each}}
 	</select>    
-	<td>	
+	<td style="width:100px;">	
 	<select  class="form-control" id="repairLevel{{= no}}">
          <option selected value=""></option>
         {{each repairLevels}} <option value="{{= $value.constantNo}}">{{= $value.constantName}}</option>{{/each}}
 	</select>  
 	
 	</td>
-	<td>
+	<td style="width:100px;">
 	<select  class="form-control" id="expert{{= no}}">
          <option selected value=""></option>
         {{each experts}} <option value="{{= $value.expertNo}}">{{= $value.expertName}}</option>{{/each}}
 	</select>  
 	</td>
-	<td>
+	<td style="width:150px;">
 	<input type="radio" name="result{{= no}}" value="1">通过
 	<input type="radio" name="result{{= no}}" value="0">不通过
 	</td>								  
-	<td>
+	<td style="width:150px;">
 	<input type="radio" name="isReform{{= no}}" value="1">整改
 	<input type="radio" name="isReform{{= no}}" value="0">无整改
 	</td>	

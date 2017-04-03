@@ -27,9 +27,9 @@
 </style>
 <c:import url="/WEB-INF/views/common/commonCss.jsp"></c:import>
 </head>
-<body onload='document.loginForm.username.focus();' class="commonBackground">
+<body onload='document.loginForm.username.focus();'>
  <div class="container">
-	<div class="panel panel-default" style="width:443px;margin: 100px auto;">
+	<div class="panel panel-primary" style="width:443px;margin: 100px auto;">
 	  <div class="panel-heading">请登陆系统111</div>
 	  <div class="panel-body"> 
 		<c:if test="${not empty error}">
@@ -65,7 +65,7 @@
 			</tr>			
 			<tr align="right">
 				<td colspan='3'><input name="submit" type="submit"
-					value="登陆" /></td>
+					class="btn btn-primary btn-sm"  value="登陆" /></td>
 			</tr>
 		  </table>
  

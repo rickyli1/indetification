@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationRequstModel;
 import com.main.identification.model.ApplicationResult;
+import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.Expert;
@@ -22,8 +23,8 @@ import com.main.identification.service.CompanyService;
 import com.main.identification.service.ConstantService;
 import com.main.identification.service.EquipmentService;
 import com.main.identification.service.ExpertService;
-import com.main.identification.utils.PageUtil;
 import com.main.identification.utils.Constant;
+import com.main.identification.utils.PageUtil;
 
 /**
  * 申请信息管理controller
@@ -104,6 +105,9 @@ public class ApplicationController {
 	
 	@RequestMapping("/addInit")
 	public String addInit(Model model) {
+		Company company = new Company();
+		company.setCompanyType(Constant.COMPANY_FACTORY_TYPE);
+        model.addAttribute("companys", companyService.findCompanyList(company));
 		
 		return "/application/add";
 	}
@@ -142,7 +146,7 @@ public class ApplicationController {
 			 model.addAttribute("msg", "插入失败!"); 
 		 }
 		 
-		 model.addAttribute("url", "adminUser/init"); 
+		 model.addAttribute("url", "application/init"); 
 		 
 		return "common/alert";
 	}
