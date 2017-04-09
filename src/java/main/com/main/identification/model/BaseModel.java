@@ -1,6 +1,5 @@
 package com.main.identification.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class BaseModel {
@@ -11,9 +10,9 @@ public class BaseModel {
 	
 	// DB
 	private int createId;
-	private Timestamp createTime;
+	private Date createTime;
 	private int updateId;
-	private Timestamp lastModifyTime;
+	private Date lastModifyTime;
 	private String createBy;
 	private String lastModifyBy;
 	private String deleteFlag;
@@ -52,11 +51,11 @@ public class BaseModel {
 		this.createId = createId;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
@@ -68,11 +67,11 @@ public class BaseModel {
 		this.updateId = updateId;
 	}
 
-	public Timestamp getLastModifyTime() {
+	public Date getLastModifyTime() {
 		return lastModifyTime;
 	}
 
-	public void setLastModifyTime(Timestamp lastModifyTime) {
+	public void setLastModifyTime(Date lastModifyTime) {
 		this.lastModifyTime = lastModifyTime;
 	}
 

@@ -7,7 +7,9 @@
         SELECT 
 		  `EQUIPMENT_NO`, 
 		  `CREATE_BY`, 
+		  `CREATE_TIME`,
 		  `LAST_MODIFY_BY`, 
+		  `LAST_MODIFY_TIME`,
 		  `DELETE_FLAG`, 
 		  `GROUP_NO`, 
 		  `EQUIPMENT_NAME`,

@@ -6,7 +6,6 @@
 	            <thead>
 	              <tr>
 	                <th>No</th>
-	                <th>申请日期</th>
 	                <th>单位名称</th>
 	                <th>设备名称</th>
 	                <th>修理等级</th>
@@ -19,7 +18,6 @@
 	            	<c:forEach var="apply" items="${applicationResultList}" varStatus="status">
 		               <tr>
 		                <td>${status.count+(page-1)*10}</td>
-		                <td>${apply.applicationDate}</td>
 		                <td>${apply.companyName}</td>
 		                <td>${apply.equipmentName}</td>
 		                <td>${apply.repairLevel}</td>

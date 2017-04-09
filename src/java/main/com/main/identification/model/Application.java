@@ -17,8 +17,6 @@ public class Application extends BaseModel implements Serializable {
 	private String deleteFlag = "0";     //删除Flag
 	private String createBy;       //创建人
 	private String  lastModifyBy;  //最后修改人
-	private Timestamp createTime;  //创建时间
-	private Timestamp lastModifyTime; //最后修改时间
 	
 	public String getDeleteFlag() {
 		return deleteFlag;
@@ -42,22 +40,6 @@ public class Application extends BaseModel implements Serializable {
 
 	public void setLastModifyBy(String lastModifyBy) {
 		this.lastModifyBy = lastModifyBy;
-	}
-
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
-
-	public Timestamp getLastModifyTime() {
-		return lastModifyTime;
-	}
-
-	public void setLastModifyTime(Timestamp lastModifyTime) {
-		this.lastModifyTime = lastModifyTime;
 	}
 
 	public String getApplicationNo() {

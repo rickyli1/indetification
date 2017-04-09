@@ -7,7 +7,9 @@
         select 
           COMPANY_NO,
           CREATE_BY,
+          CREATE_TIME,
           LAST_MODIFY_BY,
+          LAST_MODIFY_TIME,
           DELETE_FLAG,
           COMPANY_NAME,
           COMPANY_TYPE,
@@ -43,12 +45,10 @@
 	   company.company_type,
        company.company_code,
        company.remark,
-	   company.create_date,
-	   company.create_id,
-	   company.update_id,
-	   company.update_date,
+	   company.CREATE_TIME,
+	   company.LAST_MODIFY_TIME,
 	   company.create_by,
-	   company.update_by
+	   company.LAST_MODIFY_TIME
     FROM company company
     WHERE 
          company.company_name = #{companyName}    

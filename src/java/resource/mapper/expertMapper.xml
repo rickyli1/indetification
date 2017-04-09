@@ -28,7 +28,9 @@
 		     , t.PROFESSIONAL_TITLE
 		     , t.REMARK
 		     , t.create_by
+		     , t.create_time
 		     , t.last_modify_by
+		     , t.last_modify_time
 		from expert t
 		where t.EXPERT_NO = #{expertNo}
 		  and t.delete_flag = '0'
@@ -43,7 +45,9 @@
 		     , t.PROFESSIONAL_TITLE
 		     , t.REMARK
 		     , t.create_by
+		     , t.create_time
 		     , t.last_modify_by
+		     , t.last_modify_time
 		from expert t
 		where t.delete_flag = '0'
   		<if test="expertNo != null and expertNo != '' ">

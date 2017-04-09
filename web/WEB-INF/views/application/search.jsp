@@ -37,7 +37,8 @@
 
 
              <fieldset style="margin-top:10px">
-                <div class="form-group">
+             	<!-- 申请日期条件，客户说去掉，暂时隐藏 -->
+                <div class="form-group" hidden>
                  <label class="col-md-1 control-label" for="applicationDate">申请日期</label>
                  <div class="col-md-2">
                     <span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateFrom" data-link-format="yyyy-mm-dd">
@@ -57,13 +58,12 @@
 						</span>
 	               	</span>
 					<input type="hidden" id="applicationDateTo" value="" />     				     
-                 </div>  
-                 
-	             <div class="col-md-5" style="float:right;margin-right:-193px;">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
-	            </div>       
-	                 
+                  </div>  
                  </div>
+                 
+	            <div class="col-md-5" style="float:right;margin-right:-193px;">
+	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            </div> 
             </fieldset>  		  
 	       	<div id="applicationResultList">
 	       	<c:import url="/WEB-INF/views/application/list.jsp" charEncoding="UTF-8"></c:import>  

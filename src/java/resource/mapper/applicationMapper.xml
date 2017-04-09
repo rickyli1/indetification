@@ -91,6 +91,11 @@
 		<result column="time_Limit" property="timeLimit"/>
 		<result column="is_Reform" property="isReform"/>
 		<result column="remark" property="remark"/>
+		
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
 	
   <sql id="searchCondSql">
@@ -141,6 +146,10 @@
 	     , report.REPAIR_LEVEL
 	     , report.RESULT
 	     , report.TIME_LIMIT
+	     , report.CREATE_BY
+		 , report.LAST_MODIFY_BY
+		 , report.CREATE_TIME
+		 , report.LAST_MODIFY_TIME
 	  from report report
 	 inner join application apply
 	    on apply.APPLICATION_NO = report.APPLICATION_NO

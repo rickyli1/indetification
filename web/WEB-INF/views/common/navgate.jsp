@@ -3,7 +3,7 @@
 <style>
 
 			.navbar-default {
-			  background-color: #3c5fe7;
+			  background-color: #2063E8;
 			  border-color: #1337a3;
 			}
 			.navbar-default .navbar-brand {
