@@ -25,3 +25,4 @@ table tr td.inner_tbl td.item{padding-left:18px}
 	background: #000 url(/images/loader.gif) no-repeat 10px 50%;opacity: 0.7;z-index:9999;-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
 }
 .commonBackground{background-color:#52acd9;}
+.ui-helper-hidden-accessible { display:none; }

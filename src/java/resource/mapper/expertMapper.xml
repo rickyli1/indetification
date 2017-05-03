@@ -19,6 +19,28 @@
 		<result column="delete_flag" property="deleteFlag"/>
 	</resultMap>
 	
+	<resultMap id="expertInfoMap" extends="expertMap" type="Expert">
+		<result column="company_name" property="companyName"/>
+	</resultMap>	
+	
+	<sql id="searchCondSql">
+  		<if test="expertNo != null and expertNo != '' ">
+  			and t.expert_no = #{expertNo}
+  		</if>
+  		<if test="expertName != null and expertName != '' ">
+  			and t.expert_name like concat('%',#{expertName},'%')
+  		</if>
+  		<if test="profession != null and profession != '' ">
+  			and t.profession = #{profession}
+  		</if>
+  		<if test="companyNo != null and companyNo != '' ">
+  			and t.company_no = #{companyNo}
+  		</if>
+  		<if test="professionalTitle != null and professionalTitle != '' ">
+  			and t.professional_title = #{professionalTitle}
+  		</if>	
+	</sql>
+	
   <select id="selectByPK" resultMap="expertMap" parameterType="String">
 		select 
 			   t.EXPERT_NO
@@ -50,21 +72,66 @@
 		     , t.last_modify_time
 		from expert t
 		where t.delete_flag = '0'
-  		<if test="expertNo != null and expertNo != '' ">
-  			and t.expert_no = #{expertNo}
-  		</if>
-  		<if test="expertName != null and expertName != '' ">
-  			and t.expert_name like #{expertName}
-  		</if>
-  		<if test="profession != null and profession != '' ">
-  			and t.profession = #{profession}
-  		</if>
-  		<if test="companyNo != null and companyNo != '' ">
-  			and t.company_no = #{companyNo}
-  		</if>
-  		<if test="professionalTitle != null and professionalTitle != '' ">
-  			and t.professional_title = #{professionalTitle}
-  		</if>
+        <include refid="searchCondSql" />
   </select>
+  
+    <select id="selectExpertForApplication" resultMap="expertInfoMap" parameterType="Expert">
+		select 
+			   t.EXPERT_NO
+			 , t.EXPERT_NAME
+		     , t.PROFESSION
+		     , t.COMPANY_NO
+		     , t.PROFESSIONAL_TITLE
+		     , t.REMARK
+		     , t.create_by
+		     , t.create_time
+		     , t.last_modify_by
+		     , t.last_modify_time
+		     , c.company_name
+		from expert t
+		left join company c on t.COMPANY_NO = c.COMPANY_NO 
+		where t.delete_flag = '0'
+        <include refid="searchCondSql" />
+        LIMIT ${startNo}, ${pageSize}
+  </select>
+  
+   <select id="selectExperCountForApplication" resultType="int" parameterType="Expert">
+	select 
+		count(1)
+	from expert t
+	where t.delete_flag = '0'
+       <include refid="searchCondSql" />
+   </select>
+  
+  	<resultMap id="appExpertDetailMap" type="ApplicationDetailExpert">
+		<id column="EXPERT_NO" property="expertNo"/>
+		<result column="EXPERT_NAME" property="expertName"/>
+		<result column="COMPANY_NO" property="companyNo"/>
+		<result column="COMPANY_NAME" property="companyName"/>
+		<result column="role" property="role"/>
+	</resultMap>
      
+    <select id="searchAppExpertDetail" resultMap="appExpertDetailMap" parameterType="ApplicationDetailComp">
+	   select exp.EXPERT_NO
+	        , exp.EXPERT_NAME
+	        , com.COMPANY_NO
+	        , com.COMPANY_NAME
+	        , '组长' as role
+	     from expert exp
+	left join company com
+	       on com.COMPANY_NO = exp.COMPANY_NO
+		where exp.EXPERT_NO = #{leaderNo}
+		<if test="expertsCon != null and expertsCon != '' ">
+	   union
+	   select exp.EXPERT_NO
+	        , exp.EXPERT_NAME
+	        , com.COMPANY_NO
+	        , com.COMPANY_NAME
+	        , '组员' as role
+	     from expert exp
+	left join company com
+	       on com.COMPANY_NO = exp.COMPANY_NO
+		where exp.EXPERT_NO in (${expertsCon})
+		</if>
+  	</select>
 </mapper>

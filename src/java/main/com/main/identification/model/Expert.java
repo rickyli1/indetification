@@ -14,6 +14,7 @@ public class Expert extends BaseModel implements Serializable {
 	private String expertName; // 专家姓名
 	private String profession; // 专业
 	private String companyNo; // 单位编号
+	private String companyName; // 单位名
 	private String professionalTitle; // 职称或职务
 	private String remark; // 备注
 	
@@ -52,5 +53,11 @@ public class Expert extends BaseModel implements Serializable {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 }

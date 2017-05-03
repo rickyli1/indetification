@@ -30,11 +30,30 @@ public class ExpertService {
 	}
 
 	/**
-	 * 检索专家姓名
+	 * 检索专家
 	 * @param expert 专家内容
 	 * @return
 	 */
 	public List<Expert> selectExpert(Expert expert){
 		return expertRepository.selectExpert(expert);
 	}
+	
+	/**
+	 * 注册页面用专家数量
+	 * @param expert 专家内容
+	 * @return
+	 */
+	public int selectExpertCount(Expert expert){
+		return expertRepository.selectExperCountForApplication(expert);
+	}	
+	
+	
+	/**
+	 * 申请注册页面用 检索专家
+	 * @param expert 专家内容
+	 * @return
+	 */
+	public List<Expert> selectExpertForApplication(Expert expert){
+		return expertRepository.selectExpertForApplication(expert);
+	}		
 }

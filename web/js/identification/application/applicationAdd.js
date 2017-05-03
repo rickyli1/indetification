@@ -1,61 +1,56 @@
 (function($) {
+	
 	Class('Identification.application.Add',{
 		init:function() {
 			this.no = 0;
+			this.companyNameAry = [];
+			this.companyIdAry = [];
+			this.equipmentAry = [];
+			this.equipmentIdAry = [];
+			this.initData();
 			this.bindEvent();
 			this.initCalendar();
 		},
 		
-	
+		initData: function() {
+			this.companyNameAry = $("#companySelect option").map(function(){return $(this).text();}).get();
+			this.companyIdAry = $("#companySelect option").map(function(){return $(this).val();}).get();
+		},
 		
 		initCalendar : function() {
-		    $('.form_datetime').datetimepicker({
-		        language:  'zh-CN',
-		        weekStart: 1,
-		        todayBtn:  1,
-				autoclose: 1,
-				todayHighlight: 1,
-				startView: 2,
-				forceParse: 0,
-		        showMeridian: 1
-		    });
-			$('.form_date').datetimepicker({
-		        language:  'zh-CN',
-		        weekStart: 1,
-		        todayBtn:  1,
-				autoclose: 1,
-				todayHighlight: 1,
-				startView: 2,
-				minView: 2,
-				forceParse: 0
-		    });
-			$('.form_time').datetimepicker({
-		        language:  'zh-CN',
-		        weekStart: 1,
-		        todayBtn:  1,
-				autoclose: 1,
-				todayHighlight: 1,
-				startView: 1,
-				minView: 0,
-				maxView: 1,
-				forceParse: 0
-		    });
-						
+			identification.initCalendarByClass('form_datetime','form_date','form_time');						
 		},
 		
 		bindEvent: function() {
 			var that = this;			
 			$("#addApplicationDetailBtn").click(function() {
+				that.equipmentAry = [];
+				that.equipmentIdAry = [];
 	            that.no = that.no +1;
 	            var data = {  no : that.no};
 	            var datas = {};
 	        	identification.ajaxNoasync("/application/getApplicationData", null, "json", function(res) {
 	        		datas = $.extend(data, res);
-				});	         	
+				});	
+	        	
+	        	for(var i = 0; i < (datas.equipments).length; i++) {
+	        		that.equipmentAry.push((datas.equipments)[i].equipmentName);
+	        		that.equipmentIdAry.push((datas.equipments)[i].equipmentNo);
+	        	}
+
 
 				$("#detailTemplate").tmpl(datas).appendTo( "#applicationDetailBody" );
 				
 				that.initCalendar();
+				
+		        $( ".equipment" ).autocomplete({
+		              source: that.equipmentAry,
+		              messages: {
+		            	  noResults: '', 
+		            	  results: function(){ 		            		  
+		            	  }
+		               }	              
+		         });
 				
 				$(".deleteClass").each(function(index,elemet){
 					var removeNo = $(this).attr("data-no");
@@ -70,35 +65,93 @@
 			//申请保存
 	        $("#saveApplicationBtn").click(function() {
 	        	var saveData = that.getSaveData();
+	        	
+	        	//check save data
+	        	
+	     	   
+	     	   if(saveData.application.companyNo == "") {
+	     		   alert($("#companyLable").text() + ": " + $("#company").val() + "不存在！请核实或添加新的"+$("#companyLable").text());
+	     		   return false;
+	     	   }
+	     	   
+	     	   if(saveData.reports.length == 0) {
+	     		   alert("请添加"+$("#equipmentTh").text() + "!");
+	     		   return false;
+	     	   }
+	     	   
+	     	   var reportCheckResult = "";
+	     	   
+	     	   for(var n = 0; n < saveData.reports.length; n++) {
+	     		  if(saveData.reports[n].equipmentNo == "") {
+		     		   if(reportCheckResult == "") {
+		     			  reportCheckResult = saveData.reports[n].equipmentName;
+		     		   }else {
+		     			  reportCheckResult = reportCheckResult + ", " +  saveData.reports[n].equipmentName;
+		     		   }
+		     	   } 
+	     	   }
+	     	   
+	     	   if(reportCheckResult != "") {
+	     		   alert($("#equipmentTh").text() + ": " + reportCheckResult + "不存在！请核实或添加新的"+$("#equipmentTh").text());
+                   return false;
+	     	   }
+	     	   
+	        	
 	        	identification.ajax("/application/add", JSON.stringify(saveData), "html", function(res) {
     				$("#alertDiv").empty();
     				$("#alertDiv").html(res);
 				});	        	
 	        });		
 	        
-	       
+        	
+	        //申请文件上传
+        	identification.fileUpload("/application/requestFileUpload","requestFileupload", "requsetFileNameSpan", "requsetFileIdHid");	  
+	        
+	        //结论文件
+        	identification.fileUpload("/application/requestFileUpload","resultFileupload", "resultFileNameSpan", "resultFileIdHid");	  
+	        
+	        //申请单位
+	        $( "#company" ).autocomplete({
+	              source: that.companyNameAry,
+	              messages: {
+	            	  noResults: '', 
+	            	  results: function(){ 
+	            	  }
+	               }	              
+	         });
 		},
 		
        getSaveData : function() {
+    	   var that = this;
     	   var app ={};
     	   app.application = {};
     	   var rep = {};
     	   rep = {};
     	   rep.reports = [];
     	   
+
     	   //application
     	   app.application.applicationDate = $("#applicationDate").val();
-    	   app.application.companyNo = $("#company").val(); 
+    	   app.application.companyNo = this.getSelectId($.trim($("#company").val()), this.companyNameAry, this.companyIdAry); 
     	   app.application.department = $("#department").val();
+    	   app.application.appFileName = $("#requsetFileNameSpan").text(); 
+    	   app.application.appFileNo = $("#requsetFileIdHid").val(); 
+    	   app.application.resultFileName = $("#resultFileNameSpan").text(); 
+    	   app.application.resultFileNo = $("#resultFileIdHid").val(); 
+    	   
+    	   app.application.leaderNo = $("#leaderNo").val(); 
+    	   app.application.expertsNo = $("#expertsNo").val(); 
     	   
     	   //reports
     	   $(".addTr").each(function(i,element) {
     		   var i = $(this).attr("data-no");
-    		   console.log(i);
+    		   
     		   var report = {};
-    		   report.equipmentNo = $("#equipment" + i).val();
+    		   report.equipmentNo = that.getSelectId($.trim($("#equipment" + i).val()), that.equipmentAry, that.equipmentIdAry);
+    		   report.equipmentName = $("#equipment" + i).val();
     		   report.repairLevel = $("#repairLevel" + i).val();
-    		   report.expertsNo = $("#expert" + i).val();
+    		   report.expertsNo = app.application.expertsNo;
+    		   report.leaderNo = app.application.leaderNo;
     		   report.result = $("input[name='" + "result" + i +"']:checked").val(); 
     		   report.isReform =  $("input[name='" + "isReform" + i +"']:checked").val(); 
     		   report.timeLimit = $("#timeLimit" + i).val();
@@ -106,10 +159,21 @@
     		   rep.reports.push(report);   		   
     		   
     	   }); 
-    	   
+    	 
     	  return $.extend(app, rep);
   
-       } 
+       },
+       
+       getSelectId : function(name,  arrayName, arrayId) {
+    	   var result = "";
+    	   
+    	   for(var i = 0; i < arrayName.length; i++) {
+    		   if(arrayName[i] == name) {
+    			   return arrayId[i];
+    		   }
+    	   }
+    	   return result;
+       }
 		
 	});
  

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:tx="http://www.springframework.org/schema/tx"   
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">             
+     <mongo:mongo id="mongo" replica-set="127.0.0.1:27017">  
+        <!-- 一些连接属性的设置 -->  
+        <mongo:options  
+                connections-per-host="8"  
+                threads-allowed-to-block-for-connection-multiplier="4"  
+                connect-timeout="1000"  
+                max-wait-time="1500"  
+                auto-connect-retry="true"  
+                socket-keep-alive="true"  
+                socket-timeout="15000"  
+                slave-ok="true"  
+                write-number="1"  
+                write-timeout="0"  
+                write-fsync="true"/>  
+    </mongo:mongo>  
+    <!-- mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 -->  
+    <mongo:db-factory dbname="test" mongo-ref="mongo" id="mongoDbFactory" />  
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">  
+        <constructor-arg ref="mongo" />  
+        <constructor-arg name="databaseName" value="test" />  
+    </bean>             
+     <!-- MongoDB GridFS Template 支持，操作mongodb存放的文件 -->
+     <mongo:mapping-converter id="converter"  db-factory-ref="mongoDbFactory"/>     
+    <!-- MongoDB GridFS Template -->  
+	<bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+	    <constructor-arg ref="mongoDbFactory" />
+	    <constructor-arg ref="converter" />
+	</bean>    
+</beans>   
+

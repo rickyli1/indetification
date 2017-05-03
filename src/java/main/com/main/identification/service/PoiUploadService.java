@@ -148,7 +148,7 @@ public class PoiUploadService {
 									String groupNo = parentModel.getConstantNo();
 									EquipmentModel epuipModel =  new EquipmentModel(); 
 									//创建equipment 序列
-									equipmentNo = Constant.COMPANY_FLAG + String.valueOf(commonService.createSequenceId(Constant.COMPANY_SEQ));
+									equipmentNo = Constant.EQUIPMENT_FLAG+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ));
 									epuipModel.setEquipmentNo(equipmentNo);
 									epuipModel.setEquipmentName(value);
 									epuipModel.setGroupNo(groupNo);
@@ -166,8 +166,8 @@ public class PoiUploadService {
 										for(String name:companyNames){
 											if(!companyMap.containsKey(name)){
 												Company commapny =  new Company(); 
-												companyNo = Constant.EQUIPMENT_FLAG
-														+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ));
+												companyNo = Constant.COMPANY_FLAG
+														+ String.valueOf(commonService.createSequenceId(Constant.COMPANY_SEQ));
 												commapny.setCompanyNo(companyNo);
 												commapny.setCompanyName(name);
 												companyMap.put(name, commapny);
@@ -177,7 +177,7 @@ public class PoiUploadService {
 												Company commapny = companyMap.get(name);
 												Report report =  new Report(); 
 												String reportNo = Constant.REPORT_FLAG
-														+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ));
+														+ String.valueOf(commonService.createSequenceId(Constant.REPORT_SEQ));
 																	report.setApplicationDate(date);
 												report.setRemark(remark);
 												report.setReportNo(reportNo);

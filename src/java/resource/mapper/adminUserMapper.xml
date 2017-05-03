@@ -5,160 +5,166 @@
 <mapper namespace="com.main.identification.repository.AdminUserRepository">
 
 	<resultMap id="adminUserMap" type="AdminUser">
-		<id column="admin_user_id" property="userId"/>
-		<result column="admin_user_name" property="userName"/>
-		<result column="role_id" property="roleId"/>
-		<result column="role_name" property="roleName"/>
-		<result column="question_category_id" property="questionCategoryIds"/>
-		<result column="question_category_name" property="questionCategoryNames"/>
+		<id column="admin_user_id" property="userId" />
+		<result column="admin_user_name" property="userName" />
+		<result column="role_id" property="roleId" />
+		<result column="role_name" property="roleName" />
+		<result column="question_category_id" property="questionCategoryIds" />
+		<result column="question_category_name" property="questionCategoryNames" />
 
-		<result column="password" property="password"/>
+		<result column="password" property="password" />
 
-		<result column="create_id" property="createId"/>
-		<result column="create_date" property="createDate"/>
-		<result column="createor" property="createor"/>
-		
-		<result column="update_id" property="updateId"/>
-		<result column="update_date" property="updateDate"/>
-		<result column="updateor" property="updateor"/>
+		<result column="create_id" property="createId" />
+		<result column="create_date" property="createDate" />
+		<result column="createor" property="createor" />
+
+		<result column="update_id" property="updateId" />
+		<result column="update_date" property="updateDate" />
+		<result column="updateor" property="updateor" />
 	</resultMap>
 
-  <sql id="searchCondSql">
-  	<where>
-  	  <if test="questionCategoryIds != null and questionCategoryIds != '' ">  
-         AND (user.question_category_id like CONCAT(#{questionCategoryIds},'%')
-              OR user.role_id = 'ROLE_ADMIN')
-      </if> 
-        
-  	  <if test="roleId != null and roleId != '' ">  
-         AND user.role_id like CONCAT(#{roleId},'%' )   
-      </if>  
-  	  <if test="userName != null and userName != ''">  
-         AND user.admin_user_name like CONCAT('%', #{userName},'%' )   
-      </if>          
-  	</where>  
-  </sql>
-  <select id="selectAdminUserCount" resultType="int" parameterType="AdminUser">
-    select 
-	  count(1)
-    from admin_user user
-	<include refid="searchCondSql"/>  
-  </select>
+	<sql id="searchCondSql">
+		<where>
+			<if test="questionCategoryIds != null and questionCategoryIds != '' ">
+				AND (user.question_category_id like CONCAT(#{questionCategoryIds},'%')
+				OR user.role_id = 'ROLE_ADMIN')
+			</if>
 
-  <select id="selectAdminUser" resultMap="adminUserMap" parameterType="AdminUser">
-    SELECT 
-	   user.admin_user_id,
-	   user.admin_user_name,
-	   user.role_id,
-       user.role_name ,
-       user.question_category_id ,
-       user.question_category_name,
-	   user.password,
-	   user.create_date,
-	   user.create_id,
-	   user.update_id ,
-	   user.update_date,
-	   user.createor,
-	   user.updateor
-    FROM admin_user user
-    
-   <include refid="searchCondSql"/>  
-   	LIMIT ${startNo}, ${pageSize}
-  </select>
-  
-  <select id="loginCheck" resultMap="adminUserMap" parameterType="AdminUser">
-    SELECT 
-	   user.admin_user_id,
-	   user.admin_user_name,
-	   user.role_id,
-       user.role_name ,
-       user.question_category_id ,
-       user.question_category_name,
-	   user.password,
-	   user.create_date,
-	   user.create_id,
-	   user.update_id ,
-	   user.update_date,
-	   user.createor,
-	   user.updateor 
-    FROM admin_user user
-    WHERE 
-         user.admin_user_name = #{userName}    
-  </select>
-  <insert id="insertAdminUser" parameterType="AdminUser" useGeneratedKeys="true" keyProperty="userId" >
-    INSERT INTO admin_user( 
-	   admin_user_name,
-	  `role_id`,
-       role_name ,
-       question_category_id ,
-       question_category_name,	  
-	  `password`,
-	  `create_date`,
-	  `create_id`,
-	  `update_id` ,
-	  `update_date`,
-	   createor,
-	   updateor) 
-    VALUES(
-    	#{userName},
-    	#{roleId},
-    	#{roleName},
-    	#{questionCategoryIds},
-    	#{questionCategoryNames},
-    	#{password},
-    	now(),
-    	#{createId},
-    	#{updateId},
-    	now(),
-    	#{createor},
-    	#{updateor}
-    )
-  </insert> 
-  
-   <update id="updateAdminUser" parameterType="AdminUser">
-    UPDATE admin_user
-    SET  
-       admin_user_name = #{userName},
-       
-      <if test="password != null and password != ''">  
-         `password` = #{password},
-      </if>  
-      role_id = #{roleId},
-      role_name=#{roleName},
-       <if test="questionCategoryIds != null and questionCategoryIds != ''">  
-      question_category_id = #{questionCategoryIds},
-      user.question_category_name=#{questionCategoryNames},
-      </if>
-      `update_id` = #{updateId},
-       updateor = #{updateor},
-       update_date = now()
-    WHERE admin_user_id = #{userId}
-  </update>
-  
-  <insert id="insertAdminUserQuestion" parameterType="List">
-    INSERT INTO admin_user_question(admin_user_id,question_category_id) 
-    VALUES
-    <foreach collection="list" item="item" index="index" separator="," > 
-     (#{item.userId},#{item.questionCategoryId})       
-    </foreach>
-  </insert>  
-  
-  
-   
-   <delete id="deleteAdminUserQuestionList" parameterType="List">
-       DELETE FROM admin_user_question
-       WHERE admin_user_id in
-       <foreach collection="list" item="userId" open="(" separator="," close=")">
-           #{userId}
-       </foreach>
-   </delete>   
-   
-   <delete id="deleteAdminUserList" parameterType="List">
-       DELETE FROM admin_user
-       WHERE admin_user_id in
-       <foreach collection="list" item="userId" open="(" separator="," close=")">
-           #{userId}
-       </foreach>
-   </delete>
-   
+			<if test="roleId != null and roleId != '' ">
+				AND user.role_id like CONCAT(#{roleId},'%' )
+			</if>
+			<if test="userName != null and userName != ''">
+				AND user.admin_user_name like CONCAT('%', #{userName},'%' )
+			</if>
+		</where>
+	</sql>
+	<select id="selectAdminUserCount" resultType="int"
+		parameterType="AdminUser">
+		select
+		count(1)
+		from admin_user user
+		<include refid="searchCondSql" />
+	</select>
+
+	<select id="selectAdminUser" resultMap="adminUserMap"
+		parameterType="AdminUser">
+		SELECT
+		user.admin_user_id,
+		user.admin_user_name,
+		user.role_id,
+		user.role_name ,
+		user.question_category_id ,
+		user.question_category_name,
+		user.password,
+		user.create_date,
+		user.create_id,
+		user.update_id ,
+		user.update_date,
+		user.createor,
+		user.updateor
+		FROM admin_user user
+
+		<include refid="searchCondSql" />
+		LIMIT ${startNo}, ${pageSize}
+	</select>
+
+	<select id="loginCheck" resultMap="adminUserMap" parameterType="AdminUser">
+		SELECT
+		user.admin_user_id,
+		user.admin_user_name,
+		user.role_id,
+		user.role_name ,
+		user.question_category_id ,
+		user.question_category_name,
+		user.password,
+		user.create_date,
+		user.create_id,
+		user.update_id ,
+		user.update_date,
+		user.createor,
+		user.updateor
+		FROM admin_user user
+		WHERE
+		user.admin_user_name = #{userName}
+	</select>
+	<insert id="insertAdminUser" parameterType="AdminUser"
+		useGeneratedKeys="true" keyProperty="userId">
+		INSERT INTO admin_user(
+		admin_user_name,
+		`role_id`,
+		role_name ,
+		question_category_id ,
+		question_category_name,
+		`password`,
+		`create_date`,
+		`create_id`,
+		`update_id` ,
+		`update_date`,
+		createor,
+		updateor)
+		VALUES(
+		#{userName},
+		#{roleId},
+		#{roleName},
+		#{questionCategoryIds},
+		#{questionCategoryNames},
+		#{password},
+		now(),
+		#{createId},
+		#{updateId},
+		now(),
+		#{createor},
+		#{updateor}
+		)
+	</insert>
+
+	<update id="updateAdminUser" parameterType="AdminUser">
+		UPDATE admin_user
+		SET
+		admin_user_name = #{userName},
+
+		<if test="password != null and password != ''">
+			`password` = #{password},
+		</if>
+		role_id = #{roleId},
+		role_name=#{roleName},
+		<if test="questionCategoryIds != null and questionCategoryIds != ''">
+			question_category_id = #{questionCategoryIds},
+			user.question_category_name=#{questionCategoryNames},
+		</if>
+		`update_id` = #{updateId},
+		updateor = #{updateor},
+		update_date = now()
+		WHERE admin_user_id = #{userId}
+	</update>
+
+	<insert id="insertAdminUserQuestion" parameterType="List">
+		INSERT INTO admin_user_question(admin_user_id,question_category_id)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.userId},#{item.questionCategoryId})
+		</foreach>
+	</insert>
+
+
+
+	<delete id="deleteAdminUserQuestionList" parameterType="List">
+		DELETE FROM admin_user_question
+		WHERE admin_user_id in
+		<foreach collection="list" item="userId" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+	<delete id="deleteAdminUserList" parameterType="List">
+		DELETE FROM admin_user
+		WHERE admin_user_id in
+		<foreach collection="list" item="userId" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
 </mapper>

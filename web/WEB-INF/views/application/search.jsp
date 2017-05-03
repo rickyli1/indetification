@@ -20,22 +20,54 @@
               <legend> </legend>
               <div class="form-group">
                  <label class="col-md-1 control-label" for="companyName">单位名称</label>
-                 <div class="col-md-2" style="width:220px;">
-                    <input type="text" id="companyName" name="companyName">
+                 <div class="col-md-2">
+                    <input type="text" id="companyName" class="form-control" name="companyName">
                  </div>
                  <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
-                 <div class="col-md-3">                
-					<input type="text" id="equipmentName" name="equipmentName">
+                 <div class="col-md-2">                
+					<input type="text" id="equipmentName" class="form-control" name="equipmentName">
                  </div>
                  
                  <label class="col-md-1 control-label" for="expertNameCon">专家姓名</label>
-                 <div class="col-md-3">                
-                   <input type="text" id="expertNameCon" name="expertName">
+                 <div class="col-md-2">                
+                   <input type="text" id="expertNameCon" class="form-control" name="expertName">
                  </div>                 
               </div>
-           </fieldset>  		  
-
-
+           </fieldset>
+           
+           <fieldset style="margin-top:10px">
+              <div class="form-group">
+				 
+                <!-- 结果 -->
+                 <label class="col-md-1 control-label" for="result">申请结果</label>
+                 <div class="col-md-2">                
+					<input type="radio" id="resultCon" name="resultCon" value="合格" >合格
+					<input type="radio" name="resultCon" value="不合格">不合格
+                 </div>
+                <!-- 修理级别 -->
+                 <label class="col-md-1 control-label" for="repairLevel">修理级别</label>
+                 <div class="col-md-2">                
+					<select  class="form-control" id="repairLevelCon">
+					 <option selected value=""></option>				
+					  <c:forEach var="repairLevel" items="${repairLevels}" varStatus="status">
+						  <option value="${repairLevel.constantNo}">${repairLevel.constantName}</option>
+					  </c:forEach>
+					</select>
+                 </div>
+                 
+				<!-- 有效期 -->
+                <label for="limitDate" class="col-md-1 control-label">有效期</label>
+                <div class="input-group col-md-2">
+                	<span class="input-group date form_year" data-date="" data-date-format="yyyy" data-link-field="limitDate" data-link-format="yyyy">
+                    	<input class="form-control" size="4" type="text" value="">
+                    	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </span>
+	            <div class="col-md-3" style="float:right;margin-right:-193px;">
+	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            </div>
+                </div>
+                <input type="hidden" id="limitDate" value="" />
+                
              <fieldset style="margin-top:10px">
              	<!-- 申请日期条件，客户说去掉，暂时隐藏 -->
                 <div class="form-group" hidden>
@@ -60,31 +92,45 @@
 					<input type="hidden" id="applicationDateTo" value="" />     				     
                   </div>  
                  </div>
-                 
-	            <div class="col-md-5" style="float:right;margin-right:-193px;">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
-	            </div> 
-            </fieldset>  		  
+              </div>
+
+           </fieldset>
+ 		  
 	       	<div id="applicationResultList">
 	       	<c:import url="/WEB-INF/views/application/list.jsp" charEncoding="UTF-8"></c:import>  
 	       	</div>
+	       	
+ <!-- import Modal -->
+      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+      	<div class="modal-dialog" style="width:900px">
+      		<form method="post">
+      			<div class="modal-content">
+      				<div class="modal-header">
+      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title" id="detailModalLabel">申请详情</h4>
+      				</div>
+				<c:import url="/WEB-INF/views/application/detail.jsp" charEncoding="UTF-8"></c:import>
+				</div>
+			</form>
+		</div>
+	  </div>
+      <div class="modal-backdrop fade in" style="display:none" id="loading">
+		<div class="loading"></div>  
+	  </div>
       	      
 	      </div>
       </div>
       </div>
-			
+
 <!-- yangqi     -->
  <div id="searchCondition">
  	<input type="hidden" id="page" value="1"/>
  	<input type="hidden" id="companyNameHide" value=""/>
  	<input type="hidden" id="equipmentNameHide" value=""/>
  	<input type="hidden" id="expertNameConHide" value=""/>
+ 	<input type="hidden" id="repairLevelConHide" value=""/>
+ 	<input type="hidden" id="resultConHide" value=""/>
  </div>		
-   
-
-
-      
-		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
 
 	    <script type="text/javascript" src="/js/identification/application/application.js" charset="UTF-8"></script>	    
 	    <script type="text/javascript">

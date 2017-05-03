@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.identification.model.EquipmentModel;
+import com.main.identification.model.EquipmentResult;
 import com.main.identification.repository.EquipmentRepository;
 
 /**
@@ -18,8 +19,8 @@ public class EquipmentService {
 	@Autowired
 	private EquipmentRepository equipmentRepository;
 
-	public List<EquipmentModel> findEquipmentList() {
-		return equipmentRepository.selectEquipmentList();
+	public List<EquipmentModel> findEquipmentList(EquipmentModel equipmentModel) {
+		return equipmentRepository.selectEquipmentList(equipmentModel);
 	}
 
 	public int addEquipmentModel(EquipmentModel equipment) {
@@ -34,6 +35,22 @@ public class EquipmentService {
 
 	public void deleteEquipByCondation(EquipmentModel equip) {
 		equipmentRepository.deleteEquipment(equip);		
+	}
+
+	public int selectEquipmentResultCount(EquipmentResult equipment) {
+		return equipmentRepository.selectEquipmentResultCount(equipment);
+	}
+	
+	public int selectEquipmentCount(EquipmentResult equipment) {
+		return equipmentRepository.selectEquipmentCount(equipment);
+	}
+
+	public List<EquipmentResult> searchEquipmentList(EquipmentResult equipment) {
+		return equipmentRepository.searchEquipmentList2(equipment);
+	}
+
+	public List<EquipmentResult> exportEquipmentList(EquipmentResult equipment) {
+		return equipmentRepository.searchEquipmentListExport(equipment);
 	}
 	
 }

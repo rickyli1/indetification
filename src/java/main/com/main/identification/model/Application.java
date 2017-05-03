@@ -1,18 +1,24 @@
 package com.main.identification.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class Application extends BaseModel implements Serializable {
 
-	private static final long serialVersionUID = 6040568253512679000L;
+	private static final long serialVersionUID = 3795786639519832181L;
 	private String applicationNo; // 申请编号
 	private String applicationDate; // 申请日期YYYYMMDD
 	private String companyNo; // 单位编号
 	private String department; // 主要代表机构或装备部门
-	private String appFilePath; // 申请文本文件路径
-	private String resultFildPath; // 结论文本文件路径
+	private String originFlag;// 来源Flag
 	private String remark; // 备注
+	
+	private String appFileName; //申请文本名
+	private String appFileNo;   //申请文本编号
+	private String resultFileName; //结论文本文件名
+	private String  resultFileNo; //结论文本文件编号
+	
+	private String  leaderNo; //专家组长编号
+    private String  expertsNo;//专家编号集合
 	
 	private String deleteFlag = "0";     //删除Flag
 	private String createBy;       //创建人
@@ -74,20 +80,45 @@ public class Application extends BaseModel implements Serializable {
 		this.department = department;
 	}
 
-	public String getAppFilePath() {
-		return appFilePath;
+
+	public String getAppFileName() {
+		return appFileName;
 	}
 
-	public void setAppFilePath(String appFilePath) {
-		this.appFilePath = appFilePath;
+	public void setAppFileName(String appFileName) {
+		this.appFileName = appFileName;
 	}
 
-	public String getResultFildPath() {
-		return resultFildPath;
+	public String getAppFileNo() {
+		return appFileNo;
 	}
 
-	public void setResultFildPath(String resultFildPath) {
-		this.resultFildPath = resultFildPath;
+	public void setAppFileNo(String appFileNo) {
+		this.appFileNo = appFileNo;
+	}
+
+	public String getResultFileName() {
+		return resultFileName;
+	}
+
+	public void setResultFileName(String resultFileName) {
+		this.resultFileName = resultFileName;
+	}
+
+	public String getResultFileNo() {
+		return resultFileNo;
+	}
+
+	public void setResultFileNo(String resultFileNo) {
+		this.resultFileNo = resultFileNo;
+	}
+
+	public String getOriginFlag() {
+		return originFlag;
+	}
+
+	public void setOriginFlag(String originFlag) {
+		this.originFlag = originFlag;
 	}
 
 	public String getRemark() {
@@ -97,5 +128,21 @@ public class Application extends BaseModel implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public String getLeaderNo() {
+		return leaderNo;
+	}
+
+	public void setLeaderNo(String leaderNo) {
+		this.leaderNo = leaderNo;
+	}
+
+	public String getExpertsNo() {
+		return expertsNo;
+	}
+
+	public void setExpertsNo(String expertsNo) {
+		this.expertsNo = expertsNo;
+	}	
 	
 }

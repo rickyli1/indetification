@@ -3,6 +3,7 @@ package com.main.identification.repository;
 import java.util.List;
 
 import com.main.identification.model.EquipmentModel;
+import com.main.identification.model.EquipmentResult;
 
 /**
  * 
@@ -28,6 +29,17 @@ public interface EquipmentRepository {
 
 	public int batchAddEquipmentModel(List<EquipmentModel> equipmentList);
 
-	public List<EquipmentModel> selectEquipmentList();
+	public List<EquipmentModel> selectEquipmentList(EquipmentModel equipmentModel);
+
+	public int selectEquipmentResultCount(EquipmentResult equipment);
+	
+
+	public int selectEquipmentCount(EquipmentResult equipment);
+
+
+	public List<EquipmentResult> searchEquipmentList2(EquipmentResult equipment);
+
+	public List<EquipmentResult> searchEquipmentListExport(
+			EquipmentResult equipment);
 
 }

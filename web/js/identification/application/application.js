@@ -6,6 +6,18 @@
 		},
 		
 		initCalendar : function() {
+			
+			$('.form_year').datetimepicker({
+			    format: 'yyyy',  
+			     weekStart: 1,  
+			     autoclose: true,  
+			     startView: 4,  
+			     minView: 4,  
+			     forceParse: 0,  
+			     language: 'zh-CN' 
+			    
+			});
+			
 		    $('.form_datetime').datetimepicker({
 		        language:  'zh-CN',
 		        weekStart: 1,
@@ -54,6 +66,9 @@
 			$("#companyNameHide").val($("#companyName").val().trim());
 			$("#equipmentNameHide").val($("#equipmentName").val().trim());
 			$("#expertNameConHide").val($("#expertNameCon").val().trim());
+			
+			$("#resultConHide").val($("input[name='resultCon']:checked").val());
+			$("#repairLevelConHide").val($("#repairLevelCon").val());
 		},
 		// 取得隐藏域参数
 		getSearchConditions: function() {
@@ -62,6 +77,11 @@
 				"companyName": $("#companyNameHide").val(),
 				"equipmentName":$("#equipmentNameHide").val(),
 				"expertNameCon":$("#expertNameConHide").val(),
+
+				"resultCon":$("#resultConHide").val(),
+				"repairLevelCon":$("#repairLevelConHide").val(),
+				"limitDateCon":$("#limitDate").val(),
+				
 				"applicationDateFrom":$("#applicationDateFrom").val().replace(/-/g,""),
 				"applicationDateTo":$("#applicationDateTo").val().replace(/-/g,"")
 			};
@@ -70,14 +90,10 @@
 		searchList : function() {
 			var that = this;
 			$("#applicationResultList").empty();
-//			$("#total_count_em").text(0);
+
 			var data = this.getSearchConditions();
 			identification.ajax("/application/searchList", JSON.stringify(data), "html", function(res) {
 				$("#applicationResultList").html(res);
-//				$("#total_count_em").text($("#listTotalCount").val());
-//				that.bindUpdateEvent();
-//				that.checkAllEvent();
-//				that.listCheckBoxEvent();
 			});
 		}
 		

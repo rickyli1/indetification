@@ -9,10 +9,13 @@ import com.main.identification.service.ExpertService;
 
 import com.main.identification.model.Application;
 import com.main.identification.model.ApplicationAddModel;
+import com.main.identification.model.ApplicationDetailComp;
+import com.main.identification.model.ApplicationDetailModel;
 import com.main.identification.model.ApplicationResult;
 import com.main.identification.model.Report;
 import com.main.identification.repository.ApplicationRepository;
 import com.main.identification.repository.ConstantRepository;
+import com.main.identification.repository.ExpertRepository;
 import com.main.identification.repository.ReportRepository;
 import com.main.identification.utils.Constant;
 import com.main.identification.utils.IndentificationUtils;
@@ -35,7 +38,10 @@ public class ApplicationService {
 	private ReportRepository reportRepository;
 	
 	@Autowired
-	public ConstantRepository constantRepository;	
+	public ConstantRepository constantRepository;
+	
+	@Autowired
+	public ExpertRepository expertRepository;
 	
 	@Autowired
 	CommonService commonService;
@@ -92,17 +98,48 @@ public class ApplicationService {
 			report.setCompanyNo(application.getCompanyNo());
 			report.setReportNo(Constant.REPORT_FLAG +  String.valueOf(commonService.createSequenceId(Constant.REPORT_SEQ)));	
 			report.setApplicationDate(application.getApplicationDate());
-			
-			// 暂时追加为专家组长
-			if(report.getExpertsNo() != null && !report.getExpertsNo().isEmpty()){
-				report.setLeaderNo(report.getExpertsNo());
-				report.setExpertsNo("");
-			}
 		}
-		
+		application.setOriginFlag("1");
 		applicationRepository.insertApplication(application);
 		int result = reportRepository.insertReportBatch(reports);
 		return result;
+	}
+	
+	/**
+	 * 根据申请编号，取得申请详细信息
+	 * @param condition
+	 * @return
+	 */
+	public ApplicationDetailModel selectAppDetail(String applicationNo){
+		
+		ApplicationDetailModel result = new ApplicationDetailModel();
+		
+		// 获取单位信息
+		ApplicationDetailComp compDetail = applicationRepository.selectCompDetailByApplication(applicationNo);
+
+		result.setCompany(compDetail);
+		
+		// 获取专家信息
+		// 给组员专家参数赋值
+		if(!compDetail.getExpertsNo().isEmpty()){
+			StringBuffer expertsNoStrBuf = new StringBuffer();
+			expertsNoStrBuf.append("'");
+			String[] expertsNo = compDetail.getExpertsNo().split(";");
+			for(int i=0;i<expertsNo.length;i++){
+				if(!expertsNo[i].isEmpty()){
+					expertsNoStrBuf = expertsNoStrBuf.append(expertsNo[i]).append("','");
+				}
+			}
+			String expertsNoCon = expertsNoStrBuf.substring(0, expertsNoStrBuf.length()-2);
+			compDetail.setExpertsCon(expertsNoCon);
+		}
+		// 这个方法取到了数据
+		result.setExperts(expertRepository.searchAppExpertDetail(compDetail));
+		
+		// 获取设备信息 
+		result.setEquipments(applicationRepository.selectEquipsDetailByApplication(applicationNo));
+		
+		return result ;
 	}
 	
 	/**

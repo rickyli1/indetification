@@ -8,7 +8,8 @@ import java.io.Serializable;
  *
  */
 public class ApplicationResult extends BaseModel implements Serializable{
-	private static final long serialVersionUID = 1115379120030933920L;
+	
+	private static final long serialVersionUID = 7564825956587460831L;
 	//	APPLICATION_NO	申请编号
 	private String applicationNo;
 //	APPLICATION_DATE	申请日期
@@ -45,8 +46,16 @@ public class ApplicationResult extends BaseModel implements Serializable{
 	private String timeLimit;
 //	IS_REFORM	是否整改
 	private String isReform;
+	// 来源Flag
+	private String originFlag;
 //	REMARK	备注
 	private String remark;
+	
+	private String resultCon;
+	
+	private String repairLevelCon;
+	
+	private String limitDateCon;
 	
 	public String getApplicationNo() {
 		return applicationNo;
@@ -150,6 +159,12 @@ public class ApplicationResult extends BaseModel implements Serializable{
 	public void setIsReform(String isReform) {
 		this.isReform = isReform;
 	}
+	public String getOriginFlag() {
+		return originFlag;
+	}
+	public void setOriginFlag(String originFlag) {
+		this.originFlag = originFlag;
+	}
 	public String getRemark() {
 		return remark;
 	}
@@ -162,5 +177,22 @@ public class ApplicationResult extends BaseModel implements Serializable{
 	public void setExpertNameCon(String expertNameCon) {
 		this.expertNameCon = expertNameCon;
 	}
-	
+	public String getResultCon() {
+		return resultCon;
+	}
+	public void setResultCon(String resultCon) {
+		this.resultCon = resultCon;
+	}
+	public String getRepairLevelCon() {
+		return repairLevelCon;
+	}
+	public void setRepairLevelCon(String repairLevelCon) {
+		this.repairLevelCon = repairLevelCon;
+	}
+	public String getLimitDateCon() {
+		return limitDateCon;
+	}
+	public void setLimitDateCon(String limitDateCon) {
+		this.limitDateCon = limitDateCon;
+	}
 }

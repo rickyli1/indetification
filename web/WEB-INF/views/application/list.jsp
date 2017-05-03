@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
    
-      	 <div style="padding-top: 24px;">
+      	 <div style="padding-top: 1px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
@@ -12,6 +12,7 @@
 	                <th>申请结果</th>
 	                <th>有效期限</th>
 	                <th>专家组</th>
+	                <th>操作</th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -24,6 +25,11 @@
 		                <td>${apply.result}</td>
 		                <td>${apply.timeLimit}</td>
 		                <td>${apply.expertsName}</td>
+		                <td>
+							<c:if test="${apply.originFlag == '1'}">
+								<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDetail('${apply.applicationNo}')">详情</button>
+							</c:if>
+		                </td>
 		              </tr>
 	            	</c:forEach>
 	            </tbody>
@@ -33,11 +39,20 @@
           <div class="text-center">
                 <ul id="pagination-demo" class="pagination-sm pagination">
                </ul>
-          </div>		
+          </div>
+ <div id="listCondition">
+ 	<input type="hidden" id="applicationNoHidden" value=""/>
+ </div>			
 <script src="/js/common/jquery/jquery-1.11.1.min.js"></script>          
 <script type="text/javascript" src="/js/common/jquery/jquery.twbsPagination.min.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
+
+	// 跳转至详情页
+	function goDetail(applicationNo) {
+	    $("#applicationNoHidden").val(applicationNo);
+	    identification.applicationDetail.goPage();
+	}
 	
 	$('#pagination-demo').twbsPagination({
 	    totalPages: '${totalPage}',

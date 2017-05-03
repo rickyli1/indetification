@@ -53,7 +53,13 @@
   <select id="selectConstantList" resultMap="constantMap" parameterType="ConstantModel">
    	<include refid="baseSearchSql"/>  
    	 where delete_flag = '0'
-   	        and `CONSTANT_TYPE` = #{constantType}        
+   	  <if test="constantType != null and constantType != ''">  
+     	  and `CONSTANT_TYPE` = #{constantType}      
+      </if>
+       <if test="parentNo != null and parentNo != ''">  
+     	  and `PARENT_NO` = #{parentNo}      
+      </if>
+   	       <!--  and `CONSTANT_TYPE` = #{constantType}       -->  
    	 order by SORT 
   </select>
   

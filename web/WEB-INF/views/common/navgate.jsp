@@ -91,7 +91,7 @@
 			  }
 			
 </style>
-
+<!--<div><img alt="" src="/images/ban2.jpg" style="width:100%;height:100%"></div> -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="container">
      <div id="navbar" class="navbar-collapse collapse">
@@ -118,7 +118,12 @@
              <li><a href="/application/addInit"><spring:message code="lable.application.add"/></a></li>
            </ul>
          </li>
-         <li><a href="#/equipment"><spring:message code="lable.equipment"/></a></li>
+         <li>  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.equipment.search"/> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+             <li><a href="/equipment/init"><spring:message code="lable.equipment.search"/></a></li>
+             <li><a href="/equipment/addInit"><spring:message code="lable.equipment.add"/></a></li>
+           </ul>
+         </li>
          <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
          <li><a href="#/company"><spring:message code="lable.company"/></a></li>
         

@@ -99,5 +99,10 @@ public class Constant {
 	
 	public static final String COMPANY_FACTORY_TYPE = "0";
 	public static final String COMPANY_EXPERT_TYPE = "1";
+	
+	public static String FILE_NAME= "承修单位选择范围";
+	
+	public static int PAGE_SIZE = 30;
+	
 
 }

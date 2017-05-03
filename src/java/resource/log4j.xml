@@ -1,68 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">   
-<log4j:configuration>    
-    
- <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">    
-  <layout class="org.apache.log4j.PatternLayout">    
-   <param name="ConversionPattern"    
-    value="%d - %c -%-4r [%t] %-5p %x - %m%n" />    
-  </layout>    
-  </appender>
-  
- <appender name="FILE" class="org.apache.log4j.FileAppender">    
-  <param name="File" value="/Users/liruiqi/Documents/log4j.log"/>    
-  <layout class="org.apache.log4j.PatternLayout">    
-   <param name="ConversionPattern"    
-    value="%d - %c -%-4r [%t] %-5p %x - %m%n" />    
-  </layout>    
- </appender>  
-      
-  <logger name="com.main.training" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-     <!-- <appender-ref ref="FILE" />    -->    
-  </logger>   
-  
-  <logger name="com.pringframework" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->     
-  </logger>         
- 
-  <logger name="org.apache.commons" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->     
-  </logger>   
-  
-  <logger name="java.sql" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->     
-  </logger>   
-  
-  <logger name="java.sql.statement" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->     
-  </logger>        
- 
-   <logger name="java.sql.ResultSet" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->   
-    </logger>   
-    
-    <logger name="org.apache.ibatis" additivity="false">  
-      <level value="DEBUG"/>
-      <appender-ref ref="CONSOLE" />    
-    <!--  <appender-ref ref="FILE" />   -->   
-    </logger>  
- <root>    
-  <priority value="debug" />    
-  <appender-ref ref="CONSOLE" />    
-  <appender-ref ref="FILE" />    
- </root>    
-    
-    
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d - %c -%-4r [%t] %-5p %x - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="org.apache.log4j.FileAppender">
+		<param name="File" value="/Users/liruiqi/Documents/log4j.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d - %c -%-4r [%t] %-5p %x - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="com.main.training" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="com.pringframework" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="org.apache.commons" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="java.sql" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="java.sql.statement" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="java.sql.ResultSet" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<logger name="org.apache.ibatis" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+
+
 </log4j:configuration>

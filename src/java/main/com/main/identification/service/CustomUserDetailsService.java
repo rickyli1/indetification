@@ -1,13 +1,10 @@
 package com.main.identification.service;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.util.CollectionUtils;
 
 import com.main.identification.model.AdminUser;
 import com.main.identification.repository.AdminUserRepository;

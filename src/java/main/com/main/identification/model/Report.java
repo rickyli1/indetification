@@ -25,6 +25,8 @@ public class Report extends BaseModel implements Serializable{
 	private Timestamp createTime;  //创建时间
 	private Timestamp lastModifyTime; //最后修改时间
 	
+	private String equipmentName;
+	
 	private int row; // 备注
 	
 	public int getRow() {
@@ -171,4 +173,11 @@ public class Report extends BaseModel implements Serializable{
 		this.remark = remark;
 	}
 
+	public String getEquipmentName() {
+		return equipmentName;
+	}
+
+	public void setEquipmentName(String equipmentName) {
+		this.equipmentName = equipmentName;
+	}
 }

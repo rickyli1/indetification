@@ -14,7 +14,7 @@
 		  `GROUP_NO`, 
 		  `EQUIPMENT_NAME`,
 		  `SUB_GROUP_NO`
-	    FROM Equipment
+	    FROM Equipment e
     </sql>
     
 	<resultMap id="equipmentMap" type="EquipmentModel">
@@ -31,10 +31,78 @@
 		<result column="CREATE_TIME" property="createTime"/>
 		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
+	
+	<resultMap id="subResultMap" type="SubExportResult">
+		<result column="repair_Level" property="repairLevel"/>
+		<result column="repair_name" property="repairName"/>
+		<result column="company_Names" property="companyNames"/>
+		<result column="time_Limit" property="timeLimit"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	
+	<resultMap id="equipmentResultMap" type="EquipmentResult">
+		<id column="equipment_No" property="equipmentNo"/>
+		<result column="application_Date" property="applicationDate"/>
+		<result column="application_Date_From" property="applicationDateFrom"/>
+		<result column="application_Date_To" property="applicationDateTo"/>
+		<result column="report_No" property="reportNo"/>
+		<result column="company_No" property="companyNo"/>
+		<result column="company_Name" property="companyName"/>
+
+		<result column="leader_No" property="leaderNo"/>
+		<result column="leader_Name" property="leaderName"/>
+
+		<result column="experts_No" property="expertsNo"/>
+		<result column="experts_Name" property="expertsName"/>
+		<result column="expert_Name_Con" property="expertNameCon"/>
+
+		<result column="equipment_Name" property="equipmentName"/>
+
+		
+		<result column="result" property="result"/>
+		<result column="time_Limit" property="timeLimit"/>
+		<result column="is_Reform" property="isReform"/>
+		<result column="remark" property="remark"/>
+		
+		<result column="CREATE_BY" property="createBy"/>
+		<result column="LAST_MODIFY_BY" property="lastModifyBy"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
+		
+		<result column="GROUP_NO" property="groupNo"/>
+		<result column="GROUP_NAME" property="groupName"/>
+		<result column="SUB_GROUP_NO" property="subGroupNo"/>
+		<result column="SUB_GROUP_NAME" property="subGroupName"/>
+		
+		<result column="repair_Level" property="repairLevel"/>
+		<result column="repair_name" property="repairName"/>
+		<result column="company_Names" property="companyNames"/>
+		<collection property="exportList" javaType="ArrayList" ofType="SubExportResult" resultMap="subResultMap"/>
+		
+	</resultMap>  
 
   <sql id="searchCondSql">
   	<where>
   	</where>  
+  </sql>
+  
+  <sql id="searchCondSql2">
+  	<where>
+  	  <if test="repairLevel != null and repairLevel != ''">  
+        and `REPAIR_LEVEL` = #{repairLevel}
+      </if>  
+      <if test="equipmentName != null and equipmentName != ''">  
+        and e.`EQUIPMENT_NAME` = #{equipmentName}
+      </if>  
+       <if test="groupNo != null and groupNo != ''">  
+        and e.`GROUP_NO` = #{groupNo}
+      </if>  
+       <if test="subGroupNo != null and subGroupNo != ''">  
+        and e.`SUB_GROUP_NO` = #{subGroupNo}
+      </if>  
+  	</where>  
+  	        and e.DELETE_FLAG = 0
+  	
   </sql>
   
   <select id="selectEquipmentCount" resultType="int" parameterType="EquipmentModel">
@@ -43,10 +111,104 @@
     from EQUIPMENT equipment
 	<include refid="searchCondSql"/>  
   </select>
+  
+  <select id="selectEquipmentResultCount" resultType="int" parameterType="EquipmentResult">
+    select 
+	  count(1)
+        from  test.equipment e 
+        inner join test.constant cg 
+		on e.GROUP_NO = cg.CONSTANT_NO
+		inner join test.constant d
+		on e.SUB_GROUP_NO = d.CONSTANT_NO
+		
+	<include refid="searchCondSql2"/>  
+  </select>
 
-  <select id="selectEquipmentList" resultMap="equipmentMap">
+  <select id="searchEquipmentList2" resultMap="equipmentResultMap" parameterType="EquipmentResult">
+   select 
+   		   
+        e.equipment_no,
+        e.equipment_name,
+        e.GROUP_NO,
+        t.repair_level,
+        t.repair_name,
+        t.company_names,
+        t.TIME_LIMIT,
+        t.REMARK,
+        cg.CONSTANT_NAME as GROUP_NAME,
+ 		e.SUB_GROUP_NO , 
+ 		d.CONSTANT_NAME  as SUB_GROUP_NAME 
+        from  test.equipment e 
+		inner join 
+        (
+	        select  r.equipment_no as equipment_no,r.repair_level as repair_level ,
+		        con.CONSTANT_NAME as repair_name,
+		        group_concat(c.company_name separator ',') as company_names ,
+		        r.TIME_LIMIT,r.REMARK
+		        from test.report r
+		        inner join  test.company c
+		        on r.COMPANY_NO = c.COMPANY_NO
+				inner join test.constant con 
+				on r.REPAIR_LEVEL = con.CONSTANT_NO
+		        
+		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
+        
+        ) t
+        on e.equipment_no = t.equipment_no
+        inner join test.constant cg 
+		on e.GROUP_NO = cg.CONSTANT_NO
+		inner join test.constant d
+		on e.SUB_GROUP_NO = d.CONSTANT_NO 
+        <include refid="searchCondSql2"/> 
+        LIMIT ${startNo}, ${pageSize}
+  </select>
+  
+  <select id="searchEquipmentListExport" resultMap="equipmentResultMap" parameterType="EquipmentResult">
+   select 
+   		   
+        e.equipment_no,
+        e.equipment_name,
+        e.GROUP_NO,
+        t.repair_level,
+        t.repair_name,
+        t.company_names,
+        t.TIME_LIMIT,
+        t.REMARK,
+        cg.CONSTANT_NAME as GROUP_NAME,
+ 		e.SUB_GROUP_NO , 
+ 		d.CONSTANT_NAME  as SUB_GROUP_NAME 
+        from  test.equipment e 
+		inner join 
+        (
+	        select  r.equipment_no as equipment_no,r.repair_level as repair_level ,
+		        con.CONSTANT_NAME as repair_name,
+		        group_concat(c.company_name separator ',') as company_names ,
+		        r.TIME_LIMIT,r.REMARK
+		        from test.report r
+		        inner join  test.company c
+		        on r.COMPANY_NO = c.COMPANY_NO
+				inner join test.constant con 
+				on r.REPAIR_LEVEL = con.CONSTANT_NO
+		        
+		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
+        
+        ) t
+        on e.equipment_no = t.equipment_no
+        inner join test.constant cg 
+		on e.GROUP_NO = cg.CONSTANT_NO
+		inner join test.constant d
+		on e.SUB_GROUP_NO = d.CONSTANT_NO 
+        where e.DELETE_FLAG = 0
+        <include refid="searchCondSql2"/> 
+  </select>
+
+
+  <select id="selectEquipmentList" resultMap="equipmentResultMap" parameterType="EquipmentModel">
     <include refid="baseSearchSql"/>
     where  delete_flag = '0'
+      <if test="equipmentName != null and equipmentName != ''">  
+        and `equipment_NAME` = #{equipmentName}
+      </if>  
   </select>
   
    <insert id="insertEquipment" parameterType="EquipmentModel"  >
