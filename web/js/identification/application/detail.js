@@ -30,9 +30,9 @@
 			var equipsList = data.equipsDetailList;
 			
 			$("#detailCompanyName").text(compDetail.companyName);
-			$("#detailCompanyCode").text(compDetail.companyCode);
+			$("#detailCompanyCode").text(this.trimNull(compDetail.companyCode));
 			$("#detailApplicationDate").text(compDetail.applicationDate);
-			$("#detailDepartment").text(compDetail.department);
+			$("#detailDepartment").text(this.trimNull(compDetail.department));
 			
 			$("#appFile").text(compDetail.appFileName);
 			$("#appFile").attr("href", "fileDownload/"+compDetail.appFileNo);
@@ -60,7 +60,7 @@
 					roleDetailTD.attr("data-role", expertsList[i].role);
 					
 					expertNameDetailTD.text(expertsList[i].expertName);
-					expertCompanyDetailTD.text(expertsList[i].companyName);
+					expertCompanyDetailTD.text(this.trimNull(expertsList[i].companyName));
 					roleDetailTD.text(expertsList[i].role);
 					
 					expertTR.append(expertNameDetailTD);
@@ -113,7 +113,17 @@
 					groupNameTD.text(equipsList[i].groupName);
 					subGroupNameTD.text(equipsList[i].subGroupName);
 					equipmentNameTD.text(equipsList[i].equipmentName);
-					repairLevelTD.text(equipsList[i].repairLevel);
+					
+					if(equipsList[i].repairLevel == '1'){
+						repairLevelTD.text('检修');
+					} else if(equipsList[i].repairLevel == '2'){
+						repairLevelTD.text('小修');
+					} else if(equipsList[i].repairLevel == '3'){
+						repairLevelTD.text('中修');
+					} else if(equipsList[i].repairLevel == '4'){
+						repairLevelTD.text('大修');
+					}
+					
 					resultTD.text(equipsList[i].result);
 					isReformTD.text(equipsList[i].isReform);
 					timeLimitTD.text(equipsList[i].timeLimit);
@@ -130,6 +140,14 @@
 		            
 					equipmentsBody.append(equipTR);
 				}
+			}
+		},
+		
+		trimNull:function(string){
+			if(string == null){
+				return '';
+			}else{
+				return string;
 			}
 		}
 		

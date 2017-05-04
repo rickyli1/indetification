@@ -181,7 +181,7 @@ public class ApplicationService {
 		}
 		
 		if(!expertsName.isEmpty()){
-			expertsName = expertsName.concat("(*)");
+			expertsName = expertsName.concat("(组长)");
 		}
 		
 		if(applicationResult.getExpertsNo() != null && !applicationResult.getExpertsNo().isEmpty()){

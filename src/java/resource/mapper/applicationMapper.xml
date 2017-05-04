@@ -160,7 +160,10 @@
 		, report.EQUIPMENT_NO
 		, equipment.EQUIPMENT_NAME
 		, report.REPAIR_LEVEL
-		, report.RESULT
+		, CASE report.RESULT
+		  WHEN '1' THEN '合格'
+		  WHEN '0' THEN '不合格'
+		  END as result
 		, report.TIME_LIMIT
 		, report.CREATE_BY
 		, report.LAST_MODIFY_BY
@@ -260,8 +263,14 @@
 				, equ.EQUIPMENT_NO
 		        , equ.EQUIPMENT_NAME
 		        , rep.REPAIR_LEVEL
-		        , rep.RESULT
-		        , rep.IS_REFORM
+				, CASE rep.RESULT
+				  WHEN '1' THEN '合格'
+				  WHEN '0' THEN '不合格'
+				  END as RESULT
+				, CASE rep.IS_REFORM
+				  WHEN '1' THEN '整改'
+				  WHEN '0' THEN '不整改'
+				  END as IS_REFORM
 		        , rep.TIME_LIMIT
 		        , rep.REMARK
 		     from report rep

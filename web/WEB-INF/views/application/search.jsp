@@ -41,8 +41,8 @@
                 <!-- 结果 -->
                  <label class="col-md-1 control-label" for="result">申请结果</label>
                  <div class="col-md-2">                
-					<input type="radio" id="resultCon" name="resultCon" value="合格" >合格
-					<input type="radio" name="resultCon" value="不合格">不合格
+					<input type="radio" id="resultCon" name="resultCon" value="1" >合格
+					<input type="radio" name="resultCon" value="0">不合格
                  </div>
                 <!-- 修理级别 -->
                  <label class="col-md-1 control-label" for="repairLevel">修理级别</label>

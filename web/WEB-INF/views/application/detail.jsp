@@ -6,29 +6,29 @@
 	<div class="col-md-* col-xs-* col-sm-*">
 	    <div class="row">
 	      <div class="col-xs-2 col-sm-2 col-md-3"> 
-	      	<label class="control-label" for="detailCompanyName" style="margin-top:8px;margin-left:13px">单位信息</label>
+	      	<label class="control-label" for="detailCompanyName" style="margin-top:8px;margin-left:13px;font:message-box">单位名称</label>
 	      	<spam id="detailCompanyName" name="detailCompanyName"></spam>
 	      </div>
-	      <div class="col-xs-2 col-sm-2 col-md-4">
-			<label class="control-label" for="detailCompanyCode" style="margin-top:8px;margin-left:13px">单位代号</label>
+	      <div class="col-xs-2 col-sm-2 col-md-3">
+			<label class="control-label" for="detailCompanyCode" style="margin-top:8px;margin-left:13px;font:message-box">单位代号</label>
 	      	<spam id="detailCompanyCode" name="detailCompanyCode"></spam>
 		  </div>
-	      <div class="col-xs-2 col-sm-2 col-md-4">
-			<label class="control-label" for="detailApplicationDate" style="margin-top:8px;margin-left:13px">申请日期</label>
+	      <div class="col-xs-2 col-sm-2 col-md-3">
+			<label class="control-label" for="detailApplicationDate" style="margin-top:8px;margin-left:13px;font:message-box">申请日期</label>
 	      	<spam id="detailApplicationDate" name="detailApplicationDate"></spam>
 		  </div>
-		  <div class="col-xs-2 col-sm-2 col-md-4">
-			<label class="control-label" for="detailDepartment" style="margin-top:8px;margin-left:13px">主要代表机构</label>
+		  <div class="col-xs-2 col-sm-2 col-md-3">
+			<label class="control-label" for="detailDepartment" style="margin-top:8px;margin-left:13px;font:message-box">主要代表机构</label>
 	      	<spam id="detailDepartment" name="detailDepartment"></spam>
 		  </div>
 		  
 	<!--   <a href="fileDownload/5909bfe20b62d03e7d94edc0">文档.txt</a> -->	
 		  <div class="col-xs-2 col-sm-2 col-md-4">
-			<label class="control-label" for="appFile" style="margin-top:8px;margin-left:13px">申请文件</label>
+			<label class="control-label" for="appFile" style="margin-top:8px;margin-left:13px;font:message-box">申请文件</label>
 	      	<a id="appFile"></a>
 		  </div>
 		  <div class="col-xs-2 col-sm-2 col-md-4">
-			<label class="control-label" for="resultFile" style="margin-top:8px;margin-left:13px">结论文件</label>
+			<label class="control-label" for="resultFile" style="margin-top:8px;margin-left:13px;font:message-box">结论文件</label>
 	      	<a id="resultFile"></a>
 		  </div>
 		  
