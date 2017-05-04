@@ -260,12 +260,12 @@
 	
 	</td>
 	<td>
-	<input type="radio" name="result{{= no}}" value="合格">合格<br>
-	<input type="radio" name="result{{= no}}" value="不合格">不合格
+	<input type="radio" name="result{{= no}}" value="1">合格<br>
+	<input type="radio" name="result{{= no}}" value="0">不合格
 	</td>								  
 	<td>
-	<input type="radio" name="isReform{{= no}}" value="整改">整改<br>
-	<input type="radio" name="isReform{{= no}}" value="无整改">无整改
+	<input type="radio" name="isReform{{= no}}" value="1">整改<br>
+	<input type="radio" name="isReform{{= no}}" value="0">无整改
 	</td>	
 	<td>
 	<span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="timeLimit{{= no}}" data-link-format="yyyy-mm-dd">
