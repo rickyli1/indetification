@@ -32,7 +32,40 @@
 		<result column="CREATE_TIME" property="createTime"/>
 		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
-	
+  
+  <sql id="searchCondSql">
+  	<where>
+  		`DELETE_FLAG` = 0
+  		<if test="companyName != null and companyName != ''">  
+        and `company_Name` = #{companyName}
+      	</if>  
+      	<if test="companyType != null and companyType != ''">  
+        and `company_type` = #{companyType}
+      	</if>
+      	<if test="companyNo != null and companyNo != ''">  
+        and `company_No` = #{companyNo}
+      	</if>
+      	<if test="companyCode != null and companyCode != ''">  
+        and `company_Code` = #{companyCode}
+      	</if>
+      	<if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      	</if>
+  	</where>
+  	</sql>
+  	
+  	<select id="selectCompanyResultCount" resultType="int" parameterType="Company">
+	    select count(1)
+		  from company
+		<include refid="searchCondSql"/>  
+  	</select>
+  	
+  	<select id="selectCompanyResultList" resultMap="companyMap" parameterType="Company">
+   		<include refid="baseSearchSql"/>
+   		<include refid="searchCondSql"/>  
+   		LIMIT ${startNo}, ${pageSize}
+  	</select>
+  	
   <select id="selectCompanyList" resultMap="companyMap">
   	<include refid="baseSearchSql"/>
   	where DELETE_FLAG = '0'
@@ -109,13 +142,12 @@
     </foreach>
   </insert> 
   
-  <!-- <update id="deleteCompany" parameterType="Company">
+  <update id="deleteOneCompany" parameterType="Company">
     UPDATE company
     SET  
        delete_flag = 1,
-       `update_id` = #{updateId},
-       update_by = #{updateBy},
-       update_date = now()
+       LAST_MODIFY_BY = #{lastModifyBy},
+       LAST_MODIFY_TIME = now()
     WHERE delete_flag = 0
       <if test="companyName != null and companyName != ''">  
         and `company_Name` = #{companyName}
@@ -126,7 +158,7 @@
       <if test="remark != null and remark != ''">  
         and `remark` = #{remark}
       </if>  
-  </update> -->
+  </update>
   
   <delete id="deleteCompany" parameterType="Company">
     delete from company

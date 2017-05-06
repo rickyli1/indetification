@@ -89,10 +89,10 @@
   <sql id="searchCondSql2">
   	<where>
   	  <if test="repairLevel != null and repairLevel != ''">  
-        and `REPAIR_LEVEL` = #{repairLevel}
+        and t.`REPAIR_LEVEL` = #{repairLevel}
       </if>  
       <if test="equipmentName != null and equipmentName != ''">  
-        and e.`EQUIPMENT_NAME` = #{equipmentName}
+        and e.`EQUIPMENT_NAME` like #{equipmentName}
       </if>  
        <if test="groupNo != null and groupNo != ''">  
         and e.`GROUP_NO` = #{groupNo}
@@ -116,6 +116,22 @@
     select 
 	  count(1)
         from  test.equipment e 
+        inner join 
+        (
+	        select  r.equipment_no as equipment_no,r.repair_level as repair_level ,
+		        con.CONSTANT_NAME as repair_name,
+		        group_concat(c.company_name separator ',') as company_names ,
+		        r.TIME_LIMIT,r.REMARK
+		        from test.report r
+		        inner join  test.company c
+		        on r.COMPANY_NO = c.COMPANY_NO
+				inner join test.constant con 
+				on r.REPAIR_LEVEL = con.CONSTANT_NO
+		        
+		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
+        
+        ) t
+        on e.equipment_no = t.equipment_no
         inner join test.constant cg 
 		on e.GROUP_NO = cg.CONSTANT_NO
 		inner join test.constant d

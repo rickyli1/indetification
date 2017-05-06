@@ -101,10 +101,10 @@
 	<sql id="searchCondSql">
 		<where>
 			<if test="companyName != null and companyName != '' ">
-				and company.company_Name = #{companyName}
+				and company.company_Name like concat('%',#{companyName},'%')
 			</if>
 			<if test="equipmentName != null and equipmentName != '' ">
-				and equipment.equipment_Name = #{equipmentName}
+				and equipment.equipment_Name like concat('%',#{equipmentName},'%')
 			</if>
 			<if test="expertsNo != null and expertsNo != '' ">
 				and report.leader_No = #{expertsNo} or report.EXPERTS_NO like

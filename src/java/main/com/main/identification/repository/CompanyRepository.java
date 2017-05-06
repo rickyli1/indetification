@@ -15,5 +15,11 @@ public interface CompanyRepository {
 	
 	public Company searchCompanyByName(String companyName);
 
-	public void deleteCompany(Company company);
+	public int deleteCompany(Company company);
+	
+	public int deleteOneCompany(Company company);
+	
+	public List<Company> selectCompanyResultList(Company company);
+	
+	public int selectCompanyResultCount(Company company);
 }

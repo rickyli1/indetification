@@ -18,7 +18,7 @@
 		},
 		
 		initCalendar : function() {
-			identification.initCalendarByClass('form_datetime','form_date','form_time');						
+			identification.initCalendarByClass('form_datetime','form_date','form_time');			
 		},
 		
 		bindEvent: function() {
@@ -41,7 +41,7 @@
 
 				$("#detailTemplate").tmpl(datas).appendTo( "#applicationDetailBody" );
 				
-				that.initCalendar();
+				identification.initCalendarYYYYByClass('form_year');	
 				
 		        $( ".equipment" ).autocomplete({
 		              source: that.equipmentAry,

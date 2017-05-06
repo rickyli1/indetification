@@ -124,8 +124,13 @@
              <li><a href="/equipment/addInit"><spring:message code="lable.equipment.add"/></a></li>
            </ul>
          </li>
+         <li>  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.company"/> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+             <li><a href="/company/init"><spring:message code="lable.company.search"/></a></li>
+             <li><a href="/company/addInit"><spring:message code="lable.company.add"/></a></li>
+           </ul>
+         </li>
          <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
-         <li><a href="#/company"><spring:message code="lable.company"/></a></li>
         
        </ul>
      </div><!--/.nav-collapse -->

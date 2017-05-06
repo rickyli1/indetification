@@ -7,57 +7,46 @@
 	              <tr>
 	                <th>No</th>
 	                <th>单位名称</th>
-	                <th>设备名称</th>
-	                <th>修理等级</th>
-	                <th>申请结果</th>
-	                <th>有效期限</th>
-	                <th>专家组</th>
-	                <th>操作</th>
+	                <th>单位代号</th>
+	                <th>单位类型</th>
+	                <th>备注</th>
+	                <th></th>
 	              </tr>
 	            </thead>
 	            <tbody>
-	            	<c:forEach var="apply" items="${applicationResultList}" varStatus="status">
+	            	<c:forEach var="company" items="${companyResultList}" varStatus="status">
 		               <tr>
-		                <td>${status.count+(page-1)*pageSize}</td>
-		                <td>${apply.companyName}</td>
-		                <td>${apply.equipmentName}</td>
-		                <td>${apply.repairLevel}</td>
-		                <td>${apply.result}</td>
-		                <td>${apply.timeLimit}</td>
-		                <td>${apply.expertsName}</td>
+		                <td>${status.count+(page-1)*30}</td>
+		                <td>${company.companyName}</td>
+		                <td>${company.companyCode}</td>
+		                <td>${company.companyType}</td>
+		                <td>${company.remark}</td>
 		                <td>
-							<c:if test="${apply.originFlag == '1'}">
-								<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDetail('${apply.applicationNo}')">详情</button>
-							</c:if>
+							<button id="deleteBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDelete('${company.companyNo}')">删除</button>
 		                </td>
 		              </tr>
 	            	</c:forEach>
 	            </tbody>
 	         </table>
          </div>
-		
+		 <div id="alertDiv"></div>
           <div class="text-center">
                 <ul id="pagination-demo" class="pagination-sm pagination">
                </ul>
-          </div>
- <div id="listCondition">
- 	<input type="hidden" id="applicationNoHidden" value=""/>
- </div>			
+          </div>		
 <script src="/js/common/jquery/jquery-1.11.1.min.js"></script>          
 <script type="text/javascript" src="/js/common/jquery/jquery.twbsPagination.min.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
-
-	// 跳转至详情页
-	function goDetail(applicationNo) {
-	    $("#applicationNoHidden").val(applicationNo);
-	    identification.applicationDetail.goPage();
-	}
+	
+	function goDelete(companyNo) {
+    	identification.company.goDelete(companyNo);
+	};
 	
 	$('#pagination-demo').twbsPagination({
 	    totalPages: '${totalPage}',
 	    startPage: '${page}',
-	    visiblePages: 10,
+	    visiblePages: 30,
 	    onPageClick: function (event, page) {
 	    	$("#page").val(page);
 		    event.preventDefault();

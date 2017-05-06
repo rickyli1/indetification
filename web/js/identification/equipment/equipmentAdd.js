@@ -67,6 +67,46 @@
 				
 			});	
 			
+//			$("#groupNo").click(function(){
+//				 var selOpt = $("#subGroupNo option");  
+//				 selOpt.remove();  
+//			});
+			//LIAN DONG
+			$("#groupNo").change(function(){
+				var data = {	
+					"groupNo":$("#groupNo").val()
+				};
+				var selOpt = $("#subGroupNo option");  
+				selOpt.remove();  
+				
+				identification.ajaxNoasync("/equipment/getApplicationData", JSON.stringify(data), "json", function(res) {
+					 $("#subGroupNo").append($("<option/>").text("").attr("value",""));
+				     var jsobject='';
+					 jsobject =  res.childrenConstants;
+					 $(jsobject).each(function () {
+		                 $("#subGroupNo").append($("<option/>").text(this.constantName).attr("value",this.constantNo));
+//		                 $("#subGroupNo").val(this.constantNo); 
+		             }); 
+				});	
+			});	
+			
+			/*$("#subGroupNo").click(function(){
+				var data = {	
+					"groupNo":$("#groupNo").val()
+				};
+				var selOpt = $("#subGroupNo option");  
+				selOpt.remove();  
+				
+				identification.ajaxNoasync("/equipment/getApplicationData", JSON.stringify(data), "json", function(res) {
+					 $("#subGroupNo").append($("<option/>").text("").attr("value",""));
+				     var jsobject='';
+					 jsobject =  res.childrenConstants;
+					 $(jsobject).each(function () {
+		                 $("#subGroupNo").append($("<option/>").text(this.constantName).attr("value",this.constantNo));
+//		                 $("#subGroupNo").val(this.constantNo); 
+		             }); 
+				});	
+			});	*/
 			//申请保存
 //	        $("#saveEquipmentBtn").click(function() {
 //	        	var saveData = that.getSaveData();

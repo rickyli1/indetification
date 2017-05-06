@@ -141,7 +141,7 @@
                 <label class="col-md-1 control-label" for="applicationDate">申请日期</label>
                  <div class="col-md-3">
                     <span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDate" data-link-format="yyyy-mm-dd">
-                    <input class="form-control"  type="text" value="" >
+                    <input class="form-control" type="text" value="" >
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </span>
 				     <input type="hidden" id="applicationDate" value="" />
@@ -232,7 +232,7 @@
 
      </div> 	
  
-    <div class="modal-backdrop fade in" style="display:none" id="loading">
+    <div class="modal-backdrop fade in" style="display:none; z-index:10000" id="loading">
 		  <div class="loading"></div>  
 	 </div>
 	 
@@ -268,7 +268,8 @@
 	<input type="radio" name="isReform{{= no}}" value="0">无整改
 	</td>	
 	<td>
-	<span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="timeLimit{{= no}}" data-link-format="yyyy-mm-dd">
+
+	<span class="input-group date form_year" data-date=""  data-date-format="yyyy" data-link-format="yyyy" data-link-field="timeLimit{{= no}}">
 	<input class="form-control"  type="text" value="" >
 	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 	</span>
@@ -295,5 +296,3 @@
    identification.applicationAdd = new Identification.application.Add();
 </script>
 </html>
-		
-		

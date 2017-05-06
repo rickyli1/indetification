@@ -145,6 +145,18 @@ identification.initCalendarByClass = function(form_datetime, form_date, form_tim
 	    });
 };		
 	
-
+//init calendar yyyy
+identification.initCalendarYYYYByClass = function(form_year){	
+	$('.'+form_year).datetimepicker({
+	    format: 'yyyy',  
+	     weekStart: 1,  
+	     autoclose: true,  
+	     startView: 4,  
+	     minView: 4,  
+	     forceParse: 0,  
+	     language: 'zh-CN'     
+	});
+	
+};	
 	
 })(jQuery);

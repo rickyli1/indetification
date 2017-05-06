@@ -84,7 +84,7 @@
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	            </div> 
 	             <div class="col-md-1" style="float:right;">
-	            	<button id="exportBtn" class="btn btn-primary">导出</button>
+	            	<button id="exportBtn" class="btn btn-primary">报告导出</button>
 	            </div> 
             </fieldset>  		  
 	       	<div id="equipmentResultList">
@@ -98,7 +98,7 @@
 <!-- yangqi     -->
  <div id="searchCondition">
  	<input type="hidden" id="page" value="30"/>
- 	<input type="hidden" id="companyNameHide" value=""/>
+ 	<input type="hidden" id="equipmentNameHide" value=""/>
  	<input type="hidden" id="groupNoHide" value=""/>
  	<input type="hidden" id="subGroupNoHide" value=""/>
  	<input type="hidden" id="repairLevelHide" value=""/>

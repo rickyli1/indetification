@@ -25,10 +25,12 @@
 				location.href="/equipment/exportEquipmentList";    
 				
 			});	
+			
+			
 		},
 		// 设置参数隐藏域
 		setSearchParam: function() {
-			$("#companyNameHide").val($("#companyName").val());
+			$("#equipmentNameHide").val($("#equipmentName").val());
 			$("#groupNoHide").val($("#groupNo").val());
 			$("#subGroupNoHide").val($("#subGroupNo").val());
 			$("#repairLevelHide").val($("#repairLevel").val());
@@ -38,7 +40,7 @@
 		getSearchConditions: function() {
 			var data = {	
 				"page":$("#page").val(),
-				"companyName": $("#companyNameHide").val(),
+				"equipmentName": $("#equipmentNameHide").val(),
 				"groupNo":$("#groupNoHide").val(),
 				"subGroupNo":$("#subGroupNoHide").val(),
 				"repairLevel":$("#repairLevelHide").val(),

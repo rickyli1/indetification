@@ -39,10 +39,13 @@
               <div class="form-group">
 				 
                 <!-- 结果 -->
-                 <label class="col-md-1 control-label" for="result">申请结果</label>
+                 <label class="col-md-1 control-label" for="resultCon">申请结果</label>
                  <div class="col-md-2">                
-					<input type="radio" id="resultCon" name="resultCon" value="1" >合格
-					<input type="radio" name="resultCon" value="0">不合格
+					<select  class="form-control" id="resultCon">
+						<option selected value=""></option>
+						<option value="1">合格</option>
+						<option value="0">不合格</option>
+					</select>
                  </div>
                 <!-- 修理级别 -->
                  <label class="col-md-1 control-label" for="repairLevel">修理级别</label>
@@ -62,13 +65,13 @@
                     	<input class="form-control" size="4" type="text" value="">
                     	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </span>
-	            <div class="col-md-3" style="float:right;margin-right:-193px;">
+                </div>
+                <div class="col-md-1" style="float:right">
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	            </div>
-                </div>
                 <input type="hidden" id="limitDate" value="" />
                 
-             <fieldset style="margin-top:10px">
+             <fieldset style="margin-top:10px;display:none" hidden>
              	<!-- 申请日期条件，客户说去掉，暂时隐藏 -->
                 <div class="form-group" hidden>
                  <label class="col-md-1 control-label" for="applicationDate">申请日期</label>

@@ -18,7 +18,8 @@
                 <div class="form-group">
                   <div class="col-md-1">
                   <button type="button" class="btn btn-primary btn-sm" id="saveEquipmentBtn">保存设备</button>
-                  </div>                  
+                  </div> 
+                  <label class="col-md-2 control-label" for="TIP">排序只能录入数字</label>                 
                </div>  
             </fieldset>   
            <fieldset>
@@ -41,16 +42,15 @@
                  <label class="col-md-1 control-label" for="company">专业类别</label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="subGroupNo">
-					 <option selected value=""></option>				
-					    <c:forEach var="constant" items="${constantsChild}" varStatus="status">
-						  <option value="${constant.constantNo}">${constant.constantName}</option>
-					  </c:forEach>					 
+						<option selected value=""></option>			
 					</select>
                  </div>    
                  <label class="col-md-1 control-label" for="company">排序</label>
-                   <div class="col-md-2">   
-			             <input class="form-control" value ="" id="sort"/>
-			     </div> 
+                 <div class="col-md-2">   
+			             <input class="form-control" value ="" id="sort"  onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');"/>
+			     </div>
+			  </div>  
+			  <div class="form-group">  
 			     <label class="col-md-1 control-label" for="company">备注</label>
 			 	   <div class="col-md-2">   
 			            <input class="form-control" type="text" id="remark"/>
@@ -120,5 +120,3 @@
    identification.equipment = new Identification.equipment.Add();
 </script>
 </html>
-		
-		

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,6 +92,9 @@ public class EquipmentController {
 		
 		equipment.setStartNo(PageUtil.getStartNo(equipment.getPage(), Constant.PAGE_SIZE));
 		equipment.setPageSize(Constant.PAGE_SIZE);
+		if(!StringUtils.isEmpty(equipment.getEquipmentName())){
+			equipment.setEquipmentName("%"+equipment.getEquipmentName()+"%");
+		}
 		// 设定专家姓名检索条件
 //		this.setExpertNameCon(equipment);
 		int totalCount = equipmentService.selectEquipmentResultCount(equipment);
@@ -117,7 +121,7 @@ public class EquipmentController {
 		
 		try {
 			//模拟数据库取值
-			List<EquipmentResult> list = equipmentService.searchEquipmentList(null);
+			List<EquipmentResult> list = equipmentService.exportEquipmentList(null);
 			
 			//导出Excel文件数据
 			PoiExportService util = new PoiExportService();
@@ -155,33 +159,37 @@ public class EquipmentController {
         constantModel.setConstantType(Constant.PARENT_TYPE);
         model.addAttribute("constants", constantService.findConstantList(constantModel));
         
-        ConstantModel constantModel2 = new ConstantModel();
-        constantModel2.setConstantType(Constant.CHILDREN_TYPE);
-        model.addAttribute("constantsChild", constantService.findConstantList(constantModel2));
+//        ConstantModel constantModel2 = new ConstantModel();
+//        constantModel2.setConstantType(Constant.CHILDREN_TYPE);
+//        model.addAttribute("constantsChild", constantService.findConstantList(constantModel2));
 		
 		return "/equipment/add";
 	}
 	
 	@ResponseBody
 	@RequestMapping("/getApplicationData")
-	public EqupmentRequstModel getApplicationData(Model model) {
+	public EqupmentRequstModel getApplicationData(Model model, @RequestBody EquipmentModel equipment) {
 		EqupmentRequstModel  result = new EqupmentRequstModel();
-		//取得修理级别
-		ConstantModel constant = new ConstantModel();
-		constant.setConstantType(Constant.REPAIR_LEVEL);
-		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
-		
-	    ConstantModel constantModel = new ConstantModel();
-        constantModel.setConstantType(Constant.PARENT_TYPE);
-        List<ConstantModel> parentConstants = constantService.findConstantList(constantModel);
+//		//取得修理级别
+//		ConstantModel constant = new ConstantModel();
+//		constant.setConstantType(Constant.REPAIR_LEVEL);
+//		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
+//		
+//	    ConstantModel constantModel = new ConstantModel();
+//        constantModel.setConstantType(Constant.PARENT_TYPE);
+//        List<ConstantModel> parentConstants = constantService.findConstantList(constantModel);
         
         ConstantModel constantModel2 = new ConstantModel();
         constantModel2.setConstantType(Constant.CHILDREN_TYPE);
-        List<ConstantModel> childrenConstants = constantService.findConstantList(constantModel2);
-		
-		result.setChildrenConstants(childrenConstants);
-		result.setParentConstants(parentConstants);
-		result.setRepairLevels(repairLevelList);
+        if(!StringUtils.isEmpty(equipment.getGroupNo())){
+        	constantModel2.setParentNo(equipment.getGroupNo());
+        	List<ConstantModel> childrenConstants = constantService.findConstantList(constantModel2);
+            model.addAttribute("constantsChild", childrenConstants);
+    		result.setChildrenConstants(childrenConstants);
+        }
+        
+//		result.setParentConstants(parentConstants);
+//		result.setRepairLevels(repairLevelList);
 		
 		return result;
 	}

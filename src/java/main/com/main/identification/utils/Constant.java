@@ -68,6 +68,20 @@ public class Constant {
 
 	public static final String RESULT = "合格";
 	
+
+	public static final String RESULT_FLAG_FALSE = "0";
+	
+
+	public static final String RESULT_FLAG_TRUE = "1";
+	
+	/**
+	 * import flag
+	 */
+	public static final String ORIGIN_FLAG_IMPORT = "0"; 
+	
+
+	public static final String ORIGIN_FLAG_CREATE = "1";
+	
 	/**
 	 * 
 	 */

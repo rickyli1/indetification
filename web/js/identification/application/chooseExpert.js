@@ -28,13 +28,20 @@
 						
 						if(experts == "") {
 							experts = experts + tempExpert;
-							expertIds = expertIds + $(this).attr("data-expertNo");
+							
+							if($(this).attr("data-expertNo") != expertLeader.attr("data-id")) {
+								expertIds = ";" + expertIds + $(this).attr("data-expertNo");
+							}
+							
 						}else {
 							experts =  experts + "," +tempExpert;
-							expertIds = expertIds + "," +$(this).attr("data-expertNo");							
+							
+							if($(this).attr("data-expertNo") != expertLeader.attr("data-id")) {
+								expertIds = expertIds + ";" +$(this).attr("data-expertNo");				
+							}
 						}
 					});
-					
+					expertIds = expertIds + ";" ;
 					//save data
 					$("#expert").val(experts);
 					$("#expertsNo").val(expertIds);
@@ -88,6 +95,18 @@
 					selectBtn.attr("id", "selectBtn"+list[i].expertNo);
 					selectBtn.attr("data-id" , list[i].expertNo);
 					selectBtn.text("选中");
+					
+					var selectExpertTD = $(".selectExpert");
+					if(selectExpertTD && selectExpertTD.length > 0) {
+						selectExpertTD.each(function(n, item) {
+							if($(item).attr("data-id") == list[i].expertNo) {
+								selectBtn.attr("disabled", true);
+							}
+						}); 
+					}
+					
+					
+					
 					
 					//选择专家按钮
 					selectBtn.click(function() {

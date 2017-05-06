@@ -16,4 +16,20 @@ public class CompanyService {
 	public List<Company> findCompanyList(Company company) {
 		return companyRepository.selectCompanyList(company);
 	}
+	
+	public List<Company> selectCompanyResultList(Company company){
+		return companyRepository.selectCompanyResultList(company);
+	}
+
+	public int selectCompanyResultCount(Company company){
+		return companyRepository.selectCompanyResultCount(company);
+	}
+	
+	public int addCompany(Company company){
+		return companyRepository.insertCompany(company);
+	}
+	
+	public int deleteCompany(Company company){
+		return companyRepository.deleteOneCompany(company);
+	}
 }

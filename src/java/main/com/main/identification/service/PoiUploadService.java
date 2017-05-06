@@ -22,7 +22,6 @@ import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.Report;
-import com.main.identification.repository.CommonRepository;
 import com.main.identification.repository.ConstantRepository;
 import com.main.identification.utils.Constant;
 import com.main.identification.utils.TimeUtils;
@@ -64,6 +63,7 @@ public class PoiUploadService {
 		application.setApplicationNo(applicationNo);
 		application.setRemark(remark);
 		application.setApplicationDate(date);
+		application.setOriginFlag(Constant.ORIGIN_FLAG_IMPORT);//導入標識
 		applicationMap.put(date, application);
 		try {
 			// create a poi workbook from the excel spreadsheet file
@@ -184,7 +184,7 @@ public class PoiUploadService {
 												report.setCompanyNo(commapny.getCompanyNo());
 												report.setEquipmentNo(equipmentNo);
 												report.setRepairLevel(levelNo);
-												report.setResult(Constant.RESULT);
+												report.setResult(Constant.RESULT_FLAG_TRUE);//0 不合格  //1 合格
 												report.setApplicationNo(applicationNo);
 												report.setRemark(remark);
 												report.setRow(row.getRowNum());
@@ -196,7 +196,8 @@ public class PoiUploadService {
 								}
 								//期限 字段值
 								if(c==6 && !StringUtils.isEmpty(value)){
-									reportMap = setReportLimit(value,reportMap,row.getRowNum());
+									String valueLimitStr = value.substring(0, 4);
+									reportMap = setReportLimit(valueLimitStr,reportMap,row.getRowNum());
 								}
 								
 								System.out.println("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);

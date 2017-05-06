@@ -1,23 +1,11 @@
 (function($) {
-	Class('Identification.application.List',{
+	Class('Identification.company.List',{
 		init:function() {
 			this.bindEvent();
 			this.initCalendar();
 		},
 		
 		initCalendar : function() {
-			
-			$('.form_year').datetimepicker({
-			    format: 'yyyy',  
-			     weekStart: 1,  
-			     autoclose: true,  
-			     startView: 4,  
-			     minView: 4,  
-			     forceParse: 0,  
-			     language: 'zh-CN' 
-			    
-			});
-			
 		    $('.form_datetime').datetimepicker({
 		        language:  'zh-CN',
 		        weekStart: 1,
@@ -54,46 +42,44 @@
 		
 		bindEvent: function() {
 			var that = this;
-			
+			$("#alertDiv").empty();
 			$("#searchBtn").click(function(){
 				$("#page").val(1);
 				that.setSearchParam();
 				that.searchList();
 			});			 
 		},
+		
+		goDelete:function(companyName) {
+			var that = this;
+			identification.ajax("/company/delete", companyName, "json", function(res) {
+				$("#alertDiv").empty();
+				$("#alertDiv").html(res);
+			});
+			that.searchList();
+		},
+		
 		// 设置参数隐藏域
 		setSearchParam: function() {
 			$("#companyNameHide").val($("#companyName").val().trim());
-			$("#equipmentNameHide").val($("#equipmentName").val().trim());
-			$("#expertNameConHide").val($("#expertNameCon").val().trim());
-			
-			$("#resultConHide").val($("#resultCon").val());
-			$("#repairLevelConHide").val($("#repairLevelCon").val());
+			$("#companyCodeHide").val($("#companyCode").val().trim());
 		},
 		// 取得隐藏域参数
 		getSearchConditions: function() {
 			var data = {	
 				"page":$("#page").val(),
 				"companyName": $("#companyNameHide").val(),
-				"equipmentName":$("#equipmentNameHide").val(),
-				"expertNameCon":$("#expertNameConHide").val(),
-
-				"resultCon":$("#resultConHide").val(),
-				"repairLevelCon":$("#repairLevelConHide").val(),
-				"limitDateCon":$("#limitDate").val(),
-				
-				"applicationDateFrom":$("#applicationDateFrom").val().replace(/-/g,""),
-				"applicationDateTo":$("#applicationDateTo").val().replace(/-/g,"")
+				"companyCode": $("#companyCodeHide").val(),
+				"companyType": $("#companyTypeHide").val(),
 			};
 			return data;
 	    },
 		searchList : function() {
 			var that = this;
-			$("#applicationResultList").empty();
-
+			$("#companyResultList").empty();
 			var data = this.getSearchConditions();
-			identification.ajax("/application/searchList", JSON.stringify(data), "html", function(res) {
-				$("#applicationResultList").html(res);
+			identification.ajax("/company/searchList", JSON.stringify(data), "html", function(res) {
+				$("#companyResultList").html(res);
 			});
 		}
 		
