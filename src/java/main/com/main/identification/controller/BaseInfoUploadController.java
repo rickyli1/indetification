@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +41,8 @@ import com.main.identification.utils.IndentificationUtils;
  */
 @Controller
 public class BaseInfoUploadController{
+	
+	private static Logger logger = Logger.getLogger(BaseInfoUploadController.class); 
 	
 	@Autowired
 	public ConstantService constantsService;
@@ -80,10 +83,10 @@ public class BaseInfoUploadController{
     @RequestMapping(value = "/upload/baseInfoUpload")
     public String upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) {
 
-        System.out.println("开始");
+    	logger.info("开始");
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
-        System.out.println(path);
+        logger.info(path);
         File targetFile = new File(path, fileName);
         if(!targetFile.exists()){
             targetFile.mkdirs();
@@ -163,12 +166,14 @@ public class BaseInfoUploadController{
             	 reportService.insertReportBatch(reportList);
             }
         } catch (Exception e) {
-        	model.addAttribute("message", "Upload failed!");
+        	logger.error("BaseInfoUploadController upload:" + e.getMessage());
             e.printStackTrace();
-            return  "/upload/upload";
-        }
-        model.addAttribute("message", "Upload sucess!");
-        return "/upload/upload";
+        	model.addAttribute("msg", "导入失败!");
+        	return "common/alert";
+		}
+        model.addAttribute("url", "upload/init");
+        model.addAttribute("msg", "导入成功！");
+		return "common/alert";
     }
     
     /**

@@ -9,7 +9,7 @@
 	</appender>
 
 	<appender name="FILE" class="org.apache.log4j.FileAppender">
-		<param name="File" value="/Users/liruiqi/Documents/log4j.log" />
+		<param name="File" value="D://log/log4j.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d - %c -%-4r [%t] %-5p %x - %m%n" />
 		</layout>
@@ -18,7 +18,7 @@
 	<logger name="com.main.training" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="FILE" /> 
 	</logger>
 
 	<logger name="com.pringframework" additivity="false">
@@ -28,21 +28,21 @@
 	</logger>
 
 	<logger name="org.apache.commons" additivity="false">
-		<level value="DEBUG" />
+		<level value="INFO" />
 		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="FILE" />
 	</logger>
 
 	<logger name="java.sql" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<!-- <appender-ref ref="FILE" />  -->
 	</logger>
 
 	<logger name="java.sql.statement" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<!-- <appender-ref ref="FILE" />  -->
 	</logger>
 
 	<logger name="java.sql.ResultSet" additivity="false">
@@ -54,7 +54,7 @@
 	<logger name="org.apache.ibatis" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="FILE" /> 
 	</logger>
 	<root>
 		<priority value="debug" />

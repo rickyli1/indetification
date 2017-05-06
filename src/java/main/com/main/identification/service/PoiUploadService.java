@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -17,6 +18,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.identification.controller.BaseInfoUploadController;
 import com.main.identification.model.Application;
 import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
@@ -29,11 +31,14 @@ import com.main.identification.utils.TimeUtils;
 @Service
 public class PoiUploadService {
 	
+	private static Logger logger = Logger.getLogger(BaseInfoUploadController.class);
+	
 	@Autowired
 	public ConstantRepository constantRepository;
 	
 	@Autowired
 	private CommonService commonService;
+
 
 	/**
 	 * 设备基础信息导入测试接口
@@ -71,7 +76,7 @@ public class PoiUploadService {
 					filename));
 			HSSFWorkbook wb = new HSSFWorkbook(fs);
 			for (int k = 0; k < wb.getNumberOfSheets(); k++) {
-				System.out.println("THE sheet number :" + k);
+				logger.info("THE sheet number :" + k);
 				HSSFSheet sheet = wb.getSheetAt(k);
 				int rows = sheet.getPhysicalNumberOfRows();
 				ConstantModel cm = new ConstantModel(); 
@@ -86,7 +91,7 @@ public class PoiUploadService {
 					HSSFRow row = sheet.getRow(r);
 					if (row != null && r>=Constant.EXCEL_START_ROW) {
 						int cells = row.getPhysicalNumberOfCells();
-						System.out.println("THE row:" + row.getRowNum() + "");
+						logger.info("THE row:" + row.getRowNum() + "");
 					
 						for (short c = 0; c < cells; c++) {
 							HSSFCell cell = row.getCell(c);
@@ -200,13 +205,13 @@ public class PoiUploadService {
 									reportMap = setReportLimit(valueLimitStr,reportMap,row.getRowNum());
 								}
 								
-								System.out.println("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);
+								logger.info("CELL col:"+ cell.getColumnIndex()+ " CELL VALUE:" + value);
 
 							}
 						}
 					}
 				}
-				System.out.println("worksheet  END :"+ k);
+				logger.info("worksheet  END :"+ k);
 			}
 			ls.add(0, parentMap);    	//常量父类
 			ls.add(1, childrenMap);     //常量子类
@@ -215,7 +220,7 @@ public class PoiUploadService {
 			ls.add(4, applicationMap);  //申请
 			ls.add(5, reportMap);       //报告
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.error("PoiUploadService failed:"+e.getMessage());
 			e.printStackTrace();
 		}
 		return ls;

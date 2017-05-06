@@ -1,6 +1,5 @@
 package com.main.identification.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.net.URLEncoder;
@@ -12,25 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.main.identification.model.ApplicationAddModel;
-import com.main.identification.model.ApplicationRequstModel;
-import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
-import com.main.identification.model.EquipmentAddModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.EquipmentResult;
 import com.main.identification.model.EqupmentRequstModel;
-import com.main.identification.model.Expert;
 import com.main.identification.service.ApplicationService;
 import com.main.identification.service.CommonService;
 import com.main.identification.service.CompanyService;
@@ -51,6 +44,9 @@ import com.main.identification.utils.TimeUtils;
 @Controller
 @RequestMapping("/equipment")
 public class EquipmentController {
+	
+	private static Logger logger = Logger.getLogger(BaseInfoUploadController.class); 
+	
 	@Autowired
 	public ApplicationService applicationBo;
 	
@@ -115,7 +111,7 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value ="/exportEquipmentList")
 	public  String  ajaxUploadExcel(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		System.out.println("通过 jquery.form.js 提供的ajax方式导出文件！");
+		logger.info("通过 jquery.form.js 提供的ajax方式导出文件！");
 		OutputStream os = null;  
 		Workbook wb = null;    //工作薄
 		
@@ -139,6 +135,7 @@ public class EquipmentController {
 //		
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("ajaxUploadExcel failed:" + e.getMessage());
 		}
 		finally{
 			os.flush();
