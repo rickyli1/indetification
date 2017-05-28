@@ -103,7 +103,12 @@
 		<div class="row">
 		  <label class="col-md-2 control-label" for="modifyCompany" style="margin-top:8px;margin-left:13px;font:message-box">所在单位</label>
 	      <div class="col-md-3">
-	        <input type="text" class="form-control" id="modifyCompany"/>
+	        <select  class="form-control" id="modifyCompany">
+				<option selected value=""></option>				
+				<c:forEach var="modifyCompany" items="${modifyCompanys}" varStatus="status">
+					<option value="${modifyCompany.companyNo}">${modifyCompany.companyName}</option>
+				</c:forEach>					 
+			</select>
 	      </div>
 	    </div>
 	        

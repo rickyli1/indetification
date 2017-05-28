@@ -44,8 +44,8 @@
 					                <td>${apply.equipmentName}</td>
 					                <td>${apply.remark}</td>
 				                    <td>
-										<button id="deleteBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDel('${apply.equipmentNo}')">删除</button>
-					                    <button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
+					                    <button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
+					                    <button id="deleteBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDel('${apply.equipmentNo}')">删除</button>
 					                </td>
 					             </tr>
 						    </c:otherwise>   

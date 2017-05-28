@@ -124,7 +124,7 @@
   <select id="selectEquipmentCount" resultType="int" parameterType="EquipmentResult">
     select 
 	  count(1)
-    from EQUIPMENT equipment
+    from EQUIPMENT e
 	<include refid="searchCondSql"/>  
   </select>
   
@@ -239,7 +239,7 @@
     <include refid="baseSearchSql"/>
     where  e.delete_flag = '0'
       <if test="equipmentName != null and equipmentName != ''">  
-        and e.`equipment_NAME` = #{equipmentName}
+        and e.`equipment_NAME` like #{equipmentName}
       </if>  
   </select>
   

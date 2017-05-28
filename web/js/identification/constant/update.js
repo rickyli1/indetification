@@ -57,6 +57,11 @@
 			$("#detailAttribute3").val(data.attribute3);
 			$("#detailConstantTypeHide").val(data.constantType);
 			$("#detailConstantNoHide").val(data.constantNo);
+			if(data.constantType=='C_TYPE'){
+				$("#detailParentNo").removeAttr("disabled");
+			}else{
+				$("#detailParentNo").attr("disabled", true);
+			}
 		},
 		
 		trimNull:function(string){

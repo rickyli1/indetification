@@ -391,7 +391,7 @@ public class PoiUploadService {
 					company.setCreateBy("-1");
 					company.setLastModifyBy("-1");
 					company.setCompanyType("0");
-					company.setCompanyCode(company.getCompanyName());
+//					company.setCompanyCode(company.getCompanyName()); // TODO
 					companyList.add(company);
 					// companyUploadService.insertCompany(em);
 				}

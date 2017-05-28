@@ -13,6 +13,7 @@ import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationDetailComp;
 import com.main.identification.model.ApplicationDetailModel;
 import com.main.identification.model.ApplicationResult;
+import com.main.identification.model.Expert;
 import com.main.identification.model.Report;
 import com.main.identification.repository.ApplicationRepository;
 import com.main.identification.repository.ConstantRepository;
@@ -129,7 +130,7 @@ public class ApplicationService {
 		
 		// 获取专家信息
 		// 给组员专家参数赋值
-		if(!compDetail.getExpertsNo().isEmpty()){
+		if(compDetail.getExpertsNo() != null && !compDetail.getExpertsNo().isEmpty()){
 			StringBuffer expertsNoStrBuf = new StringBuffer();
 			expertsNoStrBuf.append("'");
 			String[] expertsNo = compDetail.getExpertsNo().split(";");
@@ -141,7 +142,7 @@ public class ApplicationService {
 			String expertsNoCon = expertsNoStrBuf.substring(0, expertsNoStrBuf.length()-2);
 			compDetail.setExpertsCon(expertsNoCon);
 		}
-		// 这个方法取到了数据
+		// 获取专家信息数据
 		result.setExperts(expertRepository.searchAppExpertDetail(compDetail));
 		
 		// 获取设备信息 
@@ -182,10 +183,13 @@ public class ApplicationService {
 	 */
 	private String getExpertsName(ApplicationResult applicationResult){
 		String expertsName = "";
-		
+		Expert expert = new Expert();
 		// 获取组长姓名
 		if(applicationResult.getLeaderNo() != null && !applicationResult.getLeaderNo().isEmpty()){
-			expertsName = expertsName.concat(expertService.selectByExpertNo(applicationResult.getLeaderNo()).getExpertName());
+			expert = expertService.selectByExpertNo(applicationResult.getLeaderNo());
+			if(expert != null){
+				expertsName = expert.getExpertName();
+			}
 		}
 		
 		if(!expertsName.isEmpty()){
@@ -197,7 +201,10 @@ public class ApplicationService {
 			String[] namesNo = applicationResult.getExpertsNo().split(";");
 			for(int i=0;i<namesNo.length;i++){
 				if(!namesNo[i].isEmpty()){
-					expertsName = expertsName.concat(",").concat(expertService.selectByExpertNo(namesNo[i]).getExpertName());
+					expert = expertService.selectByExpertNo(namesNo[i]);
+					if(expert !=null){
+						expertsName = expertsName.concat(",").concat(expert.getExpertName());
+					}
 				}
 			}
 		}

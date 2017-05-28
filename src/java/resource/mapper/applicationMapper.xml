@@ -129,7 +129,6 @@
 	</resultMap>
 
 	<sql id="searchCondSql">
-		<where>
 			<if test="companyName != null and companyName != '' ">
 				and company.company_Name like concat('%',#{companyName},'%')
 			</if>
@@ -162,7 +161,6 @@
 			<if test="expertNameCon != null and expertNameCon != '' ">
 				and ( ${expertNameCon} )
 			</if>
-		</where>
 	</sql>
 
 	<select id="selectApplicationResultCount" resultType="int"
@@ -352,8 +350,7 @@
 		        , equ.SUB_GROUP_NO as subGroupNo
 		        , (SELECT con.CONSTANT_NAME 
 					 FROM constant con
-					where con.CONSTANT_NO = subGroupNo
-					  and con.PARENT_NO = groupNo) as subGroupName
+					where con.CONSTANT_NO = subGroupNo) as subGroupName
 				, equ.EQUIPMENT_NO
 		        , equ.EQUIPMENT_NAME
 		        , rep.REPAIR_LEVEL
@@ -371,6 +368,7 @@
 		left join equipment equ
 		       on rep.EQUIPMENT_NO = equ.EQUIPMENT_NO
 			 where rep.application_NO = #{applicationNo}
+			   and rep.DELETE_FLAG = 0
 	</select>
 	
 </mapper>

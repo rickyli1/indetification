@@ -29,14 +29,14 @@
 			var expertsList = data.expertsDetailList;
 			var equipsList = data.equipsDetailList;
 			
-			$("#detailCompanyName").text(compDetail.companyName);
+			$("#detailCompanyName").text(this.trimNull(compDetail.companyName));
 			$("#detailCompanyCode").text(this.trimNull(compDetail.companyCode));
 			$("#detailApplicationDate").text(compDetail.applicationDate);
 			$("#detailDepartment").text(this.trimNull(compDetail.department));
 			
-			$("#appFile").text(compDetail.appFileName);
+			$("#appFile").text(this.trimNull(compDetail.appFileName));
 			$("#appFile").attr("href", "fileDownload/"+compDetail.appFileNo);
-			$("#resultFile").text(compDetail.resultFileName);
+			$("#resultFile").text(this.trimNull(compDetail.resultFileName));
 			$("#resultFile").attr("href", "fileDownload/"+compDetail.resultFileNo);
 			
 			// 专家信息List
@@ -125,7 +125,7 @@
 					}
 					
 					resultTD.text(equipsList[i].result);
-					isReformTD.text(equipsList[i].isReform);
+					isReformTD.text(this.trimNull(equipsList[i].isReform));
 					timeLimitTD.text(equipsList[i].timeLimit);
 					remarkTD.text(equipsList[i].remark);
 					

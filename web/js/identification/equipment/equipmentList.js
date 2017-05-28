@@ -18,8 +18,6 @@
 				that.searchList();
 			});	
 			
-			
-			
 		},
 		goDel:function(equipmentNo) {
 			var that = this;

@@ -138,6 +138,10 @@ public class ExpertController {
 		expert.setPageSize(1);
 		List<Expert> resultList = expertService.selectExpertForApplication(expert);
 		
+//		Company company = new Company();
+//		company.setCompanyType(Constant.COMPANY_FACTORY_TYPE);
+//		model.addAttribute("updateCompanys", companyService.findCompanyList(company));
+		
 		if(!resultList.isEmpty()){
 			return resultList.get(0);
 		}else{

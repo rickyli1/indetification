@@ -67,10 +67,11 @@
 
 	    	//expert
 	    	expert.expertName = $("#modifyExpertName").val();
-	    	expert.companyNo = this.getSelectId($.trim($("#modifyCompany").val()),
-	    			$("#modifyCompanySelect option").map(function(){return $(this).text();}).get(), 
-	    			$("#modifyCompanySelect option").map(function(){return $(this).val();}).get());
-	    	expert.companyNo = $("companyNoHide").val();//TODO
+//	    	expert.companyNo = this.getSelectId($.trim($("#modifyCompany").val()),
+//	    			$("#modifyCompanySelect option").map(function(){return $(this).text();}).get(), 
+//	    			$("#modifyCompanySelect option").map(function(){return $(this).val();}).get());
+	    	expert.companyNo = $("#modifyCompany").val(),
+//	    	expert.companyNo = $("companyNoHide").val();//TODO
 	    	expert.profession = $("#modifyProfession").val();
 	    	expert.professionalTitle = $("#modifyProfessionalTitle").val();
 	    	expert.remark = $("#modifyRemark").val();
@@ -87,7 +88,7 @@
 			$("#modifyProfessionalTitle").val(this.trimNull(data.professionalTitle));
 			$("#modifyRemark").val(this.trimNull(data.remark));
 			$("#expertNoHide").val(data.expertNo);
-			$("#companyNoHide").val(data.companyNo);//TODO
+//			$("#companyNoHide").val(data.companyNo);//TODO
 		},
 		
 	    getSelectId : function(name,  arrayName, arrayId) {
