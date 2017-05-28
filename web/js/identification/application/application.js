@@ -95,7 +95,14 @@
 			identification.ajax("/application/searchList", JSON.stringify(data), "html", function(res) {
 				$("#applicationResultList").html(res);
 			});
-		}
+		},
+		goDelete:function(reportNo) {
+			var that = this;
+			identification.ajax("/application/delete", reportNo, "html", function(res) {
+				$("#alertDiv").empty();
+				$("#alertDiv").html(res);
+			});
+		},
 		
 	});
  

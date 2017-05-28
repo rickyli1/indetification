@@ -60,7 +60,7 @@
                  
 				<!-- 有效期 -->
                 <label for="limitDate" class="col-md-1 control-label">有效期</label>
-                <div class="input-group col-md-2">
+                <div class="col-md-2">
                 	<span class="input-group date form_year" data-date="" data-date-format="yyyy" data-link-field="limitDate" data-link-format="yyyy">
                     	<input class="form-control" size="4" type="text" value="">
                     	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -124,7 +124,7 @@
 	      </div>
       </div>
       </div>
-
+ <div id="alertDiv"></div>
 <!-- yangqi     -->
  <div id="searchCondition">
  	<input type="hidden" id="page" value="1"/>

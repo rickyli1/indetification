@@ -29,7 +29,7 @@ public interface EquipmentRepository {
 
 	public int batchAddEquipmentModel(List<EquipmentModel> equipmentList);
 
-	public List<EquipmentModel> selectEquipmentList(EquipmentModel equipmentModel);
+	public List<EquipmentResult> selectEquipmentList(EquipmentResult equipmentModel);
 
 	public int selectEquipmentResultCount(EquipmentResult equipment);
 	
@@ -41,5 +41,9 @@ public interface EquipmentRepository {
 
 	public List<EquipmentResult> searchEquipmentListExport(
 			EquipmentResult equipment);
+
+	public List<EquipmentModel> findEquipmentList(EquipmentModel equipmentModel);
+
+	public EquipmentResult selectEquipmentInfoByNo(String equipmentNo);
 
 }

@@ -24,6 +24,9 @@ public class Application extends BaseModel implements Serializable {
 	private String createBy;       //创建人
 	private String  lastModifyBy;  //最后修改人
 	
+	private String companyName;
+	private String expertsName;
+	
 	public String getDeleteFlag() {
 		return deleteFlag;
 	}
@@ -143,6 +146,21 @@ public class Application extends BaseModel implements Serializable {
 
 	public void setExpertsNo(String expertsNo) {
 		this.expertsNo = expertsNo;
-	}	
-	
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getExpertsName() {
+		return expertsName;
+	}
+
+	public void setExpertsName(String expertsName) {
+		this.expertsName = expertsName;
+	}
 }

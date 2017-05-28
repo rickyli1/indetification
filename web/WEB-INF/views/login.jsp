@@ -29,9 +29,8 @@
 </head>
 <body onload='document.loginForm.username.focus();' style="background:url(/images/7.jpg)no-repeat;background-size:100%">
  <div class="container">
-	<div class="panel panel-primary" style="width:443px;margin: 100px auto;">
-	  <div class="panel-heading">请登陆系统</div>
-	  <div class="panel-body"> 
+	<div  style="width:443px;margin: 100px auto;">
+	  <div> 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
@@ -78,4 +77,5 @@
 </div>	
  
 </body>
+
 </html>

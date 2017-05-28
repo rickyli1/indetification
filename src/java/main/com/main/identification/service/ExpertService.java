@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.identification.repository.ExpertRepository;
+import com.main.identification.utils.Constant;
 import com.main.identification.model.Expert;
 
 /**
@@ -18,6 +19,8 @@ import com.main.identification.model.Expert;
 public class ExpertService {
 	@Autowired
 	private ExpertRepository expertRepository;
+	@Autowired
+	private CommonService commonService;
 	
 	/**
 	 * 申请查询
@@ -55,5 +58,22 @@ public class ExpertService {
 	 */
 	public List<Expert> selectExpertForApplication(Expert expert){
 		return expertRepository.selectExpertForApplication(expert);
-	}		
+	}
+
+	public int addExpert(Expert expert) {
+		expert.setExpertNo(Constant.EXPERT_FLAG+ String.valueOf(commonService.createSequenceId(Constant.EXPERT_SEQ)));
+		expert.setDeleteFlag("0");
+		expert.setCreateBy("-1");//TODO
+		expert.setLastModifyBy("-1");//TODO
+		return expertRepository.insertExpert(expert);
+	}
+	
+	public int deleteUpdateExpert(Expert expert){
+		return expertRepository.delUpdateExpert(expert);
+	}
+	
+	public int modifyExpert(Expert expert){
+		expert.setLastModifyBy("-1");//TODO
+		return expertRepository.updateExpert(expert);
+	}
 }

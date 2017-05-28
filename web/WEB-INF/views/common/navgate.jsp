@@ -91,26 +91,11 @@
 			  }
 			
 </style>
-<!--<div><img alt="" src="/images/ban2.jpg" style="width:100%;height:100%"></div> -->
+<div><img alt="" src="/images/ban2.jpg" style="width:100%;height:50%"></div>
 <nav class="navbar navbar-default" role="navigation">
    <div class="container">
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav">
-         <!--<li class="active">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">User <span class="caret"></span></a>
-           <ul class="dropdown-menu" role="menu">
-             <li><a href="#">User</a></li>
-             <li><a href="/adminUser/list">设备管理</a></li>
-           </ul>		            
-         </li>-->
-        
-         <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.base"/> <span class="caret"></span></a>
-           <ul class="dropdown-menu" role="menu">
-              <li><a href="/upload/init"><spring:message code="lable.upload"/></a></li>
-           </ul>
-         </li>         
-         
          <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.application.search"/> <span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
@@ -120,7 +105,7 @@
          </li>
          <li>  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.equipment.search"/> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-             <li><a href="/equipment/init"><spring:message code="lable.equipment.search"/></a></li>
+              <li><a href="/equipment/initEquipment"><spring:message code="lable.equipment.search"/></a></li>
              <li><a href="/equipment/addInit"><spring:message code="lable.equipment.add"/></a></li>
            </ul>
          </li>
@@ -130,9 +115,33 @@
              <li><a href="/company/addInit"><spring:message code="lable.company.add"/></a></li>
            </ul>
          </li>
-         <li><a href="#/expert"><spring:message code="lable.expert"/></a></li>
+		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.expert"/><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+             <li><a href="/expert/init">专家信息</a></li>
+             <li><a href="/expert/addInit">新增专家</a></li>
+           </ul>
+		</li>
+        
+         <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.statistics"/> <span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+                <li><a href="/equipment/init"><spring:message code="lable.equipment.statistics"/></a></li>
+           </ul>
+         </li>             
         
        </ul>
+        <a href="/j_spring_security_logout" role="button" class="btn btn-primary btn-sm navbar-right" style="margin-top:6px;margin-right:50px">退出</a>      
+        <ul class="nav navbar-nav navbar-right">
+           <li>  
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">       
+                <span class="glyphicon glyphicon-cog navbar-right" style="color: #F5F5DC; margin-right:10px" aria-hidden="true">
+                </span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                <li><a href="/upload/init"><spring:message code="lable.upload"/></a></li>
+                </ul>
+         </li>
+    </ul>
      </div><!--/.nav-collapse -->
    </div>
 </nav>

@@ -28,6 +28,7 @@
                  <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
                  <div class="col-md-2">                
                     <input class="form-control" id="equipmentName" type="text"/>
+                    <input type="hidden" id="equipmentNo" value=""/>
                  </div>  
                  <label class="col-md-1 control-label" for="company">专业</label>
                  <div class="col-md-2">                
@@ -120,3 +121,5 @@
    identification.equipment = new Identification.equipment.Add();
 </script>
 </html>
+		
+		

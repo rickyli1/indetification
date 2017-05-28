@@ -16,10 +16,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.main.identification.model.ApplicationAddModel;
+import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.EquipmentResult;
@@ -82,6 +85,25 @@ public class EquipmentController {
 		
 		return "/equipment/search";
 	}
+	
+	@RequestMapping("/initEquipment")
+	public String initEquipment(Model model, Principal principal) {
+	    ConstantModel constantModel = new ConstantModel();
+        constantModel.setConstantType(Constant.PARENT_TYPE);
+        model.addAttribute("constants", constantService.findConstantList(constantModel));
+        
+        ConstantModel constantModel2 = new ConstantModel();
+        constantModel2.setConstantType(Constant.CHILDREN_TYPE);
+        model.addAttribute("constantsChild", constantService.findConstantList(constantModel2));
+			
+    	ConstantModel constant = new ConstantModel();
+		constant.setConstantType(Constant.REPAIR_LEVEL);
+		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
+		model.addAttribute("repairLevelList",repairLevelList);
+		
+		return "/equipment/searchEquipment";
+	}
+	
 
 	@RequestMapping(value ="/searchEquipmentList")
 	public String getApplicationList(Model model,@RequestBody EquipmentResult equipment) {
@@ -101,6 +123,32 @@ public class EquipmentController {
 		model.addAttribute("equipmentResultList", equipmentService.searchEquipmentList(equipment));
 		
 		return "equipment/list";
+	}
+	
+	/**
+	 * 用于单表查询
+	 * @param model
+	 * @param equipment
+	 * @return
+	 */
+	@RequestMapping(value ="/findEquipmentList")
+	public String findApplicationList(Model model,@RequestBody EquipmentResult equipment) {
+		
+		equipment.setStartNo(PageUtil.getStartNo(equipment.getPage(), Constant.PAGE_SIZE));
+		equipment.setPageSize(Constant.PAGE_SIZE);
+		if(!StringUtils.isEmpty(equipment.getEquipmentName())){
+			equipment.setEquipmentName("%"+equipment.getEquipmentName()+"%");
+		}
+		// 设定专家姓名检索条件
+//		this.setExpertNameCon(equipment);
+		int totalCount = equipmentService.selectEquipmentCount(equipment);
+		model.addAttribute("totalPage", PageUtil.getTotalPage(totalCount, Constant.PAGE_SIZE));
+		model.addAttribute("pageSize", Constant.PAGE_SIZE);
+		model.addAttribute("page", equipment.getPage());
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("equipmentResultList", equipmentService.findEquipmentList2(equipment));
+		
+		return "equipment/listEquipment";
 	}
 	
 	/**
@@ -162,6 +210,23 @@ public class EquipmentController {
 		
 		return "/equipment/add";
 	}
+	
+	@RequestMapping("/updateInit/{equipmentNo}")
+	public String updateInit(Model model,@PathVariable String equipmentNo) {
+		
+		EquipmentResult equipment =  equipmentService.selectEquipmentInfoByNo(equipmentNo);
+		
+		ConstantModel constantModel = new ConstantModel();
+        constantModel.setConstantType(Constant.PARENT_TYPE);
+        model.addAttribute("constants", constantService.findConstantList(constantModel));
+        model.addAttribute("equipment", equipment);
+        
+        ConstantModel constantModel2 = new ConstantModel();
+        constantModel2.setConstantType(Constant.CHILDREN_TYPE);
+        model.addAttribute("constantsChild", constantService.findConstantList(constantModel2));
+		
+		return "/equipment/update";
+	}	
 	
 	@ResponseBody
 	@RequestMapping("/getApplicationData")
@@ -229,4 +294,44 @@ public class EquipmentController {
 	}
 
 	
+	
+	@RequestMapping("/deleteEquipment")
+	public String deleteEquipment(Model model, @RequestBody String equipmentNo) {
+		EquipmentModel equipmentModel = new EquipmentModel();
+		// 执行删除
+		int result = -1;
+		if(equipmentNo != null && !"".equals(equipmentNo)){
+			//软删除数据
+			equipmentModel.setDeleteFlag(Constant.DELETE_FLAG_TRUE);
+			equipmentModel.setLastModifyBy("-1");
+			equipmentModel.setEquipmentNo(equipmentNo);
+			result = equipmentService.updateEquipment(equipmentModel);
+		}
+		if (result > 0) {
+			model.addAttribute("msg", "删除设备成功!");
+		} else {
+			model.addAttribute("msg", "删除设备失败!");
+		}
+
+		model.addAttribute("url", "equipment/initEquipment");
+
+		return "common/alert";
+	}
+	
+	@RequestMapping("/updateEquipment")
+	public String updateEquipment(Model model, @RequestBody EquipmentModel equipmentModel) {
+		int result = -1;
+		if(equipmentModel != null && !"".equals(equipmentModel.getEquipmentNo())){
+			equipmentModel.setLastModifyBy("-1");
+			result = equipmentService.updateEquipment(equipmentModel);
+		}
+		if (result > 0) {
+			model.addAttribute("msg", "更新设备成功!");
+		} else {
+			model.addAttribute("msg", "更新设备失败!");
+		}
+		model.addAttribute("url", "equipment/initEquipment");
+
+		return "common/alert";
+	}
 }

@@ -27,6 +27,10 @@ public class ReportService {
 		return reportRepository.deleteReport(report);
 	}
 	
+	public int deleteUpdateReport(Report report){
+		return reportRepository.delUpdateReport(report);
+	}
+	
 	public int insertReportBatch(List<Report> list){
 		return reportRepository.insertReportBatch(list);
 	}

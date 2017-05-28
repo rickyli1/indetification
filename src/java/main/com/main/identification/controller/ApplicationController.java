@@ -28,12 +28,14 @@ import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.model.EquipmentModel;
 import com.main.identification.model.Expert;
+import com.main.identification.model.Report;
 import com.main.identification.model.UploadFileBaseModel;
 import com.main.identification.service.ApplicationService;
 import com.main.identification.service.CompanyService;
 import com.main.identification.service.ConstantService;
 import com.main.identification.service.EquipmentService;
 import com.main.identification.service.ExpertService;
+import com.main.identification.service.ReportService;
 import com.main.identification.service.UploadFileService;
 import com.main.identification.utils.Constant;
 import com.main.identification.utils.PageUtil;
@@ -66,6 +68,9 @@ public class ApplicationController {
 	@Autowired
 	public UploadFileService uploadFileService;
 	
+	@Autowired
+	public ReportService reportService;
+	
 	@RequestMapping("/init")
 	public String init(Model model, Principal principal) {
 		
@@ -74,6 +79,7 @@ public class ApplicationController {
 		constant.setConstantType(Constant.REPAIR_LEVEL);
 		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
 		model.addAttribute("repairLevels", repairLevelList);
+		model.addAttribute("page", 0);
 		
 		return "/application/search";
 	}
@@ -128,16 +134,8 @@ public class ApplicationController {
 	
 	@RequestMapping("/addInit")
 	public String addInit(Model model) {
-		Company company = new Company();
-		company.setCompanyType(Constant.COMPANY_FACTORY_TYPE);
-        model.addAttribute("companys", companyService.findCompanyList(company));
-        
-		//取得专家List
-		Expert expertCon = new Expert();
-		List<Expert> expertList = expertBo.selectExpert(expertCon);
-		model.addAttribute("experts", expertList);
-		
-		
+		initApplicationModifyInfo(model);
+
 		return "/application/add";
 	}
 	
@@ -223,6 +221,31 @@ public class ApplicationController {
 		}
 	}
 	
+	@RequestMapping("/updateInit/{id}")
+	public String updateInit(Model model,@PathVariable String id) {
+		ApplicationAddModel app = applicationBo.selectApplicationInfoByNo(id);
+		model.addAttribute("app", app.getApplication());
+		model.addAttribute("reports", app.getReports());
+		
+		initApplicationModifyInfo(model);
+		return "/application/update";
+	}	
+	
+	@RequestMapping("/update")
+	public String updateApplication(Model model, @RequestBody ApplicationAddModel applicationAddModel) {
+		int result = applicationBo.updateApplicationInfo(applicationAddModel);
+		
+		 if(result > 0) {
+			 model.addAttribute("msg", "修改成功!");
+		 }else {
+			 model.addAttribute("msg", "修改失败!"); 
+		 }
+		 
+		 model.addAttribute("url", "application/init"); 
+		 
+		return "common/alert";
+	}
+	
 	@RequestMapping("/detailInit")
 	public String detailInit(Model model) {
 //		Company company = new Company();
@@ -244,5 +267,55 @@ public class ApplicationController {
 		result.put("expertsDetailList", appDetail.getExperts());
 		result.put("equipsDetailList", appDetail.getEquipments());
 		return result;
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(Model model, @RequestBody String reportNo) {
+		Report report = new Report();
+		report.setReportNo(reportNo);
+		report.setLastModifyBy("-1");// TODO
+		
+		// 执行删除
+		int reportResult = -1;
+		reportResult = reportService.deleteUpdateReport(report);
+		
+//		Application apply = new Application();
+//		apply.setApplicationNo(applyResult.getApplicationNo());
+//		apply.setLastModifyBy("-1");// TODO
+//		int applyDelResult = -1;
+//		applyDelResult = applicationBo.delUpdateApplication(apply);
+
+//		if (reportResult > 0 && applyDelResult > 0) {
+		if (reportResult > 0) {
+			model.addAttribute("msg", "【申请信息】以及【结果信息】删除成功!");
+		} else {
+			model.addAttribute("msg", "【申请信息】以及【结果信息】删除失败!");
+		}
+
+		model.addAttribute("url", "application/init");
+		
+		return "common/alert";
+	}
+	
+	private void initApplicationModifyInfo(Model model) {
+		Company company = new Company();
+		company.setCompanyType(Constant.COMPANY_FACTORY_TYPE);
+        model.addAttribute("companys", companyService.findCompanyList(company));
+        
+		//取得设备List
+		List<EquipmentModel> equipmentList = equipmentService.findEquipmentList(new EquipmentModel());
+		
+		//取得修理级别
+		ConstantModel constant = new ConstantModel();
+		constant.setConstantType(Constant.REPAIR_LEVEL);
+		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
+		
+		model.addAttribute("equipments", equipmentList);
+		model.addAttribute("repairLevels", repairLevelList);
+        
+		//取得专家List
+		Expert expertCon = new Expert();
+		List<Expert> expertList = expertBo.selectExpert(expertCon);
+		model.addAttribute("experts", expertList);
 	}
 }

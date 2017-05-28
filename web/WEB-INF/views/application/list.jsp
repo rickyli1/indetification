@@ -26,9 +26,9 @@
 		                <td>${apply.timeLimit}</td>
 		                <td>${apply.expertsName}</td>
 		                <td>
-							<c:if test="${apply.originFlag == '1'}">
-								<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDetail('${apply.applicationNo}')">详情</button>
-							</c:if>
+							<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationDetail('${apply.applicationNo}')">详情</button>
+							<button id="modifyBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationUpdate('${apply.applicationNo}')">修改</button>
+							<button id="delBtn" class="btn btn-primary" type="button" onclick="goApplicationDelete('${apply.reportNo}')">删除</button>
 		                </td>
 		              </tr>
 	            	</c:forEach>
@@ -37,24 +37,33 @@
          </div>
 		
           <div class="text-center">
-                <ul id="pagination-demo" class="pagination-sm pagination">
+                <ul id="pagination_appList" class="pagination-sm pagination">
                </ul>
           </div>
  <div id="listCondition">
  	<input type="hidden" id="applicationNoHidden" value=""/>
- </div>			
+ </div>		
+	
 <script src="/js/common/jquery/jquery-1.11.1.min.js"></script>          
 <script type="text/javascript" src="/js/common/jquery/jquery.twbsPagination.min.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
 
 	// 跳转至详情页
-	function goDetail(applicationNo) {
+	function goApplicationDetail(applicationNo) {
 	    $("#applicationNoHidden").val(applicationNo);
 	    identification.applicationDetail.goPage();
 	}
 	
-	$('#pagination-demo').twbsPagination({
+	function goApplicationUpdate(applicationNo) {
+		window.open("/application/updateInit/"+applicationNo);
+	}
+	
+	function goApplicationDelete(reportNo) {
+		identification.application.goDelete(reportNo);
+	}
+	
+	$('#pagination_appList').twbsPagination({
 	    totalPages: '${totalPage}',
 	    startPage: '${page}',
 	    visiblePages: 10,

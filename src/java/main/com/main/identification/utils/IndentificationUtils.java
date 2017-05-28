@@ -1,5 +1,6 @@
 package com.main.identification.utils;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.main.identification.model.AdminUser;
@@ -20,6 +21,16 @@ public class IndentificationUtils {
 		model.setCreateId(adminUser.getUserId());
 		model.setUpdateId(adminUser.getUserId());
 		model.setLastModifyBy(adminUser.getUserName());
+	}
+	
+	
+	public static String formatDate(String dataStr) {
+ 
+		if(StringUtils.isNotEmpty(dataStr) && StringUtils.length(dataStr)== 8) {
+			return StringUtils.substring(dataStr, 0, 4) + "-" + StringUtils.substring(dataStr, 4, 6) + "-" + StringUtils.substring(dataStr, 6, 8);
+		}
+		 
+		return "";
 	}
 	
 }

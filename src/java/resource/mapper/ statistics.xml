@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.identification.repository.StatisticsRepository">
+
+	<resultMap id="expertStatisticsMap" type="ExpertStatistics">
+		<id column="expert_no" property="expertNo"/>
+		<result column="expert_name" property="expertName"/>
+		<result column="profession" property="profession"/>
+		<result column="company_no" property="companyNo"/>
+		<result column="professional_title" property="professionalTitle"/>
+		<result column="remark" property="remark"/>
+
+        <collection property="reportList" ofType="Report" javaType="ArrayList">  
+			<id column="report_no" property="reportNo"/>
+			<result column="company_no" property="companyNo"/>
+			<result column="leader_no" property="leaderNo"/>
+			<result column="experts_no" property="expertsNo"/>
+			<result column="equipment_no" property="equipmentNo"/>
+			<result column="repair_level" property="repairLevel"/>
+			<result column="equipment_name" property="equipmentName"/>
+        </collection>  
+	</resultMap>
+	
+	<sql id="searchCondSql">
+  		<if test="expertNo != null and expertNo != '' ">
+  			and t.expert_no = #{expertNo}
+  		</if>
+  		<if test="expertName != null and expertName != '' ">
+  			and t.expert_name like concat('%',#{expertName},'%')
+  		</if>
+  		<if test="profession != null and profession != '' ">
+  			and t.profession = #{profession}
+  		</if>
+  		<if test="companyNo != null and companyNo != '' ">
+  			and t.company_no = #{companyNo}
+  		</if>
+  		<if test="professionalTitle != null and professionalTitle != '' ">
+  			and t.professional_title = #{professionalTitle}
+  		</if>	
+	</sql>
+
+	
+  <select id="findExpertStatistics" resultMap="expertStatisticsMap" parameterType="Expert">
+		select 
+			   t.EXPERT_NO 
+			 , t.EXPERT_NAME
+		     , t.PROFESSION
+		     , t.COMPANY_NO
+		     , t.PROFESSIONAL_TITLE
+		     , t.REMARK
+		     , t.create_by
+		     , t.create_time
+		     , t.last_modify_by
+		     , t.last_modify_time
+			 , report.report_no,  
+			   report.company_no,
+			   report.leader_no,
+			   report.experts_no,
+			   report.equipment_no,
+			   report.repair_level,
+			   equipment.equipment_name    
+		from expert t
+		Inner join report on  
+		(t.EXPERT_NO = report.leader_No  or   concat(';',t.EXPERT_NO,';') like report.experts_no )
+		and report.delete_flag = 0
+		Inner join equipment on report.equipment_no = equipment.equipment_no and equipment.delete_flag = 0
+
+		where t.delete_flag = '0'
+		<include refid="searchCondSql" />
+  </select>
+  
+ 
+</mapper>

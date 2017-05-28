@@ -2,6 +2,7 @@ package com.main.identification.service;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +79,13 @@ public class ApplicationService {
 	 */
 	public int deleteApplication(Application application){
 		return applicationRepository.deleteApplication(application);
+	}
+	
+	/**
+	 * @return
+	 */
+	public int delUpdateApplication(Application application){
+		return applicationRepository.delUpdateApplication(application);
 	}
 	
 	/**
@@ -197,4 +205,58 @@ public class ApplicationService {
 		return expertsName;
 	}
 
+	public ApplicationAddModel selectApplicationInfoByNo(String id) {
+		ApplicationAddModel app = applicationRepository.selectApplicationInfoByNo(id);
+		ApplicationResult applicationResult = new ApplicationResult();
+		if(app != null && app.getApplication()!=null) {
+			if(StringUtils.isNotBlank(app.getApplication().getLeaderNo())) {
+				applicationResult.setLeaderNo(app.getApplication().getLeaderNo());
+			}
+			
+			if(StringUtils.isNotBlank(app.getApplication().getExpertsNo())) {
+				applicationResult.setExpertsNo(app.getApplication().getExpertsNo());
+			}
+			
+			app.getApplication().setExpertsName(getExpertsName(applicationResult));
+			
+			if(StringUtils.isNotBlank(app.getApplication().getApplicationDate())) {
+				app.getApplication().setApplicationDate(IndentificationUtils.formatDate(app.getApplication().getApplicationDate()));
+			}
+		}
+		return app;
+	}
+
+	public int updateApplicationInfo(ApplicationAddModel applicationAddModel) {
+		Application application = applicationAddModel.getApplication();
+		List<Report> reports = applicationAddModel.getReports();
+		
+		IndentificationUtils.setUserInfo(application);
+		application.setApplicationDate(application.getApplicationDate().replaceAll("-", ""));
+		
+		//set delete report info
+		Report deleteReport = new Report();
+		deleteReport.setApplicationNo(application.getApplicationNo());
+		
+		//set insert report info 
+		for(Report report : reports) {
+			IndentificationUtils.setUserInfo(report);
+			report.setApplicationNo(application.getApplicationNo());
+			report.setCompanyNo(application.getCompanyNo());
+			report.setReportNo(Constant.REPORT_FLAG +  String.valueOf(commonService.createSequenceId(Constant.REPORT_SEQ)));	
+			report.setApplicationDate(application.getApplicationDate());
+		}
+
+		
+		//application.setOriginFlag("1");
+		
+		//update application
+		applicationRepository.updateApplication(application);
+		
+		//delete report flg = 1
+		reportRepository.removeReport(deleteReport);
+		
+		//insert report
+		int result = reportRepository.insertReportBatch(reports);
+		return result;
+	}
 }

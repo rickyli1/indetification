@@ -5,6 +5,7 @@ import java.util.List;
 import com.main.identification.model.ApplicationDetailComp;
 import com.main.identification.model.ApplicationDetailExpert;
 import com.main.identification.model.Expert;
+import com.main.identification.model.ExpertCond;
 
 /**
  * 专家Repository
@@ -47,18 +48,27 @@ public interface ExpertRepository {
 	 */
 	public List<ApplicationDetailExpert> searchAppExpertDetail(ApplicationDetailComp condition);
 
+	public List<Expert> checkExpertExistCompany(ExpertCond expert);
+	
 	/**
 	 * 专家插入
 	 * @param expert 专家信息
 	 * @return 
 	 */
-//	public int insertExpert(Expert expert);
+	public int insertExpert(Expert expert);
+	
+	/**
+	 * 删除专家
+	 * @param expert 专家信息
+	 * @return
+	 */
+	public int delUpdateExpert(Expert expert);
 
 	/**
 	 * 专家更新
 	 * @param expert 专家信息
 	 * @return 
 	 */
-//	public int updateExpert(Expert expert);
+	public int updateExpert(Expert expert);
 	
 }

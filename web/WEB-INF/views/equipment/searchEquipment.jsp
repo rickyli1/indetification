@@ -42,15 +42,6 @@
 					 <input class="form-control" type="text" id="equipmentName" name="equipmentName">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="expertNameCon">修别</label>
-                 <div class="col-md-2" style="width:180px;">                
-                     <select  class="form-control" id="repairLevel">
-					 <option selected value=""></option>				
-					    <c:forEach var="constant" items="${repairLevelList}" varStatus="status">
-						  <option value="${constant.constantNo}">${constant.constantName}</option>
-					  </c:forEach>					 
-					</select>
-                 </div>                 
               </div>
            </fieldset>  		  
 
@@ -83,12 +74,9 @@
 	            <div class="col-md-1" style="float:right;">
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	            </div> 
-	             <div class="col-md-1" style="float:right;">
-	            	<button id="exportBtn" class="btn btn-primary">导出</button>
-	            </div> 
             </fieldset>  		  
 	       	<div id="equipmentResultList">
-	       	<c:import url="/WEB-INF/views/equipment/list.jsp" charEncoding="UTF-8"></c:import>  
+	       	<c:import url="/WEB-INF/views/equipment/listEquipment.jsp" charEncoding="UTF-8"></c:import>  
 	       	</div>
       	      
 	      </div>
@@ -101,7 +89,6 @@
  	<input type="hidden" id="equipmentNameHide" value=""/>
  	<input type="hidden" id="groupNoHide" value=""/>
  	<input type="hidden" id="subGroupNoHide" value=""/>
- 	<input type="hidden" id="repairLevelHide" value=""/>
  </div>		
    
 
@@ -109,12 +96,20 @@
       
 		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
 
-	    <script type="text/javascript" src="/js/identification/equipment/equipment.js" charset="UTF-8"></script>	    
+	    <script type="text/javascript" src="/js/identification/equipment/equipmentList.js" charset="UTF-8"></script>	    
 	    <script type="text/javascript">
-	    identification.equipment = new Identification.equipment.List();
+	    identification.equipmentList = new Identification.equipmentList.List();
 
 	    function goPage() {
-	    	identification.equipment.searchList();
+	    	identification.equipmentList.searchList();
+		}
+	    
+	    function goDel(equipmentNo) {
+	    	identification.equipmentList.goDel(equipmentNo);
+		}
+	    
+	    function goEquipmentUpdate(equipmentNo) {
+			window.open("/equipment/updateInit/"+equipmentNo);
 		}
       </script>
 

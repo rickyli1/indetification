@@ -5,16 +5,23 @@
 <mapper namespace="com.main.identification.repository.EquipmentRepository">
     <sql id="baseSearchSql">
         SELECT 
-		  `EQUIPMENT_NO`, 
-		  `CREATE_BY`, 
-		  `CREATE_TIME`,
-		  `LAST_MODIFY_BY`, 
-		  `LAST_MODIFY_TIME`,
-		  `DELETE_FLAG`, 
-		  `GROUP_NO`, 
-		  `EQUIPMENT_NAME`,
-		  `SUB_GROUP_NO`
-	    FROM Equipment e
+		  e.`EQUIPMENT_NO`, 
+		  e.`CREATE_BY`, 
+		  e.`CREATE_TIME`,
+		  e.`LAST_MODIFY_BY`, 
+		  e.`LAST_MODIFY_TIME`,
+		  e.`DELETE_FLAG`, 
+		  e.`GROUP_NO`, 
+		  e.`EQUIPMENT_NAME`,
+		  e.`SUB_GROUP_NO`,
+		   cg.CONSTANT_NAME as GROUP_NAME,
+ 		   e.SUB_GROUP_NO , 
+ 		   d.CONSTANT_NAME  as SUB_GROUP_NAME 
+	       from  test.equipment e 
+		   inner join test.constant cg 
+		   on e.GROUP_NO = cg.CONSTANT_NO
+		    inner join test.constant d
+			on e.SUB_GROUP_NO = d.CONSTANT_NO 
     </sql>
     
 	<resultMap id="equipmentMap" type="EquipmentModel">
@@ -83,7 +90,16 @@
 
   <sql id="searchCondSql">
   	<where>
-  	</where>  
+      <if test="equipmentName != null and equipmentName != ''">  
+        and e.`EQUIPMENT_NAME` like #{equipmentName}
+      </if>  
+       <if test="groupNo != null and groupNo != ''">  
+        and e.`GROUP_NO` = #{groupNo}
+      </if>  
+       <if test="subGroupNo != null and subGroupNo != ''">  
+        and e.`SUB_GROUP_NO` = #{subGroupNo}
+      </if>  
+  	</where>   
   </sql>
   
   <sql id="searchCondSql2">
@@ -105,7 +121,7 @@
   	
   </sql>
   
-  <select id="selectEquipmentCount" resultType="int" parameterType="EquipmentModel">
+  <select id="selectEquipmentCount" resultType="int" parameterType="EquipmentResult">
     select 
 	  count(1)
     from EQUIPMENT equipment
@@ -221,9 +237,25 @@
 
   <select id="selectEquipmentList" resultMap="equipmentResultMap" parameterType="EquipmentModel">
     <include refid="baseSearchSql"/>
-    where  delete_flag = '0'
+    where  e.delete_flag = '0'
       <if test="equipmentName != null and equipmentName != ''">  
-        and `equipment_NAME` = #{equipmentName}
+        and e.`equipment_NAME` = #{equipmentName}
+      </if>  
+  </select>
+  
+  
+  <select id="selectEquipmentInfoByNo" resultMap="equipmentResultMap" parameterType="String">
+    <include refid="baseSearchSql"/>
+    where  e.delete_flag = '0'
+        and e.`EQUIPMENT_NO` = #{equipmentNo}
+  </select>
+  
+  
+  <select id="findEquipmentList" resultMap="equipmentMap" parameterType="EquipmentModel">
+    <include refid="baseSearchSql"/>
+    where  e.delete_flag = '0'
+      <if test="equipmentName != null and equipmentName != ''">  
+        and e.`equipment_NAME` = #{equipmentName}
       </if>  
   </select>
   
@@ -255,23 +287,28 @@
   </insert> 
   
    <update id="updateEquipment" parameterType="EquipmentModel">
-    UPDATE admin_user
+    UPDATE Equipment e
     SET  
-       admin_user_name = #{userName},
-       
-      <if test="password != null and password != ''">  
-         `password` = #{password},
+          e.LAST_MODIFY_BY = #{lastModifyBy}
+      <if test="equipmentName != null and equipmentName != ''">  
+         ,e.`EQUIPMENT_NAME` = #{equipmentName}
       </if>  
-      role_id = #{roleId},
-      role_name=#{roleName},
-       <if test="questionCategoryIds != null and questionCategoryIds != ''">  
-      question_category_id = #{questionCategoryIds},
-      user.question_category_name=#{questionCategoryNames},
+      <if test="deleteFlag != null and deleteFlag != ''">  
+	    , e.DELETE_FLAG = #{deleteFlag}
       </if>
-      `update_id` = #{updateId},
-       updateor = #{updateor},
-       update_date = now()
-    WHERE admin_user_id = #{userId}
+      <if test="groupNo != null and groupNo != ''">  
+	    , e.GROUP_NO = #{groupNo}
+      </if>
+      <if test="subGroupNo != null and subGroupNo != ''">  
+	    , e.SUB_GROUP_NO = #{subGroupNo}
+      </if>
+      <if test="remark != null and remark != ''">  
+	    , e.REMARK = #{remark}
+      </if>
+      <if test="sort != null and sort != ''">  
+	    , e.SORT = #{sort}
+      </if>
+      WHERE EQUIPMENT_NO = #{equipmentNo}
   </update>
   
 

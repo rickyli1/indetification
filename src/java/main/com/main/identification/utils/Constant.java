@@ -37,12 +37,15 @@ public class Constant {
 	 */
 	public static final String APPLICATION_FLAG = "APP_";
 	
+	/**
+	 * 专家标识
+	 */
+	public static final String EXPERT_FLAG = "EXP_";
 	
 	/**
 	 * 报告标识
 	 */
 	public static final String REPORT_FLAG = "REP_";
-	
 	
 	/**
 	 * 专业 类型
@@ -65,6 +68,8 @@ public class Constant {
 	 * 删除标识 false
 	 */
 	public static final String DELETE_FLAG_FALSE = "0";
+	
+	public static final String DELETE_FLAG_TRUE = "1";
 
 	public static final String RESULT = "合格";
 	
@@ -110,6 +115,8 @@ public class Constant {
 	public static String CHILDREN_SEQ= "ChildrenSeq";
 	
 	public static String PARENT_SEQ= "ParentSeq";
+	
+	public static String EXPERT_SEQ= "ExpertSeq";
 	
 	public static final String COMPANY_FACTORY_TYPE = "0";
 	public static final String COMPANY_EXPERT_TYPE = "1";

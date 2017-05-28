@@ -125,6 +125,12 @@
       </if>  
   </update> -->
   
+  <update id="removeReport" parameterType="Report">
+      update report
+      set delete_flag = 1
+      where application_no = #{applicationNo}
+  </update>
+  
   <delete id="deleteReport" parameterType="Report">
     delete from report
     WHERE delete_flag = 0
@@ -133,6 +139,17 @@
       </if>  
       <if test="remark != null and remark != ''">  
         and `remark` = #{remark}
+      </if>  
+  </delete>
+  
+  <delete id="delUpdateReport" parameterType="Report">
+    UPDATE report
+    SET delete_flag = 1,
+        LAST_MODIFY_BY = #{lastModifyBy},
+        LAST_MODIFY_TIME = now()
+    where delete_flag = 0
+      <if test="reportNo != null and reportNo != ''">  
+        and `report_no` = #{reportNo}
       </if>  
   </delete>
 </mapper>

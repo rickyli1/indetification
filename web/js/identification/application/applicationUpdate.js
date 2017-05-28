@@ -1,6 +1,6 @@
 (function($) {
 	
-	Class('Identification.application.Add',{
+	Class('Identification.application.Update',{
 		init:function() {
 			this.no = 0;
 			this.companyNameAry = [];
@@ -13,8 +13,32 @@
 		},
 		
 		initData: function() {
+			var that = this;
 			this.companyNameAry = $("#companySelect option").map(function(){return $(this).text();}).get();
 			this.companyIdAry = $("#companySelect option").map(function(){return $(this).val();}).get();
+			
+			this.equipmentAry =  $("#equipmentInfoSelect option").map(function(){return $(this).text();}).get();
+			this.equipmentIdAry = $("#equipmentInfoSelect option").map(function(){return $(this).val();}).get();
+			
+			
+			identification.initCalendarYYYYByClass('form_year');	
+			
+	        $( ".equipment" ).autocomplete({
+	              source: that.equipmentAry,
+	              messages: {
+	            	  noResults: '', 
+	            	  results: function(){ 		            		  
+	            	  }
+	               }	              
+	         });
+			
+			$(".deleteClass").each(function(index,elemet){
+				var removeNo = $(this).attr("data-no");
+				$(this).click(function() {
+					//that.no = that.no -1;
+					$("#tr" + removeNo).remove();
+				});
+			});			
 		},
 		
 		initCalendar : function() {
@@ -26,7 +50,7 @@
 			$("#addApplicationDetailBtn").click(function() {
 				that.equipmentAry = [];
 				that.equipmentIdAry = [];
-	            that.no = that.no +1;
+	            that.no = that.no +1 + $("#reportCountId").val();
 	            var data = {  no : that.no};
 	            var datas = {};
 	        	identification.ajaxNoasync("/application/getApplicationData", null, "json", function(res) {
@@ -55,7 +79,7 @@
 				$(".deleteClass").each(function(index,elemet){
 					var removeNo = $(this).attr("data-no");
 					$(this).click(function() {
-						that.no = that.no -1;
+						//that.no = that.no -1;
 						$("#tr" + removeNo).remove();
 					});
 				});
@@ -67,6 +91,8 @@
 	        	var saveData = that.getSaveData();
 	        	
 	        	//check save data
+	        	
+	     	   
 	     	   if(saveData.application.companyNo == "") {
 	     		   alert($("#companyLable").text() + ": " + $("#company").val() + "不存在！请核实或添加新的"+$("#companyLable").text());
 	     		   return false;
@@ -94,35 +120,11 @@
                    return false;
 	     	   }
 	     	   
-	     	   
-	     	   var checkExperts = "";
-				identification.ajaxNoasync("/expert/checkExpertExistCompany", JSON.stringify(saveData), "json", function(res) {
-					if(res && res.length > 0) {
-						for(var i = 0; i < res.length; i++) {
-							if(res[i].expertName != undefined) {
-								checkExperts = checkExperts + res[i].expertName+",";
-							}
-							
-						}
-					}
-				});		
-				
-				if(checkExperts != "") {
-					if(confirm("专家"+checkExperts+"在"+$("#companyLable").text()+$("#company").val()+"工作是否要保存申请！")){
-			        	
-			        	identification.ajax("/application/add", JSON.stringify(saveData), "html", function(res) {
-		    				$("#alertDiv").empty();
-		    				$("#alertDiv").html(res);
-						});	 
-					}
-				}else {
-		        	
-		        	identification.ajax("/application/add", JSON.stringify(saveData), "html", function(res) {
-	    				$("#alertDiv").empty();
-	    				$("#alertDiv").html(res);
-					});	 
-				}
-       	
+	        	
+	        	identification.ajax("/application/update", JSON.stringify(saveData), "html", function(res) {
+    				$("#alertDiv").empty();
+    				$("#alertDiv").html(res);
+				});	        	
 	        });		
 	        
         	
@@ -160,9 +162,12 @@
     	   app.application.appFileNo = $("#requsetFileIdHid").val(); 
     	   app.application.resultFileName = $("#resultFileNameSpan").text(); 
     	   app.application.resultFileNo = $("#resultFileIdHid").val(); 
+    	   app.application.resultFileNo = $("#resultFileIdHid").val();
     	   
     	   app.application.leaderNo = $("#leaderNo").val(); 
     	   app.application.expertsNo = $("#expertsNo").val(); 
+    	   
+    	   app.application.applicationNo = $("#applicationId").val(); 
     	   
     	   //reports
     	   $(".addTr").each(function(i,element) {
@@ -188,6 +193,7 @@
        
        getSelectId : function(name,  arrayName, arrayId) {
     	   var result = "";
+    	   
     	   
     	   for(var i = 0; i < arrayName.length; i++) {
     		   if(arrayName[i] == name) {

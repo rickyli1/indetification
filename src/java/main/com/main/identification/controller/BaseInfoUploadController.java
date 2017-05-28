@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,8 +40,6 @@ import com.main.identification.utils.IndentificationUtils;
  */
 @Controller
 public class BaseInfoUploadController{
-	
-	private static Logger logger = Logger.getLogger(BaseInfoUploadController.class); 
 	
 	@Autowired
 	public ConstantService constantsService;
@@ -83,96 +80,98 @@ public class BaseInfoUploadController{
     @RequestMapping(value = "/upload/baseInfoUpload")
     public String upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) {
 
-    	logger.info("开始");
+        System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
-        logger.info(path);
+        System.out.println(path);
         File targetFile = new File(path, fileName);
         if(!targetFile.exists()){
             targetFile.mkdirs();
         }
-        deleteAllBaseInfoData();
+//        deleteAllBaseInfoData();
         //保存
         try {
             file.transferTo(targetFile);
             List ls = poiUploadService.getExcelDate(targetFile.getAbsolutePath());
-            List<ConstantModel> constantList = new ArrayList<ConstantModel>();
-            List<Company> companyList = new ArrayList<Company>();
-            List<EquipmentModel> equipmentList = new ArrayList<EquipmentModel>();
-            List<Application> applicationList = new ArrayList<Application>();
-            List<Report> reportList = new ArrayList<Report>();
-            if(ls != null){
-            	HashMap<String, ConstantModel> parentMap = (HashMap<String, ConstantModel>) ls.get(0);
-            	 for (Map.Entry<String, ConstantModel> entry : parentMap.entrySet()) {
-            		 ConstantModel cm = entry.getValue();
-            		 cm.setCreateBy("-1");
-            		 cm.setLastModifyBy("-1");
-//            		 constantsService.addConstantModel(cm);
-            		 constantList.add(cm);
-		         }
-            	
-            	 HashMap<String, ConstantModel> childrenMap = (HashMap<String, ConstantModel>) ls.get(1);
-            	 for (Map.Entry<String, ConstantModel> entry : childrenMap.entrySet()) {
-            		 ConstantModel cm = entry.getValue();
-            		 cm.setCreateBy("-1");
-            		 cm.setLastModifyBy("-1");
-//            		 constantsService.addConstantModel(cm);
-            		 constantList.add(cm);
-		         }
-            	 
-            	 constantsService.batchAddConstantModel(constantList);
-            	 
-            	 HashMap<String, EquipmentModel> equipmentMap =  (HashMap<String, EquipmentModel>) ls.get(2);
-            	 for (Map.Entry<String, EquipmentModel> entry : equipmentMap.entrySet()) {
-            		 EquipmentModel em = entry.getValue();
-            		 em.setCreateBy("-1");
-            		 em.setLastModifyBy("-1");
-            		 equipmentList.add(em);
-//            		 equipmentService.addEquipmentModel(em);
-		         }
-            	 equipmentService.batchAddEquipmentModel(equipmentList);
-            	 //获得companymap，调用接口插入相关数据
-//            	 HashMap<String, String> companyMap =  (HashMap<String, String>) ls.get(3);
-//            	 companyUploadService.addCompanyModel(companyMap);
-            	 
-            	 
-            	 HashMap<String, Company> companyMap =  (HashMap<String, Company>) ls.get(3);
-            	 for (Map.Entry<String, Company> entry : companyMap.entrySet()) {
-            		 Company company = entry.getValue();
-            		 company.setCreateBy("-1");
-            		 company.setLastModifyBy("-1");
-            		 company.setCompanyType("0");
-            		 company.setCompanyCode(company.getCompanyName());
-            		 companyList.add(company);
-//            		 companyUploadService.insertCompany(em);
-		         }
-            	 companyUploadService.insertCompanyBatch(companyList);
-            	 
-            	 HashMap<String, Application> applicationMap =  (HashMap<String, Application>) ls.get(4);
-            	 for (Map.Entry<String, Application> entry : applicationMap.entrySet()) {
-            		 Application application = entry.getValue();
-            		 application.setCreateBy("-1");
-            		 application.setLastModifyBy("-1");
-            		 applicationService.insertApplication(application);
-		         }
-            	 
-            	 HashMap<String, Report> reportMap =  (HashMap<String, Report>) ls.get(5);
-            	 for (Map.Entry<String, Report> entry : reportMap.entrySet()) {
-            		 Report report = entry.getValue();
-            		 report.setCreateBy("-1");
-            		 report.setLastModifyBy("-1");
-            		 reportList.add(report);
-		         }
-            	 reportService.insertReportBatch(reportList);
-            }
+            
+            poiUploadService.batchExportExcelDate(ls);
+            
+//            List<ConstantModel> constantList = new ArrayList<ConstantModel>();
+//            List<Company> companyList = new ArrayList<Company>();
+//            List<EquipmentModel> equipmentList = new ArrayList<EquipmentModel>();
+//            List<Application> applicationList = new ArrayList<Application>();
+//            List<Report> reportList = new ArrayList<Report>();
+//            if(ls != null){
+//            	HashMap<String, ConstantModel> parentMap = (HashMap<String, ConstantModel>) ls.get(0);
+//            	 for (Map.Entry<String, ConstantModel> entry : parentMap.entrySet()) {
+//            		 ConstantModel cm = entry.getValue();
+//            		 cm.setCreateBy("-1");
+//            		 cm.setLastModifyBy("-1");
+////            		 constantsService.addConstantModel(cm);
+//            		 constantList.add(cm);
+//		         }
+//            	
+//            	 HashMap<String, ConstantModel> childrenMap = (HashMap<String, ConstantModel>) ls.get(1);
+//            	 for (Map.Entry<String, ConstantModel> entry : childrenMap.entrySet()) {
+//            		 ConstantModel cm = entry.getValue();
+//            		 cm.setCreateBy("-1");
+//            		 cm.setLastModifyBy("-1");
+////            		 constantsService.addConstantModel(cm);
+//            		 constantList.add(cm);
+//		         }
+//            	 
+//            	 constantsService.batchAddConstantModel(constantList);
+//            	 
+//            	 HashMap<String, EquipmentModel> equipmentMap =  (HashMap<String, EquipmentModel>) ls.get(2);
+//            	 for (Map.Entry<String, EquipmentModel> entry : equipmentMap.entrySet()) {
+//            		 EquipmentModel em = entry.getValue();
+//            		 em.setCreateBy("-1");
+//            		 em.setLastModifyBy("-1");
+//            		 equipmentList.add(em);
+////            		 equipmentService.addEquipmentModel(em);
+//		         }
+//            	 equipmentService.batchAddEquipmentModel(equipmentList);
+//            	 //获得companymap，调用接口插入相关数据
+////            	 HashMap<String, String> companyMap =  (HashMap<String, String>) ls.get(3);
+////            	 companyUploadService.addCompanyModel(companyMap);
+//            	 
+//            	 
+//            	 HashMap<String, Company> companyMap =  (HashMap<String, Company>) ls.get(3);
+//            	 for (Map.Entry<String, Company> entry : companyMap.entrySet()) {
+//            		 Company company = entry.getValue();
+//            		 company.setCreateBy("-1");
+//            		 company.setLastModifyBy("-1");
+//            		 company.setCompanyType("0");
+//            		 company.setCompanyCode(company.getCompanyName());
+//            		 companyList.add(company);
+////            		 companyUploadService.insertCompany(em);
+//		         }
+//            	 companyUploadService.insertCompanyBatch(companyList);
+//            	 
+//            	 HashMap<String, Application> applicationMap =  (HashMap<String, Application>) ls.get(4);
+//            	 for (Map.Entry<String, Application> entry : applicationMap.entrySet()) {
+//            		 Application application = entry.getValue();
+//            		 application.setCreateBy("-1");
+//            		 application.setLastModifyBy("-1");
+//            		 applicationService.insertApplication(application);
+//		         }
+//            	 
+//            	 HashMap<String, Report> reportMap =  (HashMap<String, Report>) ls.get(5);
+//            	 for (Map.Entry<String, Report> entry : reportMap.entrySet()) {
+//            		 Report report = entry.getValue();
+//            		 report.setCreateBy("-1");
+//            		 report.setLastModifyBy("-1");
+//            		 reportList.add(report);
+//		         }
+//            	 reportService.insertReportBatch(reportList);
+//            }
         } catch (Exception e) {
-        	logger.error("BaseInfoUploadController upload:" + e.getMessage());
+        	model.addAttribute("msg", "文件导入失败!");
             e.printStackTrace();
-        	model.addAttribute("msg", "导入失败!");
-        	return "common/alert";
-		}
-        model.addAttribute("url", "upload/init");
-        model.addAttribute("msg", "导入成功！");
+        }
+        model.addAttribute("msg", "文件导入成功!");
+        model.addAttribute("url", "upload/init"); 
+		 
 		return "common/alert";
     }
     

@@ -20,7 +20,16 @@ public class EquipmentService {
 	private EquipmentRepository equipmentRepository;
 
 	public List<EquipmentModel> findEquipmentList(EquipmentModel equipmentModel) {
-		return equipmentRepository.selectEquipmentList(equipmentModel);
+		return equipmentRepository.findEquipmentList(equipmentModel);
+	}
+	
+	/**
+	 * 单表查询语句
+	 * @param equipmentModel
+	 * @return
+	 */
+	public List<EquipmentResult> findEquipmentList2(EquipmentResult equipmentResult) {
+		return equipmentRepository.selectEquipmentList(equipmentResult);
 	}
 
 	public int addEquipmentModel(EquipmentModel equipment) {
@@ -51,6 +60,14 @@ public class EquipmentService {
 
 	public List<EquipmentResult> exportEquipmentList(EquipmentResult equipment) {
 		return equipmentRepository.searchEquipmentListExport(equipment);
+	}
+
+	public int updateEquipment(EquipmentModel equipmentModel) {
+		return equipmentRepository.updateEquipment(equipmentModel);
+	}
+
+	public EquipmentResult selectEquipmentInfoByNo(String equipmentNo) {
+		return equipmentRepository.selectEquipmentInfoByNo(equipmentNo);
 	}
 	
 }

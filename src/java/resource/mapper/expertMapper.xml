@@ -31,14 +31,17 @@
   			and t.expert_name like concat('%',#{expertName},'%')
   		</if>
   		<if test="profession != null and profession != '' ">
-  			and t.profession = #{profession}
+  			and t.profession like concat('%',#{profession},'%')
   		</if>
   		<if test="companyNo != null and companyNo != '' ">
   			and t.company_no = #{companyNo}
   		</if>
   		<if test="professionalTitle != null and professionalTitle != '' ">
   			and t.professional_title = #{professionalTitle}
-  		</if>	
+  		</if>
+  		<if test="companyName != null and companyName != '' ">
+  			and c.company_name like concat('%',#{companyName},'%')
+  		</if>
 	</sql>
 	
   <select id="selectByPK" resultMap="expertMap" parameterType="String">
@@ -99,6 +102,7 @@
 	select 
 		count(1)
 	from expert t
+	left join company c on t.COMPANY_NO = c.COMPANY_NO 
 	where t.delete_flag = '0'
        <include refid="searchCondSql" />
    </select>
@@ -134,4 +138,74 @@
 		where exp.EXPERT_NO in (${expertsCon})
 		</if>
   	</select>
+  	
+   <insert id="insertExpert" parameterType="Expert"  >
+	INSERT INTO Expert
+	 (
+	  `EXPERT_NO`, 
+	  `CREATE_BY`, 
+	  `LAST_MODIFY_BY`, 
+	  `DELETE_FLAG`, 
+	  `EXPERT_NAME`, 
+	  `PROFESSION`,
+	  `COMPANY_NO`,
+	  `PROFESSIONAL_TITLE`,
+	  `REMARK`,
+	  `CREATE_TIME`,
+	  `LAST_MODIFY_TIME`
+	  ) 
+    VALUES(
+    	#{expertNo},
+    	#{createBy},
+    	#{lastModifyBy},
+    	#{deleteFlag},
+    	#{expertName},
+    	#{profession},
+    	#{companyNo},
+    	#{professionalTitle},
+    	#{remark},
+    	now(),
+    	now()
+    )
+  </insert>
+  
+  <update id="delUpdateExpert" parameterType="Expert">
+    UPDATE expert
+    SET  
+       delete_flag = 1,
+       LAST_MODIFY_BY = #{lastModifyBy},
+       LAST_MODIFY_TIME = now()
+    WHERE delete_flag = 0
+      <if test="expertName != null and expertName != ''">  
+        and `EXPERT_NAME` = #{expertName}
+      </if>  
+      <if test="expertNo != null and expertNo != ''">  
+        and `EXPERT_NO` = #{expertNo}
+      </if> 
+  </update>
+  
+  <delete id="deleteReport" parameterType="Report">
+    delete from report
+    WHERE delete_flag = 0
+      <if test="reportNo != null and reportNo != ''">  
+        and `report_no` = #{reportNo}
+      </if>  
+      <if test="remark != null and remark != ''">  
+        and `remark` = #{remark}
+      </if>  
+  </delete>
+  
+  <update id="updateExpert" parameterType="Expert">
+    UPDATE expert
+    SET  
+	  `EXPERT_NAME` = #{expertName}, 
+	  `PROFESSION` = #{profession}, 
+	  `COMPANY_NO` = #{companyNo}, 
+	  `PROFESSIONAL_TITLE` = #{professionalTitle}, 
+	  `REMARK` = #{remark}, 
+       LAST_MODIFY_BY = #{lastModifyBy},
+       LAST_MODIFY_TIME = now()
+    WHERE delete_flag = 0
+        and `EXPERT_NO` = #{expertNo}
+  </update>
 </mapper>

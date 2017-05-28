@@ -3,6 +3,7 @@ package com.main.identification.repository;
 import java.util.List;
 
 import com.main.identification.model.Application;
+import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationDetailComp;
 import com.main.identification.model.ApplicationDetailEquip;
 import com.main.identification.model.ApplicationResult;
@@ -35,10 +36,17 @@ public interface ApplicationRepository {
 	 */
 	public int insertApplication(Application application);
 	
+	public int updateApplication(Application application);
+	
 	/**
 	 * @return
 	 */
 	public int deleteApplication(Application application);
+	
+	/**
+	 * @return
+	 */
+	public int delUpdateApplication(Application application);
 	
 	/**
 	 * 根据申请编号，获取详细画面单位信息部分
@@ -53,4 +61,6 @@ public interface ApplicationRepository {
 	 * @return
 	 */
 	public List<ApplicationDetailEquip> selectEquipsDetailByApplication(String applicationNo);
+	
+	public ApplicationAddModel selectApplicationInfoByNo(String id);
 }

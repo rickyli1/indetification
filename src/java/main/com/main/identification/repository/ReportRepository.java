@@ -12,6 +12,10 @@ public interface ReportRepository {
 	
 	public int deleteReport(Report report);
 	
+	public int delUpdateReport(Report report);
+	
+	public int removeReport(Report report);
+	
 	public int insertReportBatch(List<Report> list);
 
 	
