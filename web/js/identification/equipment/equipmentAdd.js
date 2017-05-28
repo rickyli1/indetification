@@ -123,37 +123,30 @@
 				$("#alertDiv").empty();
 				$("#alertDiv").html(res);
 			});	        	
-        });		
-	       
+			});	
+			
+			$("#updateEquipmentBtn").click(function() {
+	        	var saveData = that.getSaveData();
+	        	identification.ajax("/equipment/updateEquipment", JSON.stringify(saveData), "html", function(res) {
+					$("#alertDiv").empty();
+					$("#alertDiv").html(res);
+				});	     
+	        	
+	        });
 	       
 		},
 		
-       getSaveData : function() {
-    	   var equipment = {};
-//    	   var rep = {};
-//    	   rep.equipments = [];
-    	   
-    	   equipment.equipmentName = $("#equipmentName").val();
-		   equipment.sort = $("#sort").val();
-		   equipment.groupNo = $("#groupNo").val();
-		   equipment.subGroupNo = $("#subGroupNo").val();
-		   equipment.remark = $("#remark").val();
-    	   //reports
-//    	   $(".addTr").each(function(i,element) {
-//    		   var i = $(this).attr("data-no");
-//    		   console.log(i);
-////    		   var equipment = {};
-//    		   equipment.equipmentName = $("#equipmentName" + i).val();
-//    		   equipment.sort = $("#sort" + i).val();
-//    		   equipment.groupNo = $("#groupNo" + i).val();
-//    		   equipment.subGroupNo = $("#subGroupNo" + i).val();
-//    		   equipment.remark = $("#remark" + i).val();
-//    		   
-//    	   }); 
-    	   
-//    	  return $.extend(app, rep);
-    	   return equipment;
-       } 
+		getSaveData : function() {
+	    	   var equipment = {};
+	    	   equipment.equipmentNo = $("#equipmentNo").val();
+	    	   equipment.equipmentName = $("#equipmentName").val();
+			   equipment.sort = $("#sort").val();
+			   equipment.groupNo = $("#groupNo").val();
+			   equipment.subGroupNo = $("#subGroupNo").val();
+			   equipment.remark = $("#remark").val();
+	    	   
+	    	   return equipment;
+	       }
 		
 	});
  

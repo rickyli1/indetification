@@ -32,7 +32,7 @@
 		<result column="CREATE_TIME" property="createTime"/>
 		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
-  
+
   <sql id="searchCondSql">
   	<where>
   		`DELETE_FLAG` = 0
@@ -64,6 +64,11 @@
    		<include refid="baseSearchSql"/>
    		<include refid="searchCondSql"/>  
    		LIMIT ${startNo}, ${pageSize}
+  	</select>
+  	
+  	<select id="selectCompany" resultMap="companyMap" parameterType="Company">
+   		<include refid="baseSearchSql"/>
+   		<include refid="searchCondSql"/>  
   	</select>
   	
   <select id="selectCompanyList" resultMap="companyMap">
@@ -173,4 +178,14 @@
         and `remark` = #{remark}
       </if>  
   </delete>
+  
+  <update id="updateCompany" parameterType="Company">
+    UPDATE company
+    SET  
+       `company_Name` = #{companyName},
+       `company_Code` = #{companyCode},
+       `remark` = #{remark}
+    WHERE  `company_No` = #{companyNo} 
+       and delete_flag = 0
+  </update>
 </mapper>

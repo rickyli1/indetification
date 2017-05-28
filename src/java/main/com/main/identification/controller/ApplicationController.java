@@ -79,7 +79,8 @@ public class ApplicationController {
 		constant.setConstantType(Constant.REPAIR_LEVEL);
 		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
 		model.addAttribute("repairLevels", repairLevelList);
-		model.addAttribute("page", 0);
+		model.addAttribute("page",  "1");
+		model.addAttribute("totalPage",  "1");
 		
 		return "/application/search";
 	}

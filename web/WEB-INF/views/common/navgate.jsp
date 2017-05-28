@@ -121,6 +121,13 @@
              <li><a href="/expert/addInit">新增专家</a></li>
            </ul>
 		</li>
+		
+		<li><a href=" " class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.constant"/> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+             <li><a href="/constant/init"><spring:message code="lable.constant.search"/></a></li>
+             <li><a href="/constant/addInit"><spring:message code="lable.constant.add"/></a></li>
+           </ul>
+         </li>
         
          <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.statistics"/> <span class="caret"></span></a>

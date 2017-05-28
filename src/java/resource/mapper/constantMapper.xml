@@ -37,19 +37,87 @@
 		<result column="CREATE_TIME" property="createTime"/>
 		<result column="LAST_MODIFY_TIME" property="lastModifyTime"/>
 	</resultMap>
-
-  <sql id="searchCondSql">
+	
+    <sql id="searchCondSql">
   	<where>
-  	</where>  
-  </sql>
+  		`DELETE_FLAG` = 0
+  		<if test="constantType != null and constantType != ''">  
+        and `CONSTANT_TYPE` = #{constantType}
+      	</if>  
+      	<if test="constantNo != null and constantNo != ''">  
+        and `CONSTANT_NO` = #{constantNo}
+      	</if>
+      	<if test="constantName != null and constantName != ''">  
+        and `CONSTANT_NAME` = #{constantName}
+      	</if>
+      	<if test="parentNo != null and parentNo != ''">  
+        and `PARENT_NO` = #{parentNo}
+      	</if>
+      	<if test="sort != null and sort != ''">  
+        and `SORT` = #{sort}
+      	</if>
+  	</where>
+  	</sql>
   
-  <select id="selectConstantCount" resultType="int" parameterType="ConstantModel">
+  <select id="searchConstantCount" resultType="int" parameterType="ConstantModel">
     select 
 	  count(1)
-    from EQUIPMENT equipment
+    from constant
 	<include refid="searchCondSql"/>  
   </select>
-
+  
+  <select id="searchConstantList" resultMap="constantMap" parameterType="ConstantModel">
+    SELECT 
+    		CASE c.CONSTANT_TYPE
+		    WHEN 'P_TYPE' THEN '专业'
+		    WHEN 'C_TYPE' THEN '子专业'
+		    WHEN 'REPAIR_LEVEL' THEN '检修级别'
+		    END as CONSTANT_TYPE,
+			c.CONSTANT_TYPE as CONSTANT_TYPE,
+			c.CONSTANT_NO as CONSTANT_NO,
+			c.CONSTANT_NAME as CONSTANT_NAME,
+			c1.CONSTANT_NAME as PARENT_NO,
+			c.SORT as SORT,
+			c.ATTRIBUTE_1 as ATTRIBUTE_1,
+			c.ATTRIBUTE_2 as ATTRIBUTE_2,
+			c.ATTRIBUTE_3 as ATTRIBUTE_3,
+			c.DELETE_FLAG as DELETE_FLAG,
+			c.CREATE_BY as CREATE_BY,
+			c.CREATE_TIME as CREATE_TIME,
+			c.LAST_MODIFY_BY as LAST_MODIFY_BY,
+			c.LAST_MODIFY_TIME as LAST_MODIFY_TIME 
+	FROM constant c
+	LEFT JOIN constant c1
+	ON   c1.CONSTANT_NO = c.PARENT_NO
+	AND  c1.CONSTANT_TYPE = 'P_TYPE'
+	AND  c1.`DELETE_FLAG` = 0
+	<where>
+  		c.`DELETE_FLAG` = 0
+  		<if test="constantType != null and constantType != ''">  
+        and c.`CONSTANT_TYPE` = #{constantType}
+      	</if>  
+      	<if test="constantNo != null and constantNo != ''">  
+        and c.`CONSTANT_NO` = #{constantNo}
+      	</if>
+      	<if test="constantName != null and constantName != ''">  
+        and c.`CONSTANT_NAME` = #{constantName}
+      	</if>
+      	<if test="parentNo != null and parentNo != ''">  
+        and c.`PARENT_NO` = #{parentNo}
+      	</if>
+      	<if test="sort != null and sort != ''">  
+        and c.`SORT` = #{sort}
+      	</if>
+  	</where>
+	order by CONSTANT_TYPE,CONSTANT_NO,SORT
+	LIMIT ${startNo}, ${pageSize}
+  </select>
+  
+  <select id="searchConstant" resultMap="constantMap" parameterType="ConstantModel">
+    <include refid="baseSearchSql"/> 
+	<include refid="searchCondSql"/>
+  </select>
+  
   <select id="selectConstantList" resultMap="constantMap" parameterType="ConstantModel">
    	<include refid="baseSearchSql"/>  
    	 where delete_flag = '0'
@@ -74,6 +142,10 @@
 	  `CONSTANT_NO`, 
 	  `CONSTANT_NAME`,
 	  `PARENT_NO`,
+	  `SORT`,
+	  `ATTRIBUTE_1`,
+	  `ATTRIBUTE_2`,
+	  `ATTRIBUTE_3`,
 	  `CREATE_TIME`,
 	  `LAST_MODIFY_TIME`
 	  ) 
@@ -85,6 +157,10 @@
     	#{constantNo},
     	#{constantName},
     	#{parentNo},
+    	#{sort},
+    	#{attribute1},
+    	#{attribute2},
+    	#{attribute3},
     	now(),
     	now()
     )
@@ -145,8 +221,19 @@
     WHERE admin_user_id = #{userId}
   </update>
   
-  
-  
+  <update id="updateOneConstant" parameterType="ConstantModel">
+    UPDATE constant
+    SET  
+        `CONSTANT_NAME` = #{constantName},
+        `PARENT_NO` = #{parentNo},
+        `SORT` = #{sort},
+      	`ATTRIBUTE_1` = #{attribute1},
+		`ATTRIBUTE_2` = #{attribute2},
+		`ATTRIBUTE_3` = #{attribute3}
+    WHERE  `CONSTANT_TYPE` = #{constantType} 
+       and `CONSTANT_NO` = #{constantNo}
+       and delete_flag = 0
+  </update>
   
   <select id="findParentSeq" resultType="int">
   	SELECT NEXTVAL('ParentSeq')
@@ -186,5 +273,20 @@
         and `CONSTANT_TYPE` = #{constantType}
       </if>  
   </delete>
+  
+  <update id="deleteConstantList" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator=";">
+    UPDATE constant
+    SET DELETE_FLAG = 1
+    where
+  		`DELETE_FLAG` = 0
+  		<if test="item.constantType != null and item.constantType != ''">  
+        and `CONSTANT_TYPE` = #{item.constantType}
+      	</if>  
+      	<if test="item.constantNo != null and item.constantNo != ''">  
+        and `CONSTANT_NO` = #{item.constantNo}
+      	</if>
+    </foreach>
+  </update>
   
 </mapper> 

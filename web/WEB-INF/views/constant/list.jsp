@@ -6,22 +6,30 @@
 	            <thead>
 	              <tr>
 	                <th>No</th>
-	                <th>单位名称</th>
-	                <th>单位代号</th>
-	                <th>备注</th>
+	                <th>常量类型</th>
+	                <th>常量名称</th>
+	                <th>父节点</th>
+	                <th>排序</th>
+	                <th>附加属性1</th>
+	                <th>附加属性2</th>
+	                <th>附加属性3</th>
 	                <th>操作</th>
 	              </tr>
 	            </thead>
 	            <tbody>
-	            	<c:forEach var="company" items="${companyResultList}" varStatus="status">
+	            	<c:forEach var="company" items="${constantResultList}" varStatus="status">
 		               <tr>
 		                <td>${status.count+(page-1)*30}</td>
-		                <td>${company.companyName}</td>
-		                <td>${company.companyCode}</td>
-		                <td>${company.remark}</td>
+		                <td>${company.constantType}</td>
+		                <td>${company.constantName}</td>
+		                <td>${company.parentNo}</td>
+		                <td>${company.sort}</td>
+		                <td>${company.attribute1}</td>
+		                <td>${company.attribute2}</td>
+		                <td>${company.attribute3}</td>
 		                <td>
-		                	<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goUpdate('${company.companyNo}')">修改</button>
-							<button id="deleteBtn" class="btn btn-primary" type="button" onclick="goDelete('${company.companyNo}')">删除</button>
+		                	<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goUpdate('${company.constantNo}', '${company.constantType}')">修改</button>
+							<button id="deleteBtn" class="btn btn-primary" type="button" onclick="goDelete('${company.constantNo}', '${company.constantType}')">删除</button>
 		                </td>
 		              </tr>
 	            	</c:forEach>
@@ -38,12 +46,12 @@
 
 <script type="text/javascript">
 	
-	function goDelete(companyNo) {
-    	identification.company.goDelete(companyNo);
+	function goDelete(constantNo, constantType) {
+    	identification.constant.goDelete(constantNo, constantType);
 	};
 	
-	function goUpdate(companyNo) {
-		identification.companyUpdate.goDetail(companyNo);
+	function goUpdate(constantNo, constantType) {
+		identification.constantUpdate.goDetail(constantNo, constantType);
 	};
 	
 	$('#pagination-demo').twbsPagination({
@@ -57,6 +65,3 @@
 	    }
 	});
  </script>
-      
-      
-      

@@ -41,5 +41,16 @@ public interface ConstantRepository {
 	public int findApplicationSeq();
 
 	public List<ConstantModel> findConstantMap(ConstantModel constantModel);
+	
+	// 画面用
+	public int searchConstantCount(ConstantModel constant);
+	
+	public List<ConstantModel> searchConstantList(ConstantModel constant);
+	
+	public int deleteConstantList(List<ConstantModel> constantList);
+	
+	public int updateOneConstant(ConstantModel constant);
+
+	public List<ConstantModel> searchConstant(ConstantModel constantModel);
 
 }

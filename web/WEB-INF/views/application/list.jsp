@@ -63,16 +63,18 @@
 		identification.application.goDelete(reportNo);
 	}
 	
-	$('#pagination_appList').twbsPagination({
-	    totalPages: '${totalPage}',
-	    startPage: '${page}',
-	    visiblePages: 10,
-	    onPageClick: function (event, page) {
-	    	$("#page").val(page);
-		    event.preventDefault();
-	    	goPage(page);
-	    }
-	});
+	if('${totalPage}' > 1){
+		$('#pagination_appList').twbsPagination({
+		    totalPages: ${totalPage},
+		    startPage: ${page},
+		    visiblePages: 10,
+		    onPageClick: function (event, page) {
+		    	$("#page").val(page);
+			    event.preventDefault();
+		    	goPage(page);
+		    }
+		});
+	}
  </script>
       
       

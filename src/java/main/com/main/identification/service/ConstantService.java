@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.identification.model.Company;
 import com.main.identification.model.ConstantModel;
 import com.main.identification.repository.ConstantRepository;
 
@@ -45,5 +46,26 @@ public class ConstantService {
 
 	public void deleteConstantsByCondation(ConstantModel constant) {
 		constantRepository.deleteConstant(constant);
+	}
+	
+	public int searchConstantCount(ConstantModel constant){
+		return constantRepository.searchConstantCount(constant);
+	}
+	
+	public List<ConstantModel> searchConstantList(ConstantModel constant){
+		return constantRepository.searchConstantList(constant);
+	}
+	
+	public int deleteConstantList(List<ConstantModel> constantList){
+		return constantRepository.deleteConstantList(constantList);
+	}
+	
+	public int updateConstant(ConstantModel constant){
+		return constantRepository.updateOneConstant(constant);
+	}
+
+	public List<ConstantModel> searchConstant(ConstantModel constantModel) {
+
+		return constantRepository.searchConstant(constantModel);
 	}
 }

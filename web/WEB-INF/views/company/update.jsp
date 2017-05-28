@@ -1,68 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html> 
-<head>
-<title>request</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<div class="modal-body">   
+<div class="container-fluid">
+<div class="row">
+	<div class="col-md-* col-xs-* col-sm-*">
+	    <div class="row">
+			<fieldset>
+	           <div class="form-group">
 
-<c:import url="/WEB-INF/views/common/commonCss.jsp"></c:import>
-</head>
-<body>
- <div class="container	">
-    <c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
-	<div class="panel panel-primary">
-	  <div class="panel-heading">修改单位信息</div>
-	  <div class="panel-body"> 
-      <form class="form-horizontal" role="form"> 
-           <fieldset>
-              <legend> </legend>
-              <div class="form-group">
-                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
-                 <div class="col-md-2">
-                     <label class="control-label" id="companyName"/>
-                 </div>
-                 
-                 <label class="col-md-1 control-label" for="companyCode">单位代号</label>
-                 <div class="col-md-2">                
-                    <input class="form-control" id="companyCode" type="text"/>
-                 </div>
-                 
-                 <label class="col-md-1 control-label" for="remark">备注</label>
-                 <div class="col-md-2">                
-                    <input class="form-control" id="remark" type="text"/>
-                 </div>
-                 
-                 <label class="col-md-1 control-label" for="companyType">单位类型</label>
-                 <div class="col-md-2">                
-					<select  class="form-control" id="companyType">
-					 <option selected value=""></option>				
-					  <c:forEach var="companyType" items="${companyType}" varStatus="status">
-						  <option value="0">维修单位</option>
-						  <option value="1">专家单位</option>
-					  </c:forEach>					 
-					</select>
-                 </div>               
-              </div>
-           </fieldset>
-            <fieldset>
-                <div class="form-group">
-                  <div class="col-md-1">
-                  <button type="button" class="btn btn-primary btn-sm" id="saveCompanyBtn">保存信息</button>
-                  </div>                  
-               </div>  
-            </fieldset>       
-       </form>
-	  </div>
+	              <div class="form-group">
+	                 <label class="col-md-1 control-label" for="detailCompanyName">单位名称</label>
+	                 <div class="col-md-2">
+	                     <input class="form-control" id="detailCompanyName" type="text"/>
+	                 </div>
+	              </div>
+	              <div class="form-group">
+	                 <label class="col-md-1 control-label" for="detailCompanyCode">单位代号</label>
+	                 <div class="col-md-2">                
+	                    <input class="form-control" id="detailCompanyCode" type="text"/>
+	                 </div>
+	              </div>
+	              <div class="form-group">   
+	                 <label class="col-md-1 control-label" for="detailRemark">备注</label>
+	                 <div class="col-md-2">                
+	                    <input class="form-control" id="detailRemark" type="text"/>
+	                 </div>            
+              	  </div>
+				</div>
+			</fieldset>
+			<fieldset style="margin-top:10px">
+	              <div class="form-group">
+	                  <div class="col-md-1">
+	                  <button type="button" class="btn btn-primary btn-sm" id="updateCompanyBtn">保存变更</button>
+	                  </div>                  
+	              </div>  
+	        </fieldset>
+	    </div>
 	</div>
 </div>
-<div id="alertDiv"></div>
-</body>
-
-<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
-<script type="text/javascript" src="/js/identification/company/companyAdd.js" charset="UTF-8"></script>
+<div id="updateCondition">
+ 	<input type="hidden" id="detailCompanyNoHide" value=""/>
+ 	<input type="hidden" id="detailCompanyNameHide" value=""/>
+ 	<input type="hidden" id="detailCompanyCodeHide" value=""/>
+ 	<input type="hidden" id="detailRemarkHide" value=""/>
+ </div>
+<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>   
+<script type="text/javascript" src="/js/identification/company/update.js" charset="UTF-8"></script>	    
 <script type="text/javascript">
-   identification.companyAdd = new Identification.company.Add();
+ identification.companyUpdate = new Identification.company.Update();
 </script>
-</html>
-		
-		

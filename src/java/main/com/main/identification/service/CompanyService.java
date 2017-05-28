@@ -32,4 +32,12 @@ public class CompanyService {
 	public int deleteCompany(Company company){
 		return companyRepository.deleteOneCompany(company);
 	}
+	
+	public int updateCompany(Company company){
+		return companyRepository.updateCompany(company);
+	}
+	
+	public List<Company> selectCompany(Company company){
+		return companyRepository.selectCompany(company);
+	}
 }

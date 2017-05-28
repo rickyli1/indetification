@@ -1,12 +1,14 @@
 package com.main.identification.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.main.identification.model.Company;
 import com.main.identification.service.CommonService;
@@ -105,6 +107,30 @@ public class CompanyController {
 			model.addAttribute("msg", "删除单位成功!");
 		} else {
 			model.addAttribute("msg", "删除单位失败!");
+		}
+
+		model.addAttribute("url", "company/init");
+
+		return "common/alert";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getDetail")
+	public Company getDetail(Model model,@RequestBody String companyNo) {
+		Company company = new Company();
+		company.setCompanyNo(companyNo);
+		List<Company> list = companyService.selectCompany(company);
+		return list.get(0);
+	}
+	
+	@RequestMapping("/update")
+	public String update(Model model, @RequestBody Company company) {
+
+		int result = companyService.updateCompany(company);
+		if (result > 0) {
+			model.addAttribute("msg", "变更单位成功!");
+		} else {
+			model.addAttribute("msg", "变更单位失败!");
 		}
 
 		model.addAttribute("url", "company/init");

@@ -50,7 +50,25 @@
 	       	<div id="companyResultList">
 	       	<c:import url="/WEB-INF/views/company/list.jsp" charEncoding="UTF-8"></c:import>  
 	       	</div>
-      	      
+      	
+      	 <!-- import Modal   -->	
+      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+      	<div class="modal-dialog" style="width:900px">
+      		<form method="post">
+      			<div class="modal-content">
+      				<div class="modal-header">
+      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title" id="detailModalLabel">单位信息</h4>
+      				</div>
+				<c:import url="/WEB-INF/views/company/update.jsp" charEncoding="UTF-8"></c:import>
+				</div>
+			</form>
+		</div>
+	  </div>
+      <div class="modal-backdrop fade in" style="display:none" id="loading">
+		<div class="loading"></div>  
+	  </div>
+      
 	      </div>
       </div>
       </div>
@@ -61,10 +79,8 @@
  	<input type="hidden" id="companyCodeHide" value=""/>
  	<input type="hidden" id="companyTypeHide" value=""/>
  </div>		
-        
-		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
 
-	    <script type="text/javascript" src="/js/identification/company/company.js" charset="UTF-8"></script>	    
+	    <script type="text/javascript" src="/js/identification/company/company.js" charset="UTF-8"></script> 	    
 	    <script type="text/javascript">
 	    identification.company = new Identification.company.List();
 
