@@ -133,6 +133,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.statistics"/> <span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
                 <li><a href="/equipment/init"><spring:message code="lable.equipment.statistics"/></a></li>
+                <li><a href="/statistics/init">专家评审统计</a></li>
            </ul>
          </li>             
         

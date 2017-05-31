@@ -9,10 +9,11 @@
 		<result column="expert_name" property="expertName"/>
 		<result column="profession" property="profession"/>
 		<result column="company_no" property="companyNo"/>
+		<result column="company_name" property="companyName"/>
 		<result column="professional_title" property="professionalTitle"/>
 		<result column="remark" property="remark"/>
 
-        <collection property="reportList" ofType="Report" javaType="ArrayList">  
+        <collection property="reportList" ofType="ExpertReport" javaType="ArrayList">  
 			<id column="report_no" property="reportNo"/>
 			<result column="company_no" property="companyNo"/>
 			<result column="leader_no" property="leaderNo"/>
@@ -20,6 +21,9 @@
 			<result column="equipment_no" property="equipmentNo"/>
 			<result column="repair_level" property="repairLevel"/>
 			<result column="equipment_name" property="equipmentName"/>
+			<result column="report_company_name" property="reportCompanyName"/>
+			<result column="repair_level_name" property="repairLevelName"/>
+			<result column="role" property="role"/>
         </collection>  
 	</resultMap>
 	
@@ -40,36 +44,63 @@
   			and t.professional_title = #{professionalTitle}
   		</if>	
 	</sql>
-
 	
-  <select id="findExpertStatistics" resultMap="expertStatisticsMap" parameterType="Expert">
+  <select id="findExpertStatisticsCount" resultType="int" parameterType="Expert">
 		select 
-			   t.EXPERT_NO 
-			 , t.EXPERT_NAME
-		     , t.PROFESSION
-		     , t.COMPANY_NO
-		     , t.PROFESSIONAL_TITLE
-		     , t.REMARK
-		     , t.create_by
-		     , t.create_time
-		     , t.last_modify_by
-		     , t.last_modify_time
-			 , report.report_no,  
-			   report.company_no,
-			   report.leader_no,
-			   report.experts_no,
-			   report.equipment_no,
-			   report.repair_level,
-			   equipment.equipment_name    
+			count(1)
 		from expert t
 		Inner join report on  
-		(t.EXPERT_NO = report.leader_No  or   concat(';',t.EXPERT_NO,';') like report.experts_no )
+		(t.EXPERT_NO = report.leader_No or concat(';',t.EXPERT_NO,';') like report.experts_no )
 		and report.delete_flag = 0
 		Inner join equipment on report.equipment_no = equipment.equipment_no and equipment.delete_flag = 0
 
 		where t.delete_flag = '0'
 		<include refid="searchCondSql" />
   </select>
-  
+
+  <select id="findExpertStatistics" resultMap="expertStatisticsMap" parameterType="Expert">
+	select
+        t.EXPERT_NO
+        , t.EXPERT_NAME 
+        , t.PROFESSION  
+        , t.COMPANY_NO 
+        , company.COMPANY_NAME as COMPANY_NAME 
+        , t.PROFESSIONAL_TITLE 
+        , t.REMARK    
+        , t.create_by   
+        , t.create_time     
+        , t.last_modify_by    
+        , t.last_modify_time  
+        , report.report_no,   
+        report.company_no,   
+        report.leader_no,    
+        	CASE report.leader_no  
+        	WHEN t.EXPERT_NO THEN '组长'  
+        	ELSE '组员'    
+        	END as ROLE,   
+        report.experts_no,  
+        report.equipment_no,    
+        report.repair_level,    
+        equipment.equipment_name,    
+        company1.company_name as REPORT_COMPANY_NAME,   
+        constant.CONSTANT_NAME as repair_level_name 
+        from expert t
+        Inner join report on     (t.EXPERT_NO = report.leader_No  or concat(';',t.EXPERT_NO,';') like report.experts_no )   
+        and report.delete_flag = 0  
+        Inner join equipment   
+        on report.equipment_no = equipment.equipment_no 
+        and equipment.delete_flag = 0 
+        left join test.company company1     
+        on report.company_no = company1.company_no   
+        and company1.delete_flag = 0 
+        left join test.company company  
+        on t.company_no = company.company_no 
+        and company.delete_flag = 0 
+        inner join constant     
+        on report.repair_level = constant.CONSTANT_NO  
+        and constant.CONSTANT_TYPE = 'REPAIR_LEVEL' 
+        where t.delete_flag = '0'
+		<include refid="searchCondSql" />
+  </select>
  
 </mapper>

@@ -5,13 +5,13 @@ import java.util.List;
 public class ExpertStatistics extends Expert  {
 
 	private static final long serialVersionUID = -794749798417226682L;
-	private List<Report> reportList;
+	private List<ExpertReport> reportList;
     
 	
-	public List<Report> getReportList() {
+	public List<ExpertReport> getReportList() {
 		return reportList;
 	}
-	public void setReportList(List<Report> reportList) {
+	public void setReportList(List<ExpertReport> reportList) {
 		this.reportList = reportList;
 	}
     

@@ -7,9 +7,8 @@ import com.main.identification.model.ExpertStatistics;
 
 public interface StatisticsRepository {
 
+	int findExpertStatisticsCount(Expert expert);
+	
 	List<ExpertStatistics> findExpertStatistics(Expert expert);
-
-	
-	
 
 }

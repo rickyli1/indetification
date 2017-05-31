@@ -14,7 +14,11 @@ public class StatisticsService {
 	@Autowired 
 	private StatisticsRepository statisticsRepository;
 	
-	public List<ExpertStatistics>findExpertStatistics(Expert expert) {
+	public int findExpertStatisticsCountCount(Expert expert){
+		return statisticsRepository.findExpertStatisticsCount(expert);
+	}
+	
+	public List<ExpertStatistics> findExpertStatistics(Expert expert) {
 	    return statisticsRepository.findExpertStatistics(expert);
 	}
 }
