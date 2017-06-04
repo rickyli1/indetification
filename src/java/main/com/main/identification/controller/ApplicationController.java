@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.main.identification.model.Application;
 import com.main.identification.model.ApplicationAddModel;
 import com.main.identification.model.ApplicationDetailModel;
 import com.main.identification.model.ApplicationRequstModel;
@@ -271,23 +272,22 @@ public class ApplicationController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Model model, @RequestBody String reportNo) {
-		Report report = new Report();
-		report.setReportNo(reportNo);
+	public String delete(Model model, @RequestBody Report report) {
+		report.setReportNo(report.getReportNo());
 		report.setLastModifyBy("-1");// TODO
 		
 		// 执行删除
 		int reportResult = -1;
 		reportResult = reportService.deleteUpdateReport(report);
 		
-//		Application apply = new Application();
-//		apply.setApplicationNo(applyResult.getApplicationNo());
-//		apply.setLastModifyBy("-1");// TODO
-//		int applyDelResult = -1;
-//		applyDelResult = applicationBo.delUpdateApplication(apply);
+		Application apply = new Application();
+		apply.setApplicationNo(report.getApplicationNo());
+		apply.setLastModifyBy("-1");// TODO
+		int applyDelResult = -1;
+		applyDelResult = applicationBo.deleteUpdateApply(apply);
 
-//		if (reportResult > 0 && applyDelResult > 0) {
-		if (reportResult > 0) {
+		if (reportResult > 0 && applyDelResult > 0) {
+//		if (reportResult > 0) {
 			model.addAttribute("msg", "【申请信息】以及【结果信息】删除成功!");
 		} else {
 			model.addAttribute("msg", "【申请信息】以及【结果信息】删除失败!");

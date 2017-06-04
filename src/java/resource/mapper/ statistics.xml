@@ -50,7 +50,7 @@
 			count(1)
 		from expert t
 		Inner join report on  
-		(t.EXPERT_NO = report.leader_No or concat(';',t.EXPERT_NO,';') like report.experts_no )
+		(t.EXPERT_NO = report.leader_No OR report.experts_no LIKE CONCAT('%;', t.EXPERT_NO, ';%'))
 		and report.delete_flag = 0
 		Inner join equipment on report.equipment_no = equipment.equipment_no and equipment.delete_flag = 0
 
@@ -85,7 +85,7 @@
         company1.company_name as REPORT_COMPANY_NAME,   
         constant.CONSTANT_NAME as repair_level_name 
         from expert t
-        Inner join report on     (t.EXPERT_NO = report.leader_No  or concat(';',t.EXPERT_NO,';') like report.experts_no )   
+        Inner join report on (t.EXPERT_NO = report.leader_No OR report.experts_no LIKE CONCAT('%;', t.EXPERT_NO, ';%'))   
         and report.delete_flag = 0  
         Inner join equipment   
         on report.equipment_no = equipment.equipment_no 
@@ -100,6 +100,7 @@
         on report.repair_level = constant.CONSTANT_NO  
         and constant.CONSTANT_TYPE = 'REPAIR_LEVEL' 
         where t.delete_flag = '0'
+        order by t.EXPERT_NO
 		<include refid="searchCondSql" />
   </select>
  

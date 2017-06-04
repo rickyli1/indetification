@@ -96,9 +96,13 @@
 				$("#applicationResultList").html(res);
 			});
 		},
-		goDelete:function(reportNo) {
+		goDelete:function(applicationNo,reportNo) {
 			var that = this;
-			identification.ajax("/application/delete", reportNo, "html", function(res) {
+			var data = {
+					"applicationNo":applicationNo,
+					"reportNo":reportNo
+			};
+			identification.ajax("/application/delete", JSON.stringify(data), "html", function(res) {
 				$("#alertDiv").empty();
 				$("#alertDiv").html(res);
 			});

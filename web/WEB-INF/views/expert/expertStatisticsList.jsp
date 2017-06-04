@@ -17,29 +17,28 @@
 	            </thead>
 	            <tbody>
 	            	<c:forEach var="expert" items="${expertStatisticsList}" varStatus="status">
-						<c:forEach var="subReport" items="${expert.reportList}" varStatus="status1">
-				    	<tr>
-				    		<c:choose>
-								<c:when  test="${status.first== true }">  
-							    	<td>${expert.expertName}</td>
-							    	<td>${expert.profession}</td>
-							    	<td>${expert.companyName}</td>
-							    	<td>${expert.professionalTitle}</td>
-								</c:when>
-								<c:otherwise> 
-							    	<td></td>
-							    	<td></td>
-							    	<td></td>
-							    	<td></td>
-								</c:otherwise>
-							</c:choose>
-		
-							<td>${subReport.reportCompanyName}</td>
-					    	<td>${subReport.equipmentName}</td>
-					    	<td>${subReport.repairLevelName}</td>
-					    	<td>${subReport.role}</td>
-						</tr>
-				    	</c:forEach>
+							<c:forEach var="subReport" items="${expert.reportList}" varStatus="status1">
+					    	<tr>
+					    		<c:choose>
+									<c:when test="${status1.first == true}">  
+								    	<td>${expert.expertName}</td>
+								    	<td>${expert.profession}</td>
+								    	<td>${expert.companyName}</td>
+								    	<td>${expert.professionalTitle}</td>
+									</c:when>
+									<c:otherwise> 
+								    	<td></td>
+								    	<td></td>
+								    	<td></td>
+								    	<td></td>
+									</c:otherwise>
+								</c:choose>
+								<td>${subReport.reportCompanyName}</td>
+						    	<td>${subReport.equipmentName}</td>
+						    	<td>${subReport.repairLevelName}</td>
+						    	<td>${subReport.role}</td>
+							</tr>
+					    	</c:forEach>
 	            	</c:forEach>
 	            </tbody>
 	         </table>
@@ -55,8 +54,8 @@
 <script type="text/javascript">
 if('${totalPage}' > 1){	
 	$('#pagination_expertStatic').twbsPagination({
-	    totalPages: '${totalPage}',
-	    startPage: '${page}',
+	    totalPages: ${totalPage},
+	    startPage: ${page},
 	    visiblePages: 10,
 	    onPageClick: function (event, page) {
 	    	$("#page").val(page);

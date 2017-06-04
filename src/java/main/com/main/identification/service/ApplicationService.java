@@ -85,7 +85,7 @@ public class ApplicationService {
 	/**
 	 * @return
 	 */
-	public int delUpdateApplication(Application application){
+	public int deleteUpdateApply(Application application){
 		return applicationRepository.delUpdateApplication(application);
 	}
 	
