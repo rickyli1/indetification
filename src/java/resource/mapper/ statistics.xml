@@ -100,8 +100,8 @@
         on report.repair_level = constant.CONSTANT_NO  
         and constant.CONSTANT_TYPE = 'REPAIR_LEVEL' 
         where t.delete_flag = '0'
-        order by t.EXPERT_NO
 		<include refid="searchCondSql" />
+		order by t.EXPERT_NO
   </select>
  
 </mapper>

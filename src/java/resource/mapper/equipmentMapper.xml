@@ -241,6 +241,13 @@
       <if test="equipmentName != null and equipmentName != ''">  
         and e.`equipment_NAME` like #{equipmentName}
       </if>  
+        <if test="groupNo != null and groupNo != ''">  
+        and e.`GROUP_NO` = #{groupNo}
+      </if>  
+      <if test="subGroupNo != null and subGroupNo != ''">  
+        and e.`SUB_GROUP_NO` = #{subGroupNo}
+      </if> 
+       LIMIT ${startNo}, ${pageSize}
   </select>
   
   
@@ -256,6 +263,12 @@
     where  e.delete_flag = '0'
       <if test="equipmentName != null and equipmentName != ''">  
         and e.`equipment_NAME` = #{equipmentName}
+      </if>  
+      <if test="groupNo != null and groupNo != ''">  
+        and e.`GROUP_NO` = #{groupNo}
+      </if>  
+      <if test="subGroupNo != null and subGroupNo != ''">  
+        and e.`SUB_GROUP_NO` = #{subGroupNo}
       </if>  
   </select>
   

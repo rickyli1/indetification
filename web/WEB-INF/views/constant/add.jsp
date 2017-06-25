@@ -14,6 +14,13 @@
 	  <div class="panel-heading">新增常量信息</div>
 	  <div class="panel-body"> 
       <form class="form-horizontal" role="form"> 
+           <fieldset style="margin-top:10px">
+                <div class="form-group">
+                  <div class="col-md-1">
+                  <button type="button" class="btn btn-primary" id="saveconstantBtn">保存常量</button>
+                  </div>                  
+               </div>  
+            </fieldset> 
            <fieldset>
               <legend> </legend>
               <div class="form-group">
@@ -26,12 +33,7 @@
 						<option value="REPAIR_LEVEL">检修级别</option>
 					 </select>
 				 </div>
-                 
-                 <label class="col-md-1 control-label" for="constantNo">常量编号</label>
-                 <div class="col-md-2">
-                    <input type="text" class="form-control" id="constantNo" name="constantNo">
-                 </div>
-                 
+
                  <label class="col-md-1 control-label" for="constantName">常量名称</label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="constantName" name="constantName">
@@ -46,38 +48,33 @@
 					  </c:forEach>					 
 					</select>
                  </div>
-              </div>
-         </fieldset>
-         <fieldset style="margin-top:10px">
-              <div class="form-group">   
+                 
                  <label class="col-md-1 control-label" for="sort">排序</label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="sort" name="sort">
                  </div>
-                 
-                 <label class="col-md-1 control-label" for="attribute1">说明1</label>
+              </div>
+         </fieldset>
+         <fieldset style="margin-top:10px">
+              <div class="form-group">   
+
+                 <label class="col-md-1 control-label" for="attribute1">附加属性1</label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute1" name="attribute1">
                  </div>
 
-                 <label class="col-md-1 control-label" for="attribute2">说明2</label>
+                 <label class="col-md-1 control-label" for="attribute2">附加属性2</label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute2" name="attribute2">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="attribute3">说明3</label>
+                 <label class="col-md-1 control-label" for="attribute3">附加属性3</label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute3" name="attribute3">
                  </div>     
               </div>
            </fieldset>
-            <fieldset style="margin-top:10px">
-                <div class="form-group">
-                  <div class="col-md-1" style="float:right">
-                  <button type="button" class="btn btn-primary" id="saveconstantBtn">保存</button>
-                  </div>                  
-               </div>  
-            </fieldset>       
+                  
        </form>
 	  </div>
 	</div>

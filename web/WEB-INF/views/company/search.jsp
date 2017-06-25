@@ -42,6 +42,8 @@
                  -->
 
               </div>
+           </fieldset> 
+           <fieldset style="margin-top:10px">
               <div class="col-md-1" style="float:right">
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	          </div>

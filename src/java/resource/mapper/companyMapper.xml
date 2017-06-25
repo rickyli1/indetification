@@ -37,7 +37,7 @@
   	<where>
   		`DELETE_FLAG` = 0
   		<if test="companyName != null and companyName != ''">  
-        and `company_Name` = #{companyName}
+        and `company_Name` like CONCAT('%', #{companyName},'%' )
       	</if>  
       	<if test="companyType != null and companyType != ''">  
         and `company_type` = #{companyType}
@@ -46,7 +46,7 @@
         and `company_No` = #{companyNo}
       	</if>
       	<if test="companyCode != null and companyCode != ''">  
-        and `company_Code` = #{companyCode}
+        and `company_Code` like CONCAT('%', #{companyCode},'%' )
       	</if>
       	<if test="remark != null and remark != ''">  
         and `remark` = #{remark}
@@ -58,6 +58,15 @@
 	    select count(1)
 		  from company
 		<include refid="searchCondSql"/>  
+  	</select>
+  	
+  	<select id="selectCompanyResultCountForAdd" resultType="int" parameterType="Company">
+	    select count(1)
+		  from company
+		 WHERE delete_flag = 0
+	      <if test="companyName != null and companyName != ''">  
+	        and `company_Name` = #{companyName}
+	      </if>  
   	</select>
   	
   	<select id="selectCompanyResultList" resultMap="companyMap" parameterType="Company">

@@ -43,59 +43,49 @@
                  </div>
                  
               </div>
-           </fieldset>  		  
+            </fieldset>  		  
 
-
-             <fieldset style="margin-top:10px">
-             	<!-- 申请日期条件，客户说去掉，暂时隐藏 -->
-                <div class="form-group" hidden>
-                 <label class="col-md-1 control-label" for="applicationDate">申请日期</label>
-                 <div class="col-md-2">
-                    <span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateFrom" data-link-format="yyyy-mm-dd">
-                    <input class="form-control"  type="text" value="" >
-					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </span>
-				    <input type="hidden" id="applicationDateFrom" value="" />
-				 </div>
-				 <div class="col-md-1">   
-				    <span>~</span>
-				  </div>
-				  <div class="col-md-2"  style="margin-left:-53px">
-	       		    <span class="input-group date form_date"  data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDateTo" data-link-format="yyyy-mm-dd">
-	                   	<input class="form-control" type="text" value="" />
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-	               	</span>
-					<input type="hidden" id="applicationDateTo" value="" />     				     
-                  </div>  
-                 </div>
-                 
+            <fieldset style="margin-top:10px">
 	            <div class="col-md-1" style="float:right;">
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	            </div> 
             </fieldset>  		  
 	       	<div id="equipmentResultList">
-	       	<c:import url="/WEB-INF/views/equipment/listEquipment.jsp" charEncoding="UTF-8"></c:import>  
+	       		<c:import url="/WEB-INF/views/equipment/listEquipment.jsp" charEncoding="UTF-8"></c:import>  
 	       	</div>
-      	      
+	       	
+	      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+	      	<div class="modal-dialog" style="width:900px">
+	      		<form method="post">
+	      			<div class="modal-content">
+	      				<div class="modal-header">
+	      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        		<h4 class="modal-title" id="detailModalLabel">设备信息</h4>
+	      				</div>
+					<c:import url="/WEB-INF/views/equipment/update.jsp" charEncoding="UTF-8"></c:import>
+					</div>
+				</form>
+			</div>
+		  </div>
+	      <div class="modal-backdrop fade in" style="display:none" id="loading">
+			<div class="loading"></div>  
+		  </div>	
+    
 	      </div>
       </div>
       </div>
-			
+
+<div id="alertDiv"></div>			
 <!-- yangqi     -->
  <div id="searchCondition">
  	<input type="hidden" id="page" value="1"/>
  	<input type="hidden" id="equipmentNameHide" value=""/>
  	<input type="hidden" id="groupNoHide" value=""/>
  	<input type="hidden" id="subGroupNoHide" value=""/>
- </div>		
-   
+ </div>	
 
 
-      
-		<c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
-
+	    <script type="text/javascript" src="/js/identification/equipment/equipmentAdd.js" charset="UTF-8"></script>	    
 	    <script type="text/javascript" src="/js/identification/equipment/equipmentList.js" charset="UTF-8"></script>	    
 	    <script type="text/javascript">
 	    identification.equipmentList = new Identification.equipmentList.List();
@@ -109,7 +99,9 @@
 		}
 	    
 	    function goEquipmentUpdate(equipmentNo) {
-			window.open("/equipment/updateInit/"+equipmentNo);
+			//window.open("/equipment/updateInit/"+equipmentNo);
+			identification.add = new Identification.equipment.Add();
+	    	identification.add.goDetail(equipmentNo);
 		}
       </script>
 

@@ -88,6 +88,7 @@
 		             }); 
 				});	
 			});	
+		
 			//申请保存
 //	        $("#saveEquipmentBtn").click(function() {
 //	        	var saveData = that.getSaveData();

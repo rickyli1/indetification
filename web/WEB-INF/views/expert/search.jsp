@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,7 +14,7 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">专家信息检索</div>
+	  <div class="panel-heading"><spring:message code="label.expert.search.infoSearch"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>

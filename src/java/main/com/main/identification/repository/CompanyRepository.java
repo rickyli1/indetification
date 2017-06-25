@@ -26,4 +26,6 @@ public interface CompanyRepository {
 	public int updateCompany(Company company);
 	
 	public List<Company> selectCompany(Company company);
+	
+	public int selectCompanyResultCountForAdd(Company company);
 }

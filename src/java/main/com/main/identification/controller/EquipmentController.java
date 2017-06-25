@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -100,7 +101,8 @@ public class EquipmentController {
 		constant.setConstantType(Constant.REPAIR_LEVEL);
 		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
 		model.addAttribute("repairLevelList",repairLevelList);
-		
+		model.addAttribute("page",  "1");
+		model.addAttribute("totalPage",  "1");
 		return "/equipment/searchEquipment";
 	}
 	
@@ -211,21 +213,37 @@ public class EquipmentController {
 		return "/equipment/add";
 	}
 	
-	@RequestMapping("/updateInit/{equipmentNo}")
-	public String updateInit(Model model,@PathVariable String equipmentNo) {
+	@ResponseBody
+	@RequestMapping("/updateInit")
+	public EquipmentResult updateInit(Model model,@RequestBody EquipmentResult select) {
 		
-		EquipmentResult equipment =  equipmentService.selectEquipmentInfoByNo(equipmentNo);
+		EquipmentResult equipment =  equipmentService.selectEquipmentInfoByNo(select.getEquipmentNo());
 		
 		ConstantModel constantModel = new ConstantModel();
         constantModel.setConstantType(Constant.PARENT_TYPE);
-        model.addAttribute("constants", constantService.findConstantList(constantModel));
-        model.addAttribute("equipment", equipment);
-        
+        List<ConstantModel> list1 = constantService.findConstantList(constantModel);
+        List<ConstantModel> listConstants = new ArrayList<>();
+        for(ConstantModel constantModel1 : list1){
+//        	if(constantModel1.getConstantNo().equals(equipment.getGroupNo())){
+        		listConstants.add(constantModel1);
+//        	}
+        }
+        model.addAttribute("constants", listConstants);
+//        model.addAttribute("equipment", equipment);
+        equipment.setfList(listConstants);
         ConstantModel constantModel2 = new ConstantModel();
         constantModel2.setConstantType(Constant.CHILDREN_TYPE);
-        model.addAttribute("constantsChild", constantService.findConstantList(constantModel2));
-		
-		return "/equipment/update";
+        List<ConstantModel> list2 = constantService.findConstantList(constantModel2);
+        listConstants = new ArrayList<>();
+        for(ConstantModel constantModel1 : list2){
+//        	if(constantModel1.getConstantNo().equals(equipment.getSubGroupNo())){
+        		listConstants.add(constantModel1);
+//        	}
+        }
+        model.addAttribute("constantsChild", listConstants);
+        equipment.setcList(listConstants);
+
+		return equipment;
 	}	
 	
 	@ResponseBody
@@ -276,7 +294,7 @@ public class EquipmentController {
 			model.addAttribute("msg", "插入失败!");
 		}
 
-		model.addAttribute("url", "equipment/init");
+		model.addAttribute("url", "equipment/initEquipment");
 
 		return "common/alert";
 	}
@@ -284,7 +302,7 @@ public class EquipmentController {
 	private EquipmentModel toModel(EquipmentModel equipment) {
 		EquipmentModel equipmentModel = new EquipmentModel();
 		equipmentModel.setGroupNo(equipment.getGroupNo());
-		equipmentModel.setSubGroupNo(equipment.getGroupNo());
+		equipmentModel.setSubGroupNo(equipment.getSubGroupNo());
 		equipmentModel.setEquipmentNo(Constant.EQUIPMENT_FLAG+ String.valueOf(commonService.createSequenceId(Constant.EQUIPMENT_SEQ)));
 		equipmentModel.setEquipmentName(equipment.getEquipmentName());
 		equipmentModel.setRemark(equipment.getRemark());

@@ -20,7 +20,7 @@
 					"constantNo": constantNo,
 					"constantType": constantType,
 				};
-			identification.ajax("/constant/delete", JSON.stringify(data), "json", function(res) {
+			identification.ajax("/constant/delete", JSON.stringify(data), "html", function(res) {
 				$("#alertDiv").empty();
 				$("#alertDiv").html(res);
 			});
@@ -32,7 +32,6 @@
 			$("#constantTypeHide").val($("#constantType").val().trim());
 			$("#constantNameHide").val($("#constantName").val().trim());
 			$("#parentNoHide").val($("#parentNo").val().trim());
-			$("#sortHide").val($("#sort").val().trim());
 		},
 		// 取得隐藏域参数
 		getSearchConditions: function() {
@@ -41,7 +40,6 @@
 				"constantType": $("#constantTypeHide").val(),
 				"constantName": $("#constantNameHide").val(),
 				"parentNo": $("#parentNoHide").val(),
-				"sort": $("#sortHide").val(),
 			};
 			return data;
 	    },

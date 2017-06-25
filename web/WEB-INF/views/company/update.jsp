@@ -9,29 +9,29 @@
 	           <div class="form-group">
 
 	              <div class="form-group">
-	                 <label class="col-md-1 control-label" for="detailCompanyName">单位名称</label>
+	                 <label class="col-md-2 control-label" for="detailCompanyName">单位名称</label>
 	                 <div class="col-md-2">
 	                     <input class="form-control" id="detailCompanyName" type="text"/>
 	                 </div>
 	              </div>
 	              <div class="form-group">
-	                 <label class="col-md-1 control-label" for="detailCompanyCode">单位代号</label>
+	                 <label class="col-md-2 control-label" for="detailCompanyCode">单位代号</label>
 	                 <div class="col-md-2">                
 	                    <input class="form-control" id="detailCompanyCode" type="text"/>
 	                 </div>
 	              </div>
 	              <div class="form-group">   
-	                 <label class="col-md-1 control-label" for="detailRemark">备注</label>
+	                 <label class="col-md-2 control-label" for="detailRemark">备注</label>
 	                 <div class="col-md-2">                
 	                    <input class="form-control" id="detailRemark" type="text"/>
 	                 </div>            
               	  </div>
 				</div>
 			</fieldset>
-			<fieldset style="margin-top:10px">
-	              <div class="form-group">
+			<fieldset style="margin-top:30px">
+	              <div class="modal-footer">
 	                  <div class="col-md-1">
-	                  <button type="button" class="btn btn-primary btn-sm" id="updateCompanyBtn">保存变更</button>
+	                  <button type="button" class="btn btn-primary btn-sm" id="updateCompanyBtn">保存</button>
 	                  </div>                  
 	              </div>  
 	        </fieldset>

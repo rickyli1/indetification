@@ -168,6 +168,7 @@ public class BaseInfoUploadController{
         } catch (Exception e) {
         	model.addAttribute("msg", "文件导入失败!");
             e.printStackTrace();
+            return "common/alert";
         }
         model.addAttribute("msg", "文件导入成功!");
         model.addAttribute("url", "upload/init"); 

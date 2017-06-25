@@ -13,8 +13,15 @@
 	<div class="panel panel-primary">
 	  <div class="panel-heading">新增单位信息</div>
 	  <div class="panel-body"> 
-      <form class="form-horizontal" role="form"> 
-           <fieldset>
+      <form class="form-horizontal" role="form">
+      		<fieldset>
+                <div class="form-group">
+                  <div class="col-md-1">
+                  <button type="button" class="btn btn-primary btn-sm" id="saveCompanyBtn">保存单位</button>
+                  </div>                  
+               </div>  
+            </fieldset>  
+           	<fieldset>
               <legend> </legend>
               <div class="form-group">
                  <label class="col-md-1 control-label" for="companyName">单位名称</label>
@@ -44,13 +51,7 @@
                  -->              
               </div>
            </fieldset>
-            <fieldset>
-                <div class="form-group">
-                  <div class="col-md-1">
-                  <button type="button" class="btn btn-primary btn-sm" id="saveCompanyBtn">保存信息</button>
-                  </div>                  
-               </div>  
-            </fieldset>       
+                  
        </form>
 	  </div>
 	</div>

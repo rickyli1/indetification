@@ -17,7 +17,7 @@
 	            	<c:forEach var="apply" items="${equipmentResultList}" varStatus="status">
 		              
 		                <c:choose>
-							 <c:when  test="${!empty apply.remark}"> 
+							 <c:when  test="${!empty apply.applicationNo}"> 
 					             <c:forEach var="subappliy" items="${apply.exportList}" varStatus="status1">
 				               		<tr>
 				               		<c:choose>
@@ -27,7 +27,7 @@
 						                <td>${apply.subGroupName}</td>
 						                <td>${apply.equipmentName}</td>
 						                 <td>
-											<button id="deleteBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDelete('${apply.equipmentNo}')">删除</button>
+											<button id="deleteBtn" class="btn btn-primary" type="button"   onclick="goDel'${apply.equipmentNo}')">删除</button>
 						                	<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
 						                </td>
 									   </c:when>
@@ -44,8 +44,8 @@
 					                <td>${apply.equipmentName}</td>
 					                <td>${apply.remark}</td>
 				                    <td>
-					                    <button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
-					                    <button id="deleteBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDel('${apply.equipmentNo}')">删除</button>
+										<button id="deleteBtn" class="btn btn-primary" type="button"  onclick="goDel('${apply.equipmentNo}')">删除</button>
+					                    <button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
 					                </td>
 					             </tr>
 						    </c:otherwise>   
@@ -55,7 +55,9 @@
 	            </tbody>
 	         </table>
          </div>
-		
+         
+         
+		 <div id="alertDiv"></div>
           <div class="text-center">
                 <ul id="pagination-demo" class="pagination-sm pagination">
                </ul>
@@ -65,9 +67,10 @@
 
 <script type="text/javascript">
 	
+if('${totalPage}' > 1){
 	$('#pagination-demo').twbsPagination({
-	    totalPages: '${totalPage}',
-	    startPage: '${page}',
+	    totalPages: ${totalPage},
+	    startPage: ${page},
 	    visiblePages: 10,
 	    onPageClick: function (event, page) {
 	    	$("#page").val(page);
@@ -75,6 +78,7 @@
 	    	goPage(page);
 	    }
 	});
+}
  </script>
       
       

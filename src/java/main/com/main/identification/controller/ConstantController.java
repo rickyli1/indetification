@@ -33,7 +33,9 @@ public class ConstantController {
 		ConstantModel constantModel = new ConstantModel();
         constantModel.setConstantType(Constant.PARENT_TYPE);
         model.addAttribute("constants", constantService.findConstantList(constantModel));
-		return "/constant/search";
+        model.addAttribute("page",  "1");
+		model.addAttribute("totalPage",  "1");
+        return "/constant/search";
 	}
 
 	@RequestMapping(value ="/searchList")
@@ -54,7 +56,6 @@ public class ConstantController {
 	@RequestMapping("/addInit")
 	public String addInit(Model model) {
 		
-		//取得单位类型
 		ConstantModel constantModel = new ConstantModel();
         constantModel.setConstantType(Constant.PARENT_TYPE);
         model.addAttribute("constants", constantService.findConstantList(constantModel));
@@ -64,16 +65,36 @@ public class ConstantController {
 	@RequestMapping("/add")
 	public String init(Model model, @RequestBody ConstantModel constant) {
 		ConstantModel constantModel = new ConstantModel();
-		constantModel.setConstantType(constant.getConstantType());
-		constantModel.setConstantNo(constant.getConstantType());
+		model.addAttribute("url", "constant/init");
+		if(constant.getConstantType() != "" && constant.getConstantName() != ""){
+			constantModel.setConstantType(constant.getConstantType());
+			constantModel.setConstantName(constant.getConstantName());
+		}else{
+			model.addAttribute("msg", "请输入常量类型和常量名!");
+			model.addAttribute("url", "constant/addInit");
+			return "common/alert";
+		}
 		
-		int count = constantService.searchConstantCount(constantModel);
+		if(Constant.CHILDREN_TYPE.equals(constant.getConstantType()) && constant.getParentNo() == ""){
+			model.addAttribute("msg", "请选择父节点!");
+			model.addAttribute("url", "constant/addInit");
+			return "common/alert";
+		}
+	
+		int count = constantService.searchConstantCountForAdd(constantModel);
 		if (count > 0) {
 			model.addAttribute("msg", "信息已经存在!");
-			model.addAttribute("url", "constant/init");
+			model.addAttribute("url", "constant/addInit");
 			return "common/alert";
 		} 
 		constantModel = constant;
+		String constantNo;
+		if(Constant.CHILDREN_TYPE.equals(constant.getConstantType())){
+			constantNo = String.valueOf(commonService.createSequenceId(Constant.CHILDREN_SEQ));
+		}else{
+			constantNo = String.valueOf(commonService.createSequenceId(Constant.PARENT_SEQ));
+		}
+		constantModel.setConstantNo(constantModel.getConstantType() + constantNo);
 		constantModel.setCreateBy("-1");
 		constantModel.setLastModifyBy("-1");
 		int result = constantService.addConstantModel(constantModel);
@@ -82,9 +103,8 @@ public class ConstantController {
 			model.addAttribute("msg", "新增成功!");
 		} else {
 			model.addAttribute("msg", "新增失败!");
+			model.addAttribute("url", "constant/addInit");
 		}
-
-		model.addAttribute("url", "constant/addInit");
 
 		return "common/alert";
 	}

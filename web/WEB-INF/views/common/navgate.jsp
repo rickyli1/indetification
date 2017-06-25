@@ -117,8 +117,8 @@
          </li>
 		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><spring:message code="lable.expert"/><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-             <li><a href="/expert/init">专家信息</a></li>
-             <li><a href="/expert/addInit">新增专家</a></li>
+             <li><a href="/expert/init"><spring:message code="lable.expert.search"/></a></li>
+             <li><a href="/expert/addInit"><spring:message code="lable.expert.add"/></a></li>
            </ul>
 		</li>
 		

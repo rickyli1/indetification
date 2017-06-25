@@ -28,6 +28,7 @@
 			
 			
 		},
+	
 		// 设置参数隐藏域
 		setSearchParam: function() {
 			$("#equipmentNameHide").val($("#equipmentName").val());
@@ -68,7 +69,15 @@
 //			});
 			
 		}
-		
+		,
+		goDelete:function(equipmentNo) {
+			var that = this;
+			identification.ajax("/equipment/deleteEquipment", equipmentNo, "json", function(res) {
+				$("#alertDiv").empty();
+				$("#alertDiv").html(res);
+			});
+			that.searchList();
+		}
 	});
  
 })(jQuery);	

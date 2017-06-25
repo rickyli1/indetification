@@ -34,11 +34,8 @@ public class CompanyController {
 	public String init(Model model, Principal principal) {
 		
 		//取得单位类型
-//		ConstantModel constant = new ConstantModel();
-//		constant.setConstantType(Constant.COMPANY_TYPE);
-//		List<ConstantModel> repairLevelList = constantService.findConstantList(constant);
-//		model.addAttribute("companyTypes", repairLevelList);
-		
+		model.addAttribute("page",  "1");
+		model.addAttribute("totalPage",  "1");
 		return "/company/search";
 	}
 
@@ -65,12 +62,18 @@ public class CompanyController {
 	@RequestMapping("/add")
 	public String init(Model model, @RequestBody Company company) {
 		Company companyModel = new Company();
+		model.addAttribute("url", "company/init");
+		if (company.getCompanyName() == "") {
+			model.addAttribute("msg", "请输入单位名!");
+			model.addAttribute("url", "company/addInit");
+			return "common/alert";
+		} 
 		companyModel.setCompanyName(company.getCompanyName());
 		
-		int count = companyService.selectCompanyResultCount(companyModel);
+		int count = companyService.selectCompanyResultCountForAdd(companyModel);
 		if (count > 0) {
 			model.addAttribute("msg", "单位信息已经存在!");
-			model.addAttribute("url", "company/init");
+			model.addAttribute("url", "company/addInit");
 			return "common/alert";
 		} 
 		companyModel = company;
@@ -85,9 +88,8 @@ public class CompanyController {
 			model.addAttribute("msg", "新增单位成功!");
 		} else {
 			model.addAttribute("msg", "新增单位失败!");
+			model.addAttribute("url", "company/addInit");
 		}
-
-		model.addAttribute("url", "company/addInit");
 
 		return "common/alert";
 	}

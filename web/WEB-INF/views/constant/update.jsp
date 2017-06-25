@@ -31,25 +31,25 @@
 	           </fieldset>
 	           <fieldset style="margin-top:10px">
 	              <div class="form-group">  
-	                 <label class="col-md-2 control-label" for="detailAttribute1">说明1</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute1">附加属性1</label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute1">
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailAttribute2">说明2</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute2">附加属性2</label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute2">
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailAttribute3">说明3</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute3">附加属性3</label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute3">
 	                 </div>
 	                         
 	              </div>
 	           </fieldset>
-	           <fieldset style="margin-top:10px">
-	              <div class="form-group">
+	           <fieldset style="margin-top:30px">
+	              <div class="modal-footer">
 	                  <div class="col-md-1">
 	                  <button type="button" class="btn btn-primary btn-sm" id="updateConstantBtn">保存</button>
 	                  </div>                  

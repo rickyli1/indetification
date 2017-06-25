@@ -78,13 +78,20 @@
     				$("#alertDiv").empty();
     				$("#alertDiv").html(res);
 				});	        	
-	        });		  
+	        });
+	        $("#constantType").change(function() {
+	        	if($("#constantType").val() == "C_TYPE"){
+	        		$("#parentNo").removeAttr("disabled");
+	        	}else{
+	        		$("#parentNo").val("");
+	        		$("#parentNo").attr("disabled", true);
+	        	}
+	        });
 		},
 		
        getSaveData : function() {
     	   var data = {
    				"constantType": $("#constantType").val(),
-   				"constantNo": $("#constantNo").val(),
    				"constantName": $("#constantName").val(),
    				"parentNo": $("#parentNo").val(),
    				"sort": $("#sort").val(),

@@ -5,13 +5,14 @@
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th width=5%>专业</th>
-	                <th width=10%>专业类别</th>
-	                <th width=15%>设备型号及名称</th>
-	                <th width=5%>修别</th>
+	                <th>No</th>
+	                <th>专业</th>
+	                <th>专业类别</th>
+	                <th>设备型号及名称</th>
+	                <th>修别</th>
 	                <th>承修单位选择范围</th>
-	                <th width=8%>有效期限</th>
-	                <th width=15%>备注</th>
+	                <th>有效期限</th>
+	                <th>备注</th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -23,11 +24,13 @@
 				               		<tr>
 				               		<c:choose>
 									   <c:when  test="${status1.first== true }">  
+										<td>${status.count+(page-1)*pageSize}</td>
 						                <td>${apply.groupName}</td>
 						                <td>${apply.subGroupName}</td>
 						                <td>${apply.equipmentName}</td>
 									   </c:when>
 									   <c:otherwise> 
+										<td></td>
 						                <td></td>
 						                <td></td>
 						                <td></td>
@@ -43,6 +46,7 @@
 							 </c:when>
 							 <c:otherwise> 
 								 <tr>
+								 	<td>${status.count+(page-1)*10}</td>
 					                <td>${apply.groupName}</td>
 					                <td>${apply.subGroupName}</td>
 					                <td>${apply.equipmentName}</td>
@@ -60,7 +64,7 @@
          </div>
 		
           <div class="text-center">
-                <ul id="pagination_equipExport" class="pagination-sm pagination">
+                <ul id="pagination-demo" class="pagination-sm pagination">
                </ul>
           </div>		
 <script src="/js/common/jquery/jquery-1.11.1.min.js"></script>          
@@ -68,7 +72,7 @@
 
 <script type="text/javascript">
 	
-	$('#pagination_equipExport').twbsPagination({
+	$('#pagination-demo').twbsPagination({
 	    totalPages: '${totalPage}',
 	    startPage: '${page}',
 	    visiblePages: 10,

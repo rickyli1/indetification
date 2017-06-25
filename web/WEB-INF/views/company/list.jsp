@@ -15,7 +15,7 @@
 	            <tbody>
 	            	<c:forEach var="company" items="${companyResultList}" varStatus="status">
 		               <tr>
-		                <td>${status.count+(page-1)*30}</td>
+		                <td>${status.count+(page-1)*pageSize}</td>
 		                <td>${company.companyName}</td>
 		                <td>${company.companyCode}</td>
 		                <td>${company.remark}</td>
@@ -46,16 +46,18 @@
 		identification.companyUpdate.goDetail(companyNo);
 	};
 	
-	$('#pagination-demo').twbsPagination({
-	    totalPages: '${totalPage}',
-	    startPage: '${page}',
-	    visiblePages: 30,
-	    onPageClick: function (event, page) {
-	    	$("#page").val(page);
-		    event.preventDefault();
-	    	goPage(page);
-	    }
-	});
+	if('${totalPage}' > 1){
+		$('#pagination-demo').twbsPagination({
+		    totalPages: ${totalPage},
+		    startPage: ${page},
+		    visiblePages: 30,
+		    onPageClick: function (event, page) {
+		    	$("#page").val(page);
+			    event.preventDefault();
+		    	goPage(page);
+		    }
+		});
+	}
  </script>
       
       

@@ -52,5 +52,7 @@ public interface ConstantRepository {
 	public int updateOneConstant(ConstantModel constant);
 
 	public List<ConstantModel> searchConstant(ConstantModel constantModel);
+	
+	public int searchConstantCountForAdd(ConstantModel constant);
 
 }

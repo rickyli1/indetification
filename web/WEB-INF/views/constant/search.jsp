@@ -43,10 +43,6 @@
 					  </c:forEach>					 
 					</select>
                  </div>
-                 <label class="col-md-1 control-label" for="sort">排序</label>
-                 <div class="col-md-2">
-                    <input type="text" class="form-control" id="sort" name="sort">
-                 </div>
            </fieldset>
            
            <fieldset style="margin-top:10px">
@@ -89,7 +85,6 @@
  	<input type="hidden" id="constantNoHide" value=""/>
  	<input type="hidden" id="constantNameHide" value=""/>
  	<input type="hidden" id="parentNoHide" value=""/>
- 	<input type="hidden" id="sortHide" value=""/>
  </div>		
 
 	    <script type="text/javascript" src="/js/identification/constant/constant.js" charset="UTF-8"></script> 	    

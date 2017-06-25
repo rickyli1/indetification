@@ -84,7 +84,7 @@
 	            	<button id="searchBtn" class="btn btn-primary">查询</button>
 	            </div> 
 	             <div class="col-md-1" style="float:right;">
-	            	<button id="exportBtn" class="btn btn-primary">导出</button>
+	            	<button id="exportBtn" class="btn btn-primary">全部导出</button>
 	            </div> 
             </fieldset>  		  
 	       	<div id="equipmentResultList">

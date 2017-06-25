@@ -60,9 +60,32 @@ public class EquipmentResult extends BaseModel implements Serializable{
 //	申请日期To
 	private String applicationDateTo;
 	
+	private String sort;
+	
 	private List<SubExportResult> exportList ;
+	private List<ConstantModel> fList ;
+	private List<ConstantModel> cList ;
 	
 	
+	
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	public List<ConstantModel> getfList() {
+		return fList;
+	}
+	public void setfList(List<ConstantModel> fList) {
+		this.fList = fList;
+	}
+	public List<ConstantModel> getcList() {
+		return cList;
+	}
+	public void setcList(List<ConstantModel> cList) {
+		this.cList = cList;
+	}
 	public List<SubExportResult> getExportList() {
 		return exportList;
 	}

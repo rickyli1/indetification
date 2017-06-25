@@ -48,7 +48,7 @@
         and `CONSTANT_NO` = #{constantNo}
       	</if>
       	<if test="constantName != null and constantName != ''">  
-        and `CONSTANT_NAME` = #{constantName}
+        and `CONSTANT_NAME` like CONCAT('%', #{constantName},'%' )
       	</if>
       	<if test="parentNo != null and parentNo != ''">  
         and `PARENT_NO` = #{parentNo}
@@ -64,6 +64,21 @@
 	  count(1)
     from constant
 	<include refid="searchCondSql"/>  
+  </select>
+  
+  <select id="searchConstantCountForAdd" resultType="int" parameterType="ConstantModel">
+    select 
+	  count(1)
+    from constant
+	<where>
+  		`DELETE_FLAG` = 0
+  		<if test="constantType != null and constantType != ''">  
+        and `CONSTANT_TYPE` = #{constantType}
+      	</if>  
+      	<if test="constantName != null and constantName != ''">  
+        and `CONSTANT_NAME` = #{constantName}
+      	</if>
+  	</where>  
   </select>
   
   <select id="searchConstantList" resultMap="constantMap" parameterType="ConstantModel">
@@ -100,7 +115,7 @@
         and c.`CONSTANT_NO` = #{constantNo}
       	</if>
       	<if test="constantName != null and constantName != ''">  
-        and c.`CONSTANT_NAME` = #{constantName}
+        and c.`CONSTANT_NAME` like CONCAT('%', #{constantName},'%' )
       	</if>
       	<if test="parentNo != null and parentNo != ''">  
         and c.`PARENT_NO` = #{parentNo}

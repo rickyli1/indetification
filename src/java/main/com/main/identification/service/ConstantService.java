@@ -68,4 +68,8 @@ public class ConstantService {
 
 		return constantRepository.searchConstant(constantModel);
 	}
+	
+	public int searchConstantCountForAdd(ConstantModel constant){
+		return constantRepository.searchConstantCountForAdd(constant);
+	}
 }

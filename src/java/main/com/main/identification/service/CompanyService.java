@@ -40,4 +40,8 @@ public class CompanyService {
 	public List<Company> selectCompany(Company company){
 		return companyRepository.selectCompany(company);
 	}
+	
+	public int selectCompanyResultCountForAdd(Company company){
+		return companyRepository.selectCompanyResultCountForAdd(company);
+	}
 }
