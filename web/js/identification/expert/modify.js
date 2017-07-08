@@ -84,7 +84,7 @@
 			
 			$("#modifyExpertName").val(this.trimNull(data.expertName));
 			$("#modifyProfession").val(this.trimNull(data.profession));
-			$("#modifyCompany").val(this.trimNull(data.companyName));
+			$("#modifyCompany").val(this.trimNull(data.companyNo));
 			$("#modifyProfessionalTitle").val(this.trimNull(data.professionalTitle));
 			$("#modifyRemark").val(this.trimNull(data.remark));
 			$("#expertNoHide").val(data.expertNo);

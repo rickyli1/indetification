@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,19 +14,19 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">专家评审统计</div>
+	  <div class="panel-heading"><spring:message code="label.expert.expertStatisticsSearch.statis"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="expertName">专家姓名</label>
+                 <label class="col-md-1 control-label" for="expertName"><spring:message code="label.expert.expertStatisticsSearch.expertName"/></label>
                  <div class="col-md-2" style="width:180px;">
 					 <input class="form-control" type="text" id="expertName" name="expertName">
                  </div>
                  
 	            <div class="col-md-1" style="float:right;">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            	<button id="searchBtn" class="btn btn-primary"><spring:message code="label.expert.expertStatisticsSearch.SearchBtn"/></button>
 	            </div>
 	            
               </div>

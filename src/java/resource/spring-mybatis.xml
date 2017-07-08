@@ -60,7 +60,7 @@
             <tx:method name="add*" propagation="REQUIRED" />  
             <tx:method name="create*" propagation="REQUIRES_NEW" />  
             <tx:method name="insert*" propagation="REQUIRED" />  
-            <tx:method name="batch*" propagation="REQUIRED" />  
+            <tx:method name="batch*" propagation="REQUIRES_NEW" rollback-for="Throwable"/>  
             <tx:method name="modify*" propagation="REQUIRED" />  
             <tx:method name="update*" propagation="REQUIRED" />  
             <tx:method name="delete*" propagation="REQUIRED" />  

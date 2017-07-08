@@ -120,11 +120,37 @@
                    return false;
 	     	   }
 	     	   
+	     	   
+	     	   
+	     	   var checkExperts = "";
+				identification.ajaxNoasync("/expert/checkExpertExistCompany", JSON.stringify(saveData), "json", function(res) {
+					if(res && res.length > 0) {
+						for(var i = 0; i < res.length; i++) {
+							if(res[i].expertName != undefined) {
+								checkExperts = checkExperts + res[i].expertName+",";
+							}
+							
+						}
+					}
+				});		
+				
+				if(checkExperts != "") {
+					if(confirm("专家"+checkExperts+"在"+$("#companyLable").text()+$("#company").val()+"工作是否要保存申请！")){
+			        	
+			        	identification.ajax("/application/update", JSON.stringify(saveData), "html", function(res) {
+		    				$("#alertDiv").empty();
+		    				$("#alertDiv").html(res);
+						});	 
+					}
+				}else {
+		        	identification.ajax("/application/update", JSON.stringify(saveData), "html", function(res) {
+	    				$("#alertDiv").empty();
+	    				$("#alertDiv").html(res);
+					});	 
+				}
+      	
 	        	
-	        	identification.ajax("/application/update", JSON.stringify(saveData), "html", function(res) {
-    				$("#alertDiv").empty();
-    				$("#alertDiv").html(res);
-				});	        	
+       	
 	        });		
 	        
         	
@@ -135,7 +161,7 @@
         	identification.fileUpload("/application/requestFileUpload","resultFileupload", "resultFileNameSpan", "resultFileIdHid");	  
 	        
 	        //申请单位
-	        $( "#company" ).autocomplete({
+	        $("#company").autocomplete({
 	              source: that.companyNameAry,
 	              messages: {
 	            	  noResults: '', 

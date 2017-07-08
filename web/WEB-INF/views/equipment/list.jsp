@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>      
    
       	 <div style="padding-top: 24px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
 	                <th>No</th>
-	                <th>专业</th>
-	                <th>专业类别</th>
-	                <th>设备型号及名称</th>
-	                <th>修别</th>
-	                <th>承修单位选择范围</th>
-	                <th>有效期限</th>
-	                <th>备注</th>
+	                <th><spring:message code="lable.equipment.group"/></th>
+	                <th><spring:message code="lable.equipment.subGroup"/></th>
+	                <th><spring:message code="lable.equipment.equipmentName"/></th>
+	                <th><spring:message code="lable.equipment.modifyCategory"/></th>
+	                <th><spring:message code="lable.equipment.modifyCompany"/></th>
+	                <th><spring:message code="lable.equipment.limit"/></th>
+	                <th><spring:message code="lable.equipment.remarks"/></th>
+	                
 	              </tr>
 	            </thead>
 	            <tbody>

@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
-   
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
       	 <div style="padding-top: 24px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
 	                <th>No</th>
-	                <th>专业</th>
-	                <th>专业类别</th>
-	                <th>设备型号及名称</th>
-	                <th>备注</th>
+	                <th><spring:message code="lable.equipment.group"/></th>
+	                <th><spring:message code="lable.equipment.subGroup"/></th>
+	                <th><spring:message code="lable.equipment.equipmentName"/></th>
+	                <th><spring:message code="lable.equipment.remarks"/></th>
 	                <th></th>
 	              </tr>
 	            </thead>
@@ -27,8 +27,8 @@
 						                <td>${apply.subGroupName}</td>
 						                <td>${apply.equipmentName}</td>
 						                 <td>
-											<button id="deleteBtn" class="btn btn-primary" type="button"   onclick="goDel'${apply.equipmentNo}')">删除</button>
-						                	<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
+											<button id="deleteBtn" class="btn btn-primary" type="button"   onclick="goDel'${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
+						                	<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentUpdate"/></button>
 						                </td>
 									   </c:when>
 									</c:choose>
@@ -44,8 +44,8 @@
 					                <td>${apply.equipmentName}</td>
 					                <td>${apply.remark}</td>
 				                    <td>
-										<button id="deleteBtn" class="btn btn-primary" type="button"  onclick="goDel('${apply.equipmentNo}')">删除</button>
-					                    <button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')">修改</button>
+										<button id="deleteBtn" class="btn btn-primary" type="button"  onclick="goDel('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
+					                    <button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentUpdate"/></button>
 					                </td>
 					             </tr>
 						    </c:otherwise>   
@@ -55,13 +55,13 @@
 	            </tbody>
 	         </table>
          </div>
-         
-         
-		 <div id="alertDiv"></div>
+          <div id="alertDiv"></div>
           <div class="text-center">
                 <ul id="pagination-demo" class="pagination-sm pagination">
                </ul>
-          </div>		
+          </div>	
+          
+          
 <script src="/js/common/jquery/jquery-1.11.1.min.js"></script>          
 <script type="text/javascript" src="/js/common/jquery/jquery.twbsPagination.min.js" charset="UTF-8"></script>
 

@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
       	 <div style="padding-top: 10px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th>No</th>
-	                <th>专家姓名</th>
-	                <th>专业</th>
-	                <th>单位名称</th>
-	                <th>职称职务</th>
-	                <th>备注</th>
-	                <th>操作</th>
+	                <th><spring:message code="label.expert.list.No"/></th>
+	                <th><spring:message code="label.expert.list.expertName"/></th>
+	                <th><spring:message code="label.expert.list.profession"/></th>
+	                <th><spring:message code="label.expert.list.companyName"/></th>
+	                <th><spring:message code="label.expert.list.professionalTitle"/></th>
+	                <th><spring:message code="label.expert.list.remark"/></th>
+	                <th><spring:message code="label.expert.list.operate"/></th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -27,8 +27,8 @@
 		                <!-- 
 							<button id="modifyBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goDetail('${apply.applicationNo}')">修改</button>
 						-->
-							<button id="modifyBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#modifyModal" onclick="goModify('${expert.expertNo}')">修改</button>
-							<button id="delBtn" class="btn btn-primary" type="button" onclick="goDelete('${expert.expertNo}')">删除</button>
+							<button id="modifyBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#modifyModal" onclick="goModify('${expert.expertNo}')"><spring:message code="label.expert.list.modifyBtn"/></button>
+							<button id="delBtn" class="btn btn-primary" type="button" onclick="goDelete('${expert.expertNo}')"><spring:message code="label.expert.list.delBtn"/></button>
 		                </td>
 		              </tr>
 	            	</c:forEach>

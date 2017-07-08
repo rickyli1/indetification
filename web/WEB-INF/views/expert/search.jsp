@@ -20,21 +20,21 @@
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="expertName">专家姓名</label>
+                 <label class="col-md-1 control-label" for="expertName"><spring:message code="label.expert.search.expertName"/></label>
                  <div class="col-md-2">
                     <input type="text" id="expertName" class="form-control" name="expertName">
                  </div>
-                 <label class="col-md-1 control-label" for="profession">专业名称</label>
+                 <label class="col-md-1 control-label" for="profession"><spring:message code="label.expert.search.profession"/></label>
                  <div class="col-md-2">                
 					<input type="text" id="profession" class="form-control" name="profession">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
+                 <label class="col-md-1 control-label" for="companyName"><spring:message code="label.expert.search.companyName"/></label>
                  <div class="col-md-2">                
                    <input type="text" id="companyName" class="form-control" name="companyName">
                  </div>
 	            <div class="col-md-1" style="float:right;">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            	<button id="searchBtn" class="btn btn-primary"><spring:message code="label.expert.search.btn"/></button>
 	            </div>
               </div>
 
@@ -51,7 +51,7 @@
       			<div class="modal-content">
       				<div class="modal-header">
       					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        		<h4 class="modal-title" id="modifyModalLabel">专家信息修改</h4>
+		        		<h4 class="modal-title" id="modifyModalLabel"><spring:message code="label.expert.modal.modify"/></h4>
       				</div>
 				<c:import url="/WEB-INF/views/expert/modify.jsp" charEncoding="UTF-8"></c:import>
 				</div>

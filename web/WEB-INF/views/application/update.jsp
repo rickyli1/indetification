@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -88,26 +88,26 @@
  <div class="container">
     <c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">申请注册</div>
+	  <div class="panel-heading"><spring:message code="lable.application.update.title"/></div>
 	  <div class="panel-body"> 
       <form class="form-horizontal" role="form">
              <fieldset>
                 <div class="form-group">
                   <div class="col-md-10">
-                  <button type="button" class="btn btn-primary btn-sm" id="addApplicationDetailBtn">添加详情</button>
-                  <span style="color:blue; font-size:5px">*可多次添加</span>
+                  <button type="button" class="btn btn-primary btn-sm" id="addApplicationDetailBtn"><spring:message code="button.application.update.detail"/></button>
+                  <span style="color:blue; font-size:5px"><spring:message code="lable.application.update.remark"/></span>
                   </div>
                   <div class="col-md-1">
-                  <button type="button" class="btn btn-primary btn-sm" id="saveApplicationBtn">保存申请</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="saveApplicationBtn"><spring:message code="button.application.update.save.application"/></button>
                   </div>                  
                </div>  
             </fieldset>   
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label"  for="company" id="companyLable">申请单位</label>
+                 <label class="col-md-1 control-label"  for="company" id="companyLable"><spring:message code="lable.application.update.company.name"/></label>
                  <div class="col-md-3">   
-                  <input type="text" class="form-control"  id="company" value="${app.companyName}"/>             
+                  <input type="text" class="form-control"  id="company" value="${app.companyName}" readonly="readonly"/>             
 					  <select  class="form-control" id="companySelect" style="display:none">
 					  <c:forEach var="company" items="${companys}" varStatus="status">
 						  <option value="${company.companyNo}">${company.companyName}</option>
@@ -115,16 +115,16 @@
 					</select>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="department">代表机构</label>
+                 <label class="col-md-1 control-label" for="department"><spring:message code="lable.application.update.deparment"/></label>
                  <div class="col-md-3">                
                     <input class="form-control" id="department" type="text" value="${app.department}"/>
                  </div>    
                  
               
-                 <label class="col-md-1 control-label" for="expert">专家</label>
+                 <label class="col-md-1 control-label" for="expert"><spring:message code="lable.application.update.expert"/></label>
                  <div class="col-md-3">    
 					<div class="input-group">
-					      <input type="text" class="form-control" id="expert" readonly="true" value="${app.expertsName}"/>
+					      <input type="text" class="form-control" id="expert" readonly="readonly" value="${app.expertsName}"/>
 					      <span class="input-group-btn">
 					        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#expertModal">...</button>
 					      </span>
@@ -140,7 +140,7 @@
               
              </div> 
               <div class="form-group">
-                <label class="col-md-1 control-label" for="applicationDate">申请日期</label>
+                <label class="col-md-1 control-label" for="applicationDate"><spring:message code="lable.application.update.application.date"/></label>
                  <div class="col-md-3">
                     <span class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="applicationDate" data-link-format="yyyy-mm-dd">
                     <input class="form-control" type="text" value="${app.applicationDate}" >
@@ -149,12 +149,12 @@
 				     <input type="hidden" id="applicationDate" value="${app.applicationDate}" />
                  </div>     
                  
-                 <label class="col-md-1 control-label" for="department">申请文件</label>
+                 <label class="col-md-1 control-label" for="department"><spring:message code="lable.application.update.application.file"/></label>
                  
 				<div class="col-md-3">
 		 			<span class="btn btn-default  btn-sm fileinput-button">
 				        <i class="glyphicon glyphicon-plus"></i>
-				        <span>选择文件</span>
+				        <span><spring:message code="lable.application.update.application.select.file"/></span>
 				        <!-- The file input field used as target for the file upload widget -->
 				         <input id="requestFileupload"  type="file" name="file" multiple>
 				    </span>
@@ -164,11 +164,11 @@
 				    </span>
 				</div>     
 				            
-                <label class="col-md-1 control-label" for="department">结论文件</label>
+                <label class="col-md-1 control-label" for="department"><spring:message code="lable.application.update.result.file"/></label>
 				<div class="col-md-3">
 		 			<span class="btn btn-default btn-sm fileinput-button">
 				        <i class="glyphicon glyphicon-plus"></i>
-				        <span>选择文件</span>
+				        <span><spring:message code="lable.application.update.application.select.file"/></span>
 				        <!-- The file input field used as target for the file upload widget -->
 				         <input id="resultFileupload"  type="file" name="file" multiple>
 				    </span>
@@ -195,13 +195,13 @@
 					       </colgroup>					
 					      <thead>
 					        <tr>
-					          <th id="equipmentTh">设备</th>
-					          <th>修理级别</th>
-					          <th>结果</th>
-					          <th>整改标记</th>
-					          <th>有效期期</th>
-					          <th>备注</th>
-					          <th>操作</th>
+					          <th id="equipmentTh"><spring:message code="lable.application.update.list.equipment"/></th>
+					          <th><spring:message code="lable.application.update.list.repair.level"/></th>
+					          <th><spring:message code="lable.application.update.list.result"/></th>
+					          <th><spring:message code="lable.application.update.list.rectify"/></th>
+					          <th><spring:message code="lable.application.update.list.limit.date"/></th>
+					          <th><spring:message code="lable.application.update.list.remark"/></th>
+					          <th><spring:message code="lable.application.update.list.operation"/></th>
 					        </tr>
 					      </thead>
 					      <tbody id="applicationDetailBody">
@@ -225,12 +225,12 @@
 									
 									</td>
 									<td>
-									<input type="radio" name="result${status.count}" value="1" <c:if test="${report.result == 1}">checked</c:if>>合格<br>
-									<input type="radio" name="result${status.count}" value="0" <c:if test="${report.result == 0}">checked</c:if>>不合格
+									<input type="radio" name="result${status.count}" value="1" <c:if test="${report.result == 1}">checked</c:if>><spring:message code="lable.application.update.detail.result.ok"/><br>
+									<input type="radio" name="result${status.count}" value="0" <c:if test="${report.result == 0}">checked</c:if>><spring:message code="lable.application.update.detail.result.unqualified"/>
 									</td>								  
 									<td>
-									<input type="radio" name="isReform${status.count}" value="1" <c:if test="${report.isReform == 1}">checked</c:if>>整改<br>
-									<input type="radio" name="isReform${status.count}" value="0" <c:if test="${report.isReform == 0}">checked</c:if>>无整改
+									<input type="radio" name="isReform${status.count}" value="1" <c:if test="${report.isReform == 1}">checked</c:if>><spring:message code="lable.application.update.detail.rectify"/><br>
+									<input type="radio" name="isReform${status.count}" value="0" <c:if test="${report.isReform == 0}">checked</c:if>><spring:message code="lable.application.update.detail.no.rectify"/>
 									</td>	
 									<td>
 								
@@ -244,7 +244,7 @@
 								         <input type="text" value ="${report.remark}" id="remark${status.count}"/>
 								    </td>		
 								    <td>
-								         <button type="button" class="btn btn-primary btn-sm deleteClass"  id="delete${status.count}" data-no="${status.count}">删除</button>
+								         <button type="button" class="btn btn-primary btn-sm deleteClass"  id="delete${status.count}" data-no="${status.count}"><spring:message code="button.application.update.detail.delete"/></button>
 								    </td>					  
 								</tr>						           
 					           </c:forEach>				      
@@ -275,7 +275,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">专家选择</h4>
+		        <h4 class="modal-title" id="myModalLabel"><spring:message code="lable.application.update.list.expert.select.title"/></h4>
 		      </div>
 		      
 		      	<c:import url="/WEB-INF/views/application/chooseExpert.jsp" charEncoding="UTF-8"></c:import>  	      
@@ -314,17 +314,17 @@
 	
 	</td>
 	<td>
-	<input type="radio" name="result{{= no}}" value="1">合格<br>
-	<input type="radio" name="result{{= no}}" value="0">不合格
+	<input type="radio" name="result{{= no}}" value="1"><spring:message code="lable.application.update.detail.result.ok"/><br>
+	<input type="radio" name="result{{= no}}" value="0">不合格<spring:message code="lable.application.update.detail.result.unqualified"/>
 	</td>								  
 	<td>
-	<input type="radio" name="isReform{{= no}}" value="1">整改<br>
-	<input type="radio" name="isReform{{= no}}" value="0">无整改
+	<input type="radio" name="isReform{{= no}}" value="1"><spring:message code="lable.application.update.detail.rectify"/><br>
+	<input type="radio" name="isReform{{= no}}" value="0"><spring:message code="lable.application.update.detail.no.rectify"/>
 	</td>	
 	<td>
 
 	<span class="input-group date form_year" data-date=""  data-date-format="yyyy" data-link-format="yyyy" data-link-field="timeLimit{{= no}}">
-	<input class="form-control"  type="text" value="" >
+	<input class="form-control"  type="text" value="" readonly='true'>
 	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 	</span>
 		<input type="hidden" id="timeLimit{{= no}}" value="" />
@@ -333,7 +333,7 @@
          <input type="text" value ="" id="remark{{= no}}"／>
     </td>		
     <td>
-         <button type="button" class="btn btn-primary btn-sm deleteClass"  id="delete{{= no}}" data-no="{{= no}}">删除</button>
+         <button type="button" class="btn btn-primary btn-sm deleteClass"  id="delete{{= no}}" data-no="{{= no}}"><spring:message code="button.application.update.detail.delete"/></button>
     </td>					  
 </tr>
 </script>

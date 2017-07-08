@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,22 +15,22 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">申请信息检索</div>
+	  <div class="panel-heading"><spring:message code="lable.application.search.title"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
+                 <label class="col-md-1 control-label" for="companyName"><spring:message code="lable.application.search.company.name"/></label>
                  <div class="col-md-2">
                     <input type="text" id="companyName" class="form-control" name="companyName">
                  </div>
-                 <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
+                 <label class="col-md-1 control-label" for="equipmentName"><spring:message code="lable.application.search.equipment.name"/></label>
                  <div class="col-md-2">                
 					<input type="text" id="equipmentName" class="form-control" name="equipmentName">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="expertNameCon">专家姓名</label>
+                 <label class="col-md-1 control-label" for="expertNameCon"><spring:message code="lable.application.search.expert.name"/></label>
                  <div class="col-md-2">                
                    <input type="text" id="expertNameCon" class="form-control" name="expertName">
                  </div>                 
@@ -39,16 +41,16 @@
               <div class="form-group">
 				 
                 <!-- 结果 -->
-                 <label class="col-md-1 control-label" for="resultCon">申请结果</label>
+                 <label class="col-md-1 control-label" for="resultCon"><spring:message code="lable.application.search.application.result"/></label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="resultCon">
 						<option selected value=""></option>
-						<option value="1">合格</option>
-						<option value="0">不合格</option>
+						<option value="1"><spring:message code="lable.application.search.application.result.ok"/></option>
+						<option value="0"><spring:message code="lable.application.search.application.result.unqualified"/></option>
 					</select>
                  </div>
                 <!-- 修理级别 -->
-                 <label class="col-md-1 control-label" for="repairLevel">修理级别</label>
+                 <label class="col-md-1 control-label" for="repairLevel"><spring:message code="lable.application.search.repair.level"/></label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="repairLevelCon">
 					 <option selected value=""></option>				
@@ -59,15 +61,15 @@
                  </div>
                  
 				<!-- 有效期 -->
-                <label for="limitDate" class="col-md-1 control-label">有效期</label>
+                <label for="limitDate" class="col-md-1 control-label"><spring:message code="lable.application.search.limit.date"/></label>
                 <div class="col-md-2">
                 	<span class="input-group date form_year" data-date="" data-date-format="yyyy" data-link-field="limitDate" data-link-format="yyyy">
-                    	<input class="form-control" size="4" type="text" value="">
+                    	<input class="form-control" size="4" type="text" value="" readonly='true'>
                     	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </span>
                 </div>
                 <div class="col-md-1" style="float:right">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            	<button id="searchBtn" class="btn btn-primary"><spring:message code="button.application.search.search"/></button>
 	            </div>
                 <input type="hidden" id="limitDate" value="" />
                 
@@ -104,13 +106,13 @@
 	       	</div>
 	       	
  <!-- import Modal -->
-      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true" style="display:none">
       	<div class="modal-dialog" style="width:900px">
       		<form method="post">
       			<div class="modal-content">
       				<div class="modal-header">
       					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        		<h4 class="modal-title" id="detailModalLabel">申请详情</h4>
+		        		<h4 class="modal-title" id="detailModalLabel"><spring:message code="lable.application.search.detail.page.title"/></h4>
       				</div>
 				<c:import url="/WEB-INF/views/application/detail.jsp" charEncoding="UTF-8"></c:import>
 				</div>

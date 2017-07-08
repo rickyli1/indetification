@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
       	 <div style="padding-top: 24px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th width=10%>专家姓名</th>
-	                <th width=10%>专业</th>
-	                <th width=15%>所在单位</th>
-	                <th width=10%>职称职务</th>
-	                <th>被审单位</th>
-	                <th width=10%>被审设备</th>
-	                <th width=10%>维修级别</th>
-	                <th width=15%>担任角色</th>
+	                <th width=10%><spring:message code="label.expert.expertStatisticsList.expertName"/></th>
+	                <th width=10%><spring:message code="label.expert.expertStatisticsList.profession"/></th>
+	                <th width=15%><spring:message code="label.expert.expertStatisticsList.companyName"/></th>
+	                <th width=10%><spring:message code="label.expert.expertStatisticsList.professionalTitle"/></th>
+	                <th><spring:message code="label.expert.expertStatisticsList.company"/></th>
+	                <th width=10%><spring:message code="label.expert.expertStatisticsList.equipment"/></th>
+	                <th width=10%><spring:message code="label.expert.expertStatisticsList.level"/></th>
+	                <th width=15%><spring:message code="label.expert.expertStatisticsList.role"/></th>
 	              </tr>
 	            </thead>
 	            <tbody>

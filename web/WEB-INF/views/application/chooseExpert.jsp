@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>    
 <div class="modal-body">   
 <div class="container-fluid">
 <div class="row">
@@ -21,11 +22,11 @@
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>	               
-	                <th>姓名</th>
-	                <th>专业</th>
-	                <th>职称</th>
-	                <th>单位</th>
-	                <th>操作</th>
+	                <th><spring:message code="lable.application.chooseExpert.list.name"/></th>
+	                <th><spring:message code="lable.application.chooseExpert.list.profession"/></th>
+	                <th><spring:message code="lable.application.chooseExpert.list.profession.title"/></th>
+	                <th><spring:message code="lable.application.chooseExpert.list.company"/></th>
+	                <th><spring:message code="lable.application.chooseExpert.list.operation"/></th>
 	              </tr>
 	            </thead>
 	            <tbody id="expertBody">
@@ -42,9 +43,9 @@
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th>评审专家</th>
-	                <th>组长设置</th>	  
-	                <th>操作</th>             
+	                <th><spring:message code="lable.application.chooseExpert.list.expert"/></th>
+	                <th><spring:message code="lable.application.chooseExpert.list.expert.leader"/></th>	  
+	                <th><spring:message code="lable.application.chooseExpert.list.operation"/></th>             
 	              </tr>
 	            </thead>
 	            <tbody id="setExpertBody">
@@ -57,7 +58,7 @@
  </div>
 			   		      
   <div class="modal-footer">
-    <button type="button" id="saveExpertBtn" class="btn btn-primary btn-sm"  style="margin-right:28px">确定</button>
+    <button type="button" id="saveExpertBtn" class="btn btn-primary btn-sm"  style="margin-right:28px"><spring:message code="button.application.chooseExpert.ok"/></button>
   </div>	 
 <div><input type="hidden" id="page"/></div>
 <c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>   

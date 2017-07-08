@@ -14,6 +14,8 @@
 		  e.`GROUP_NO`, 
 		  e.`EQUIPMENT_NAME`,
 		  e.`SUB_GROUP_NO`,
+		  e.sort,
+		   e.remark,
 		   cg.CONSTANT_NAME as GROUP_NAME,
  		   e.SUB_GROUP_NO , 
  		   d.CONSTANT_NAME  as SUB_GROUP_NAME 
@@ -55,7 +57,8 @@
 		<result column="report_No" property="reportNo"/>
 		<result column="company_No" property="companyNo"/>
 		<result column="company_Name" property="companyName"/>
-
+		<result column="sort" property="sort"/>
+		<result column="remark" property="remark"/>
 		<result column="leader_No" property="leaderNo"/>
 		<result column="leader_Name" property="leaderName"/>
 
@@ -99,6 +102,7 @@
        <if test="subGroupNo != null and subGroupNo != ''">  
         and e.`SUB_GROUP_NO` = #{subGroupNo}
       </if>  
+       and e.DELETE_FLAG = 0
   	</where>   
   </sql>
   
@@ -283,6 +287,8 @@
 	  `GROUP_NO`, 
 	  `EQUIPMENT_NAME`,
 	  `SUB_GROUP_NO`,
+	   `SORT`,
+	   `REMARK`,
 	  `CREATE_TIME`,
 	  `LAST_MODIFY_TIME`
 	  ) 
@@ -294,6 +300,8 @@
     	#{groupNo},
     	#{equipmentName},
     	#{subGroupNo},
+    	#{sort},
+    	#{remark},
     	now(),
     	now()
     )
@@ -337,7 +345,8 @@
 	  `EQUIPMENT_NAME`,
 	  `SUB_GROUP_NO`,
 	  `CREATE_TIME`,
-	  `LAST_MODIFY_TIME`
+	  `LAST_MODIFY_TIME`,
+	    `REMARK`
 	  ) 
     VALUES
     
@@ -351,14 +360,15 @@
     	#{item.equipmentName},
     	#{item.subGroupNo},
     	now(),
-    	now()
+    	now(),
+    	#{item.remark}
 	   )
 	 </foreach>
 	</insert>
 	
   <delete id="deleteEquipment" parameterType="EquipmentModel">
     delete from Equipment
-    WHERE delete_flag = 0
+    WHERE 1 =1
       <if test="remark != null and remark != ''">  
         and `remark` = #{remark}
       </if>  

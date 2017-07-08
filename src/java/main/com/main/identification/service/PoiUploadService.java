@@ -194,6 +194,7 @@ public class PoiUploadService {
 									epuipModel.setEquipmentName(value);
 									epuipModel.setGroupNo(groupNo);
 									epuipModel.setSubGroupNo(childrenNo);
+									epuipModel.setRemark(remark);
 									equipmentMap.put(value, epuipModel);
 									equipmentName = value;
 								}
@@ -227,6 +228,7 @@ public class PoiUploadService {
 																.createSequenceId(Constant.APPLICATION_SEQ));
 												Application application = new Application();
 												application.setApplicationNo(applicationNo);
+												application.setCompanyNo(commapny.getCompanyNo());
 												application.setRemark(remark);
 												application.setApplicationDate(date);
 												application.setOriginFlag(Constant.ORIGIN_FLAG_IMPORT);// 導入標識
@@ -391,7 +393,7 @@ public class PoiUploadService {
 					company.setCreateBy("-1");
 					company.setLastModifyBy("-1");
 					company.setCompanyType("0");
-//					company.setCompanyCode(company.getCompanyName()); // TODO 
+					company.setCompanyCode(company.getCompanyName()); // TODO 
 					companyList.add(company);
 					// companyUploadService.insertCompany(em);
 				}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,28 +14,28 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">常量信息检索</div>
+	  <div class="panel-heading"><spring:message code="lable.constant.constantSearch"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="constantType">常量类型</label>
+                 <label class="col-md-1 control-label" for="constantType"><spring:message code="lable.constant.constantType"/></label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="constantType">
 					 <option selected value=""></option>				
-					 <option value="P_TYPE">专业</option>
-					 <option value="C_TYPE">子专业</option>
-					 <option value="REPAIR_LEVEL">检修级别</option>
+					 <option value="P_TYPE"><spring:message code="lable.constant.constantPType"/></option>
+					 <option value="C_TYPE"><spring:message code="lable.constant.constantCType"/></option>
+					 <option value="REPAIR_LEVEL"><spring:message code="lable.constant.constantRType"/></option>
 					</select>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="constantName">常量名称</label>
+                 <label class="col-md-1 control-label" for="constantName"><spring:message code="lable.constant.constantName"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="constantName" name="constantName">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="parentNo">父节点</label>
+                 <label class="col-md-1 control-label" for="parentNo"><spring:message code="lable.constant.constantParentNo"/></label>
                  <div class="col-md-2">
                    <select  class="form-control" id="parentNo">
 					 <option selected value=""></option>				
@@ -48,7 +49,7 @@
            <fieldset style="margin-top:10px">
               <div class="form-group">
 	              <div class="col-md-1" style="float:right">
-		            	<button id="searchBtn" class="btn btn-primary">查询</button>
+		            	<button id="searchBtn" class="btn btn-primary"><spring:message code="lable.constant.search"/></button>
 		          </div>
 	          </div>
            </fieldset>  		  
@@ -64,7 +65,7 @@
       			<div class="modal-content">
       				<div class="modal-header">
       					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        		<h4 class="modal-title" id="detailModalLabel">常量信息</h4>
+		        		<h4 class="modal-title" id="detailModalLabel"><spring:message code="lable.constant.constant"/></h4>
       				</div>
 				<c:import url="/WEB-INF/views/constant/update.jsp" charEncoding="UTF-8"></c:import>
 				</div>

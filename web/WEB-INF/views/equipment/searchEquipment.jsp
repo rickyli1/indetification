@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,13 +14,13 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">装备信息检索</div>
+	  <div class="panel-heading"><spring:message code="lable.equipment.equipmentSearch"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                <label class="col-md-1 control-label" for="companyName">专业</label>
+                <label class="col-md-1 control-label" for="companyName"><spring:message code="lable.equipment.group"/></label>
                  <div class="col-md-2" style="width:180px;">
                   <select  class="form-control" id="groupNo">
 					 <option selected value=""></option>				
@@ -28,7 +29,7 @@
 					  </c:forEach>					 
 					</select>
                  </div>
-                 <label class="col-md-1 control-label" for="companyName">专业类别</label>
+                 <label class="col-md-1 control-label" for="companyName"><spring:message code="lable.equipment.subGroup"/></label>
                  <div class="col-md-2" style="width:180px;">
                    <select  class="form-control" id="subGroupNo">
 					 <option selected value=""></option>				
@@ -37,7 +38,7 @@
 					  </c:forEach>					 
 					</select>
                  </div>
-                 <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
+                 <label class="col-md-1 control-label" for="equipmentName"><spring:message code="lable.equipment.equipmentName"/></label>
                  <div class="col-md-2" style="width:180px;">               
 					 <input class="form-control" type="text" id="equipmentName" name="equipmentName">
                  </div>
@@ -47,7 +48,7 @@
 
             <fieldset style="margin-top:10px">
 	            <div class="col-md-1" style="float:right;">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            	<button id="searchBtn" class="btn btn-primary"><spring:message code="lable.equipment.equipmentFind"/></button>
 	            </div> 
             </fieldset>  		  
 	       	<div id="equipmentResultList">
@@ -60,7 +61,7 @@
 	      			<div class="modal-content">
 	      				<div class="modal-header">
 	      					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        		<h4 class="modal-title" id="detailModalLabel">设备信息</h4>
+			        		<h4 class="modal-title" id="detailModalLabel"><spring:message code="lable.equipment.equipmentInfo"/></h4>
 	      				</div>
 					<c:import url="/WEB-INF/views/equipment/update.jsp" charEncoding="UTF-8"></c:import>
 					</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>      
 <div class="modal-body">   
 <div class="container-fluid">
 <div class="row">
@@ -8,12 +9,12 @@
 	      <div class="panel-body"> 
 	           <fieldset>
 	              <div class="form-group">
-	                 <label class="col-md-2 control-label" for="detailConstantName">常量名称</label>
+	                 <label class="col-md-2 control-label" for="detailConstantName"><spring:message code="lable.constant.constantName"/></label>
 	                 <div class="col-md-2">
 	                    <input type="text" class="form-control" id="detailConstantName">
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailParentNo">父节点</label>
+	                 <label class="col-md-2 control-label" for="detailParentNo"><spring:message code="lable.constant.constantParentNo"/></label>
 	                 <div class="col-md-2">
 	                   <select  class="form-control" id="detailParentNo">
 						 <option selected value=""></option>				
@@ -23,7 +24,7 @@
 						</select>
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailSort">排序</label>
+	                 <label class="col-md-2 control-label" for="detailSort"><spring:message code="lable.constant.constantSort"/></label>
 	                 <div class="col-md-2">
 	                    <input type="text" class="form-control" id="detailSort">
 	                 </div>
@@ -31,17 +32,17 @@
 	           </fieldset>
 	           <fieldset style="margin-top:10px">
 	              <div class="form-group">  
-	                 <label class="col-md-2 control-label" for="detailAttribute1">附加属性1</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute1"><spring:message code="lable.constant.constantAttribute1"/></label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute1">
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailAttribute2">附加属性2</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute2"><spring:message code="lable.constant.constantAttribute2"/></label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute2">
 	                 </div>
 	                 
-	                 <label class="col-md-2 control-label" for="detailAttribute3">附加属性3</label>
+	                 <label class="col-md-2 control-label" for="detailAttribute3"><spring:message code="lable.constant.constantAttribute3"/></label>
 	                 <div class="col-md-2" >
 	                    <input type="text" class="form-control" id="detailAttribute3">
 	                 </div>
@@ -51,7 +52,7 @@
 	           <fieldset style="margin-top:30px">
 	              <div class="modal-footer">
 	                  <div class="col-md-1">
-	                  <button type="button" class="btn btn-primary btn-sm" id="updateConstantBtn">保存</button>
+	                  <button type="button" class="btn btn-primary btn-sm" id="updateConstantBtn"><spring:message code="lable.constant.save"/></button>
 	                  </div>                  
 	               </div>  
 	            </fieldset>       

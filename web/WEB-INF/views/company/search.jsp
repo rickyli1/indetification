@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head> 
@@ -13,18 +14,18 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading">单位信息检索</div>
+	  <div class="panel-heading"><spring:message code="lable.company.companySearch"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
+                 <label class="col-md-1 control-label" for="companyName"><spring:message code="lable.company.companyName"/></label>
                  <div class="col-md-2" style="width:220px;">
                     <input type="text" class="form-control" id="companyName" name="companyName">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="companyCode">单位代号</label>
+                 <label class="col-md-1 control-label" for="companyCode"><spring:message code="lable.company.companyCode"/></label>
                  <div class="col-md-2" style="width:220px;">
                     <input type="text" class="form-control" id="companyCode" name="companyCode">
                  </div>
@@ -45,7 +46,7 @@
            </fieldset> 
            <fieldset style="margin-top:10px">
               <div class="col-md-1" style="float:right">
-	            	<button id="searchBtn" class="btn btn-primary">查询</button>
+	            	<button id="searchBtn" class="btn btn-primary"><spring:message code="lable.company.search"/></button>
 	          </div>
            </fieldset>  		  
  
@@ -60,7 +61,7 @@
       			<div class="modal-content">
       				<div class="modal-header">
       					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        		<h4 class="modal-title" id="detailModalLabel">单位信息</h4>
+		        		<h4 class="modal-title" id="detailModalLabel"><spring:message code="lable.company.company"/></h4>
       				</div>
 				<c:import url="/WEB-INF/views/company/update.jsp" charEncoding="UTF-8"></c:import>
 				</div>

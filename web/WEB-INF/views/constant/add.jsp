@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -11,35 +12,35 @@
  <div class="container	">
     <c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">新增常量信息</div>
+	  <div class="panel-heading"><spring:message code="lable.constant.constantAdd"/></div>
 	  <div class="panel-body"> 
       <form class="form-horizontal" role="form"> 
            <fieldset style="margin-top:10px">
                 <div class="form-group">
                   <div class="col-md-1">
-                  <button type="button" class="btn btn-primary" id="saveconstantBtn">保存常量</button>
+                  <button type="button" class="btn btn-primary" id="saveconstantBtn"><spring:message code="lable.constant.constantSave"/></button>
                   </div>                  
                </div>  
             </fieldset> 
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="constantType">常量类型</label>
+                 <label class="col-md-1 control-label" for="constantType"><spring:message code="lable.constant.constantType"/></label>
                  <div class="col-md-2">
 	                 <select  class="form-control" id="constantType">
 					 	<option selected value=""></option>				
-						<option value="P_TYPE">专业</option>
-						<option value="C_TYPE">子专业</option>
-						<option value="REPAIR_LEVEL">检修级别</option>
+						<option value="P_TYPE"><spring:message code="lable.constant.constantPType"/></option>
+						<option value="C_TYPE"><spring:message code="lable.constant.constantCType"/></option>
+						<option value="REPAIR_LEVEL"><spring:message code="lable.constant.constantRType"/></option>
 					 </select>
 				 </div>
 
-                 <label class="col-md-1 control-label" for="constantName">常量名称</label>
+                 <label class="col-md-1 control-label" for="constantName"><spring:message code="lable.constant.constantName"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="constantName" name="constantName">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="parentNo">父节点</label>
+                 <label class="col-md-1 control-label" for="parentNo"><spring:message code="lable.constant.constantParentNo"/></label>
                  <div class="col-md-2">
                    <select  class="form-control" id="parentNo">
 					 <option selected value=""></option>				
@@ -49,7 +50,7 @@
 					</select>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="sort">排序</label>
+                 <label class="col-md-1 control-label" for="sort"><spring:message code="lable.constant.constantSort"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="sort" name="sort">
                  </div>
@@ -58,17 +59,17 @@
          <fieldset style="margin-top:10px">
               <div class="form-group">   
 
-                 <label class="col-md-1 control-label" for="attribute1">附加属性1</label>
+                 <label class="col-md-1 control-label" for="attribute1"><spring:message code="lable.constant.constantAttribute1"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute1" name="attribute1">
                  </div>
 
-                 <label class="col-md-1 control-label" for="attribute2">附加属性2</label>
+                 <label class="col-md-1 control-label" for="attribute2"><spring:message code="lable.constant.constantAttribute2"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute2" name="attribute2">
                  </div>
                  
-                 <label class="col-md-1 control-label" for="attribute3">附加属性3</label>
+                 <label class="col-md-1 control-label" for="attribute3"><spring:message code="lable.constant.constantAttribute3"/></label>
                  <div class="col-md-2">
                     <input type="text" class="form-control" id="attribute3" name="attribute3">
                  </div>     

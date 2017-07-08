@@ -90,7 +90,7 @@
 			});	
 			
 			
-			$("#dsubGroupNo").click(function(){
+			$("#dgroupNo").change(function(){
 				var data = {	
 					"groupNo":$("#dgroupNo").val()
 				};

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -11,26 +12,26 @@
  <div class="container	">
     <c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">设备添加</div>
+	  <div class="panel-heading"><spring:message code="lable.equipment.equipmentAdd"/></div>
 	  <div class="panel-body"> 
       <form class="form-horizontal" role="form">
              <fieldset>
                 <div class="form-group">
                   <div class="col-md-1">
-                  <button type="button" class="btn btn-primary btn-sm" id="saveEquipmentBtn">保存设备</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="saveEquipmentBtn"><spring:message code="lable.equipment.equipmentSave"/></button>
                   </div> 
-                  <label class="col-md-2 control-label" for="TIP">排序只能录入数字</label>                 
+                  <label class="col-md-2 control-label" for="TIP"><spring:message code="lable.equipment.equipmentTip"/></label>                 
                </div>  
             </fieldset>   
            <fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="equipmentName">设备名称</label>
+                 <label class="col-md-1 control-label" for="equipmentName"><spring:message code="lable.equipment.equipmentName"/></label>
                  <div class="col-md-2">                
                     <input class="form-control" id="equipmentName" type="text"/>
                     <input type="hidden" id="equipmentNo" value=""/>
                  </div>  
-                 <label class="col-md-1 control-label" for="company">专业</label>
+                 <label class="col-md-1 control-label" for="company"><spring:message code="lable.equipment.group"/></label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="groupNo">
 					 <option selected value=""></option>				
@@ -40,19 +41,19 @@
 					</select>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="company">专业类别</label>
+                 <label class="col-md-1 control-label" for="company"><spring:message code="lable.equipment.subGroup"/></label>
                  <div class="col-md-2">                
 					<select  class="form-control" id="subGroupNo">
 						<option selected value=""></option>			
 					</select>
                  </div>    
-                 <label class="col-md-1 control-label" for="company">排序</label>
+                 <label class="col-md-1 control-label" for="company"><spring:message code="lable.equipment.sort"/></label>
                  <div class="col-md-2">   
 			             <input class="form-control" value ="" id="sort"  onkeyup="this.value=this.value.replace(/[^0-9-]+/,'');"/>
 			     </div>
 			  </div>  
 			  <div class="form-group">  
-			     <label class="col-md-1 control-label" for="company">备注</label>
+			     <label class="col-md-1 control-label" for="company"><spring:message code="lable.equipment.remarks"/></label>
 			 	   <div class="col-md-2">   
 			            <input class="form-control" type="text" id="remark"/>
 			            
@@ -118,7 +119,7 @@
 <c:import url="/WEB-INF/views/common/commonScript.jsp"></c:import>  
    <script type="text/javascript" src="/js/identification/equipment/equipmentAdd.js" charset="UTF-8"></script>	    
    <script type="text/javascript">
-   identification.equipment = new Identification.equipment.Add();
+    identification.equipment = new Identification.equipment.Add();
 </script>
 </html>
 		

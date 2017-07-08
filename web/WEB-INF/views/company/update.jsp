@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>      
 <div class="modal-body">   
 <div class="container-fluid">
 <div class="row">
@@ -9,19 +10,19 @@
 	           <div class="form-group">
 
 	              <div class="form-group">
-	                 <label class="col-md-2 control-label" for="detailCompanyName">单位名称</label>
+	                 <label class="col-md-2 control-label" for="detailCompanyName"><spring:message code="lable.company.companyName"/></label>
 	                 <div class="col-md-2">
 	                     <input class="form-control" id="detailCompanyName" type="text"/>
 	                 </div>
 	              </div>
 	              <div class="form-group">
-	                 <label class="col-md-2 control-label" for="detailCompanyCode">单位代号</label>
+	                 <label class="col-md-2 control-label" for="detailCompanyCode"><spring:message code="lable.company.companyCode"/></label>
 	                 <div class="col-md-2">                
 	                    <input class="form-control" id="detailCompanyCode" type="text"/>
 	                 </div>
 	              </div>
 	              <div class="form-group">   
-	                 <label class="col-md-2 control-label" for="detailRemark">备注</label>
+	                 <label class="col-md-2 control-label" for="detailRemark"><spring:message code="lable.company.companyRemark"/></label>
 	                 <div class="col-md-2">                
 	                    <input class="form-control" id="detailRemark" type="text"/>
 	                 </div>            
@@ -31,7 +32,7 @@
 			<fieldset style="margin-top:30px">
 	              <div class="modal-footer">
 	                  <div class="col-md-1">
-	                  <button type="button" class="btn btn-primary btn-sm" id="updateCompanyBtn">保存</button>
+	                  <button type="button" class="btn btn-primary btn-sm" id="updateCompanyBtn"><spring:message code="lable.company.save"/></button>
 	                  </div>                  
 	              </div>  
 	        </fieldset>

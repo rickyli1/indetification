@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <link rel="stylesheet" href="/css/jquery/autocomplete.min.css">
 <style type="text/css">
     .ui-autocomplete{
@@ -79,29 +80,29 @@
 <div class="container-fluid">
 <div class="row">
 	    <div class="row">
-	      <label class="col-md-2 control-label" for="modifyExpertName" style="margin-top:8px;margin-left:13px;font:message-box">专家姓名</label>
+	      <label class="col-md-2 control-label" for="modifyExpertName" style="margin-top:8px;margin-left:13px;font:message-box"><spring:message code="label.expert.modify.modifyExpertName"/></label>
 	      <div class="col-md-3"> 
 	      	<input class="form-control" id="modifyExpertName" type="text"/>
 	      </div>
 	      
-		  <label class="col-md-2 control-label" for="modifyProfession" style="margin-top:8px;margin-left:13px;font:message-box">专家专业</label>
+		  <label class="col-md-2 control-label" for="modifyProfession" style="margin-top:8px;margin-left:13px;font:message-box"><spring:message code="label.expert.modify.modifyProfession"/></label>
 	      <div class="col-md-3">
 	      	<input class="form-control" id="modifyProfession" type="text"/>
 		  </div>
 		</div>
 		<div class="row">
-		  <label class="col-md-2 control-label" for="modifyProfessionalTitle" style="margin-top:8px;margin-left:13px;font:message-box">职称职务</label>
+		  <label class="col-md-2 control-label" for="modifyProfessionalTitle" style="margin-top:8px;margin-left:13px;font:message-box"><spring:message code="label.expert.modify.modifyProfessionalTitle"/></label>
 		  <div class="col-md-3">
 	      	<input class="form-control" id="modifyProfessionalTitle" type="text"/>
 		  </div>
 		  
-		  <label class="col-md-2 control-label" for="modifyRemark" style="margin-top:8px;margin-left:13px;font:message-box">备注信息</label>
+		  <label class="col-md-2 control-label" for="modifyRemark" style="margin-top:8px;margin-left:13px;font:message-box"><spring:message code="label.expert.modify.modifyRemark"/></label>
 	      <div class="col-md-3">
 	      	<input class="form-control" id="modifyRemark" type="text"/>
 		  </div>
 		</div>
 		<div class="row">
-		  <label class="col-md-2 control-label" for="modifyCompany" style="margin-top:8px;margin-left:13px;font:message-box">所在单位</label>
+		  <label class="col-md-2 control-label" for="modifyCompany" style="margin-top:8px;margin-left:13px;font:message-box"><spring:message code="label.expert.modify.modifyCompany"/></label>
 	      <div class="col-md-3">
 	        <select  class="form-control" id="modifyCompany">
 				<option selected value=""></option>				
@@ -114,7 +115,7 @@
 	        
 </div>
   <div class="modal-footer">
-    <button type="button" id="modifyExpertBtn" class="btn btn-primary btn-sm"  style="margin-right:28px">保存</button>
+    <button type="button" id="modifyExpertBtn" class="btn btn-primary btn-sm"  style="margin-right:28px"><spring:message code="label.expert.modify.modifyBtn"/></button>
   </div>
  <div id="modifyCondition">
  	<input type="hidden" id="expertNoHide" value=""/>

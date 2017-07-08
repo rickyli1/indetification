@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+ <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
    
       	 <div style="padding-top: 10px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
 	                <th width=3%>No</th>
-	                <th>单位名称</th>
-	                <th>设备名称</th>
-	                <th>修理等级</th>
-	                <th>申请结果</th>
-	                <th>有效期限</th>
-	                <th>专家组</th>
-	                <th width=15%>操作</th>
+	                <th><spring:message code="lable.application.list.company.name"/></th>
+	                <th><spring:message code="lable.application.list.equipment.name"/></th>
+	                <th><spring:message code="lable.application.list.repair.level"/></th>
+	                <th><spring:message code="lable.application.list.application.result"/></th>
+	                <th><spring:message code="lable.application.list.limit.date"/></th>
+	                <th><spring:message code="lable.application.list.experts"/></th>
+	                <th width=15%><spring:message code="lable.application.list.opertaion"/></th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -26,9 +27,9 @@
 		                <td>${apply.timeLimit}</td>
 		                <td>${apply.expertsName}</td>
 		                <td>
-							<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationDetail('${apply.applicationNo}')">详情</button>
-							<button id="modifyBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationUpdate('${apply.applicationNo}')">修改</button>
-							<button id="delBtn" class="btn btn-primary btn-sm" type="button" onclick="goApplicationDelete('${apply.applicationNo}', '${apply.reportNo}')">删除</button>
+							<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationDetail('${apply.applicationNo}')"><spring:message code="button.application.list.detail"/></button>
+							<button id="modifyBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" onclick="goApplicationUpdate('${apply.applicationNo}')"><spring:message code="button.application.list.update"/></button>
+							<button id="delBtn" class="btn btn-primary btn-sm" type="button" onclick="goApplicationDelete('${apply.reportNo}')"><spring:message code="button.application.list.delete"/></button>
 		                </td>
 		              </tr>
 	            	</c:forEach>
@@ -59,8 +60,8 @@
 		window.open("/application/updateInit/"+applicationNo);
 	}
 	
-	function goApplicationDelete(applicationNo,reportNo) {
-		identification.application.goDelete(applicationNo,reportNo);
+	function goApplicationDelete(reportNo) {
+		identification.application.goDelete(reportNo);
 	}
 	
 	if('${totalPage}' > 1){

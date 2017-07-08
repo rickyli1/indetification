@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>      
    
       	 <div style="padding-top: 10px;">
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
 	                <th>No</th>
-	                <th>常量类型</th>
-	                <th>常量名称</th>
-	                <th>父节点</th>
-	                <th>排序</th>
-	                <th>附加属性1</th>
-	                <th>附加属性2</th>
-	                <th>附加属性3</th>
-	                <th>操作</th>
+	                <th><spring:message code="lable.constant.constantType"/></th>
+	                <th><spring:message code="lable.constant.constantName"/></th>
+	                <th><spring:message code="lable.constant.constantParentNo"/></th>
+	                <th><spring:message code="lable.constant.constantSort"/></th>
+	                <th><spring:message code="lable.constant.constantAttribute1"/></th>
+	                <th><spring:message code="lable.constant.constantAttribute2"/></th>
+	                <th><spring:message code="lable.constant.constantAttribute3"/></th>
+	                <th><spring:message code="lable.constant.constantOperation"/></th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -28,8 +29,8 @@
 		                <td>${company.attribute2}</td>
 		                <td>${company.attribute3}</td>
 		                <td>
-		                	<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goUpdate('${company.constantNo}', '${company.constantType}')">修改</button>
-							<button id="deleteBtn" class="btn btn-primary" type="button" onclick="goDelete('${company.constantNo}', '${company.constantType}')">删除</button>
+		                	<button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goUpdate('${company.constantNo}', '${company.constantType}')"><spring:message code="lable.constant.constantUpdate"/></button>
+							<button id="deleteBtn" class="btn btn-primary" type="button" onclick="goDelete('${company.constantNo}', '${company.constantType}')"><spring:message code="lable.constant.constantDelete"/></button>
 		                </td>
 		              </tr>
 	            	</c:forEach>

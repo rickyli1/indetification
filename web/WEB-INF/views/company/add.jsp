@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -11,30 +12,30 @@
  <div class="container	">
     <c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 	<div class="panel panel-primary">
-	  <div class="panel-heading">新增单位信息</div>
+	  <div class="panel-heading"><spring:message code="lable.company.companyAdd"/></div>
 	  <div class="panel-body"> 
       <form class="form-horizontal" role="form">
       		<fieldset>
                 <div class="form-group">
                   <div class="col-md-1">
-                  <button type="button" class="btn btn-primary btn-sm" id="saveCompanyBtn">保存单位</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="saveCompanyBtn"><spring:message code="lable.company.companySave"/></button>
                   </div>                  
                </div>  
             </fieldset>  
            	<fieldset>
               <legend> </legend>
               <div class="form-group">
-                 <label class="col-md-1 control-label" for="companyName">单位名称</label>
+                 <label class="col-md-1 control-label" for="companyName"><spring:message code="lable.company.companyName"/></label>
                  <div class="col-md-2">
                      <input class="form-control" id="companyName" type="text"/>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="companyCode">单位代号</label>
+                 <label class="col-md-1 control-label" for="companyCode"><spring:message code="lable.company.companyCode"/></label>
                  <div class="col-md-2">                
                     <input class="form-control" id="companyCode" type="text"/>
                  </div>
                  
-                 <label class="col-md-1 control-label" for="remark">备注</label>
+                 <label class="col-md-1 control-label" for="remark"><spring:message code="lable.company.companyRemark"/></label>
                  <div class="col-md-2">                
                     <input class="form-control" id="remark" type="text"/>
                  </div>
