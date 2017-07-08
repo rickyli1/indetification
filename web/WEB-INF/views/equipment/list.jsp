@@ -6,7 +6,6 @@
 	         <table class="table table-bordered table-striped">
 	            <thead>
 	              <tr>
-	                <th>No</th>
 	                <th><spring:message code="lable.equipment.group"/></th>
 	                <th><spring:message code="lable.equipment.subGroup"/></th>
 	                <th><spring:message code="lable.equipment.equipmentName"/></th>
@@ -26,13 +25,11 @@
 				               		<tr>
 				               		<c:choose>
 									   <c:when  test="${status1.first== true }">  
-										<td>${status.count+(page-1)*pageSize}</td>
 						                <td>${apply.groupName}</td>
 						                <td>${apply.subGroupName}</td>
 						                <td>${apply.equipmentName}</td>
 									   </c:when>
 									   <c:otherwise> 
-										<td></td>
 						                <td></td>
 						                <td></td>
 						                <td></td>
@@ -48,7 +45,6 @@
 							 </c:when>
 							 <c:otherwise> 
 								 <tr>
-								 	<td>${status.count+(page-1)*10}</td>
 					                <td>${apply.groupName}</td>
 					                <td>${apply.subGroupName}</td>
 					                <td>${apply.equipmentName}</td>

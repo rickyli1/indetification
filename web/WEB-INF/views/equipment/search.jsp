@@ -14,7 +14,7 @@
 			<c:import url="/WEB-INF/views/common/navgate.jsp"></c:import>
 
 	<div class="panel panel-primary">
-	  <div class="panel-heading"><spring:message code="lable.equipment.equipmentSearch"/></div>
+	  <div class="panel-heading"><spring:message code="lable.equipment.statistics"/></div>
 		  <div class="panel-body"> 
 		  
            <fieldset>

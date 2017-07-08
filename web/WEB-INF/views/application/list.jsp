@@ -29,7 +29,7 @@
 		                <td>
 							<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goApplicationDetail('${apply.applicationNo}')"><spring:message code="button.application.list.detail"/></button>
 							<button id="modifyBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" onclick="goApplicationUpdate('${apply.applicationNo}')"><spring:message code="button.application.list.update"/></button>
-							<button id="delBtn" class="btn btn-primary btn-sm" type="button" onclick="goApplicationDelete('${apply.reportNo}')"><spring:message code="button.application.list.delete"/></button>
+							<button id="delBtn" class="btn btn-primary btn-sm" type="button" onclick="goApplicationDelete('${apply.applicationNo}','${apply.reportNo}')"><spring:message code="button.application.list.delete"/></button>
 		                </td>
 		              </tr>
 	            	</c:forEach>
@@ -60,8 +60,8 @@
 		window.open("/application/updateInit/"+applicationNo);
 	}
 	
-	function goApplicationDelete(reportNo) {
-		identification.application.goDelete(reportNo);
+	function goApplicationDelete(applicationNo,reportNo) {
+		identification.application.goDelete(applicationNo,reportNo);
 	}
 	
 	if('${totalPage}' > 1){

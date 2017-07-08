@@ -142,27 +142,31 @@
 		        con.CONSTANT_NAME as repair_name,
 		        group_concat(c.company_name separator ',') as company_names ,
 		        r.TIME_LIMIT,r.REMARK
-		        from test.report r
-		        inner join  test.company c
+		      from test.report r
+		     inner join  test.company c
 		        on r.COMPANY_NO = c.COMPANY_NO
-				inner join test.constant con 
+		       and c.DELETE_FLAG = 0
+			 inner join test.constant con 
 				on r.REPAIR_LEVEL = con.CONSTANT_NO
-		        
+		       and con.DELETE_FLAG = 0
+		     where r.DELETE_FLAG = 0
 		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
         
         ) t
         on e.equipment_no = t.equipment_no
+       and e.DELETE_FLAG = 0
         inner join test.constant cg 
 		on e.GROUP_NO = cg.CONSTANT_NO
+	   and cg.DELETE_FLAG = 0
 		inner join test.constant d
-		on e.SUB_GROUP_NO = d.CONSTANT_NO
+		on e.SUB_GROUP_NO = d.CONSTANT_NO 
+	   and d.DELETE_FLAG = 0
 		
 	<include refid="searchCondSql2"/>  
   </select>
 
   <select id="searchEquipmentList2" resultMap="equipmentResultMap" parameterType="EquipmentResult">
    select 
-   		   
         e.equipment_no,
         e.equipment_name,
         e.GROUP_NO,
@@ -181,20 +185,25 @@
 		        con.CONSTANT_NAME as repair_name,
 		        group_concat(c.company_name separator ',') as company_names ,
 		        r.TIME_LIMIT,r.REMARK
-		        from test.report r
-		        inner join  test.company c
+		      from test.report r
+		     inner join  test.company c
 		        on r.COMPANY_NO = c.COMPANY_NO
-				inner join test.constant con 
+		       and c.DELETE_FLAG = 0
+			 inner join test.constant con 
 				on r.REPAIR_LEVEL = con.CONSTANT_NO
-		        
+		       and con.DELETE_FLAG = 0
+		     where r.DELETE_FLAG = 0
 		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
         
         ) t
         on e.equipment_no = t.equipment_no
+       and e.DELETE_FLAG = 0
         inner join test.constant cg 
 		on e.GROUP_NO = cg.CONSTANT_NO
+	   and cg.DELETE_FLAG = 0
 		inner join test.constant d
 		on e.SUB_GROUP_NO = d.CONSTANT_NO 
+	   and d.DELETE_FLAG = 0
         <include refid="searchCondSql2"/> 
         LIMIT ${startNo}, ${pageSize}
   </select>
@@ -221,20 +230,24 @@
 		        group_concat(c.company_name separator ',') as company_names ,
 		        r.TIME_LIMIT,r.REMARK
 		        from test.report r
-		        inner join  test.company c
-		        on r.COMPANY_NO = c.COMPANY_NO
-				inner join test.constant con 
-				on r.REPAIR_LEVEL = con.CONSTANT_NO
-		        
-		        group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
+		       inner join  test.company c
+		          on r.COMPANY_NO = c.COMPANY_NO
+		         and c.DELETE_FLAG = 0
+			   inner join test.constant con 
+				  on r.REPAIR_LEVEL = con.CONSTANT_NO
+		         and con.DELETE_FLAG = 0
+		       where r.DELETE_FLAG = 0
+		       group by r.equipment_no,r.repair_level,con.CONSTANT_NAME,r.TIME_LIMIT,r.REMARK
         
         ) t
         on e.equipment_no = t.equipment_no
-        inner join test.constant cg 
+     inner join test.constant cg 
 		on e.GROUP_NO = cg.CONSTANT_NO
-		inner join test.constant d
+	   and cg.DELETE_FLAG = 0
+	 inner join test.constant d
 		on e.SUB_GROUP_NO = d.CONSTANT_NO 
-        where e.DELETE_FLAG = 0
+	   and d.DELETE_FLAG = 0
+     where e.DELETE_FLAG = 0
         <include refid="searchCondSql2"/> 
   </select>
 

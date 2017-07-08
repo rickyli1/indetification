@@ -274,6 +274,7 @@ public class ApplicationController {
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestBody Report report) {
 		report.setReportNo(report.getReportNo());
+		report.setApplicationNo(report.getApplicationNo());
 		report.setLastModifyBy("-1");// TODO
 		
 		// 执行删除

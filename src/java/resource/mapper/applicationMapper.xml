@@ -167,12 +167,15 @@
 		parameterType="ApplicationResult">
 		select count(1)
 		from report report
-		inner join application apply
-		on apply.APPLICATION_NO = report.APPLICATION_NO
-		inner join company
-		on company.COMPANY_NO = report.COMPANY_NO
-		inner join equipment
-		on equipment.EQUIPMENT_NO = report.EQUIPMENT_NO
+	   inner join application apply
+		  on apply.APPLICATION_NO = report.APPLICATION_NO
+		 and apply.delete_flag = 0
+	   inner join company
+		  on company.COMPANY_NO = report.COMPANY_NO
+		 and company.delete_flag = 0
+	   inner join equipment
+		  on equipment.EQUIPMENT_NO = report.EQUIPMENT_NO
+		 and equipment.delete_flag = 0
 		WHERE report.delete_flag = 0
 		<include refid="searchCondSql" />
 	</select>
