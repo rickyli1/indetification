@@ -10,7 +10,7 @@
 	                <th><spring:message code="lable.equipment.subGroup"/></th>
 	                <th><spring:message code="lable.equipment.equipmentName"/></th>
 	                <th><spring:message code="lable.equipment.remarks"/></th>
-	                <th></th>
+	                <th><spring:message code="lable.equipment.operate"/></th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -27,8 +27,8 @@
 						                <td>${apply.subGroupName}</td>
 						                <td>${apply.equipmentName}</td>
 						                 <td>
-											<button id="deleteBtn" class="btn btn-primary" type="button"   onclick="goDel'${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
 						                	<button id="detailBtn" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentUpdate"/></button>
+						                	<button id="deleteBtn" class="btn btn-primary" type="button"   onclick="goDel'${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
 						                </td>
 									   </c:when>
 									</c:choose>
@@ -44,8 +44,8 @@
 					                <td>${apply.equipmentName}</td>
 					                <td>${apply.remark}</td>
 				                    <td>
-										<button id="deleteBtn" class="btn btn-primary" type="button"  onclick="goDel('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
 					                    <button id="detailBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#detailModal" onclick="goEquipmentUpdate('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentUpdate"/></button>
+					                    <button id="deleteBtn" class="btn btn-primary" type="button"  onclick="goDel('${apply.equipmentNo}')"><spring:message code="lable.equipment.equipmentDelete"/></button>
 					                </td>
 					             </tr>
 						    </c:otherwise>   
