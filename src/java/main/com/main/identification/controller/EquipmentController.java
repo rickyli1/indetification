@@ -233,6 +233,7 @@ public class EquipmentController {
         equipment.setfList(listConstants);
         ConstantModel constantModel2 = new ConstantModel();
         constantModel2.setConstantType(Constant.CHILDREN_TYPE);
+        constantModel2.setParentNo(equipment.getGroupNo());
         List<ConstantModel> list2 = constantService.findConstantList(constantModel2);
         listConstants = new ArrayList<>();
         for(ConstantModel constantModel1 : list2){
