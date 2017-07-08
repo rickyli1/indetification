@@ -11,6 +11,13 @@
       
         <!--允许ROLE_ADMIN权限访问-->  
         <security:intercept-url pattern="/adminUser1/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/application/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/equipment/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/company/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/expert/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/constant/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/statistics/**" access="ROLE_ADMIN" />  
+        <security:intercept-url pattern="/upload/**" access="ROLE_ADMIN" />  
         <!--允许ROLE_ADMIN权限访问  
         <security:intercept-url pattern="/**" access="ROLE_ADMIN" />  -->
         <!--允许ROLE_USER权限访问-->  

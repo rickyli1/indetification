@@ -176,8 +176,18 @@
 			$("#dsort").val(data.sort);
 			$("#dremark").val(data.remark);
 			$("#dgroupNo").val(data.groupNo);
+			
+			var selOpt = $("#dsubGroupNo option");  
+			selOpt.remove();  
+			$("#dsubGroupNo").append($("<option/>").text("").attr("value",""));
+			var jsobject='';
+			jsobject =  data.cList;
+			$(jsobject).each(function () {
+				$("#dsubGroupNo").append($("<option/>").text(this.constantName).attr("value",this.constantNo));
+//                 $("#subGroupNo").val(this.constantNo); 
+            }); 
 			$("#dsubGroupNo").val(data.subGroupNo);
-		},
+		}
 		
 	});
  
